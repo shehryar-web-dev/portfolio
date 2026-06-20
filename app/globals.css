@@ -1,26 +1,116 @@
 @import "tailwindcss";
 
+/* Enable class-based dark mode (driven by next-themes) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  Light mode — clean slate that complements the navy dark theme.
+  Accent #23eda3 stays the same across both modes.
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0f2b46;
+  --foreground: #d4e8f5;
+  --muted: #132f4e;
+  --muted-foreground: #5080a0;
+  --card: #132f4e;
+  --card-foreground: #d4e8f5;
+  --border: #1e3f5c;
+  --accent: #00cfd1;
+  --accent-foreground: #000a0b;
+  --accent-2: #38bdf8;
+  --ring: #00cfd1;
+}
+
+.dark {
+  --background: #0f2b46;
+  --foreground: #d4e8f5;
+  --muted: #132f4e;
+  --muted-foreground: #5080a0;
+  --card: #132f4e;
+  --card-foreground: #d4e8f5;
+  --border: #1e3f5c;
+  --accent: #00cfd1;
+  --accent-foreground: #000a0b;
+  --accent-2: #38bdf8;
+  --ring: #00cfd1;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-2: var(--accent-2);
+  --color-ring: var(--ring);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--accent) 28%, transparent);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 9999px;
+  border: 2px solid var(--background);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
+
+@layer utilities {
+  .gradient-text {
+    background-image: linear-gradient(135deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .glass {
+    background: color-mix(in oklab, var(--card) 75%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .container-px {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

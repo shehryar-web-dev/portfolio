@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Shehryar — Portfolio
 
-## Getting Started
+A fast, interactive portfolio built with **Next.js (App Router)**, **TypeScript**,
+**Tailwind CSS v4**, and **Framer Motion**. It showcases full-stack, blockchain
+(Solana), and AI engineering work. All content lives in code — no CMS, no
+database, no separate backend.
 
-First, run the development server:
+## Features
+
+- Animated hero, scroll-reveal sections, dark/light theme (system-aware)
+- Sections: Hero · About · Skills · Projects · Experience · Blog · Contact
+- File-based **MDX blog** (`content/blog/*.mdx`)
+- **Contact form** that emails you via a Next.js Route Handler + **Nodemailer**
+- SEO: metadata, dynamic Open Graph image, `sitemap.xml`, `robots.txt`
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Build & run production:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npm run start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Editing your content
 
-## Learn More
+Everything is plain TypeScript / MDX — edit and redeploy:
 
-To learn more about Next.js, take a look at the following resources:
+| What | File |
+| --- | --- |
+| Name, headline, bio, socials, SEO | `data/profile.ts` |
+| Projects (cards) | `data/projects.ts` |
+| Skills (grouped) | `data/skills.ts` |
+| Experience timeline | `data/experience.ts` |
+| Blog posts | `content/blog/*.mdx` |
+| Resume PDF | replace `public/resume.pdf` |
+| Project screenshots | add to `public/projects/` and set `image` in `data/projects.ts` |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Adding a blog post
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Create `content/blog/my-post.mdx` with frontmatter:
 
-## Deploy on Vercel
+```mdx
+---
+title: "My Post Title"
+description: "Short summary for cards and SEO."
+date: "2026-06-20"
+tags: ["AI", "Next.js"]
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Your **Markdown / MDX** content here.
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contact form email
+
+The form posts to `app/api/contact/route.ts`, which sends mail with Nodemailer.
+
+- **Development:** with no SMTP env vars set, it uses an [Ethereal](https://ethereal.email)
+  test inbox and logs a preview URL to the server console — no real email is sent.
+- **Production:** copy `.env.example` to `.env.local` and set your SMTP creds:
+
+```bash
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=your-address@gmail.com
+SMTP_PASS=your-app-password
+CONTACT_TO=where-to-receive@example.com
+```
+
+> For Gmail, create an **App Password** (not your normal password).
+
+A hidden honeypot field silently drops bot submissions.
+
+## Before you deploy
+
+1. Replace `public/resume.pdf` with your real resume.
+2. Update links in `data/profile.ts` (GitHub, LinkedIn, X, email).
+3. Set `siteConfig.url` in `data/profile.ts` to your real domain (used for SEO/OG).
+4. Add real project screenshots and the missing live/GitHub links.
+5. Set SMTP env vars in your host.
+
+## Tech
+
+Next.js 16 · React 19 · TypeScript · Tailwind CSS v4 · Framer Motion ·
+next-themes · next-mdx-remote · Nodemailer · lucide-react

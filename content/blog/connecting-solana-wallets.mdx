@@ -1,0 +1,30 @@
+---
+title: "Connecting Solana wallets without the headaches"
+description: "A practical look at wiring Phantom and @solana/web3.js into a Next.js dApp frontend."
+date: "2026-04-12"
+tags: ["Blockchain", "Solana", "Web3"]
+---
+
+The first time you wire a wallet into a web app, it feels like magic. The second
+time, you notice all the edge cases. Here's the mental model that keeps it
+manageable.
+
+## The three pieces
+
+- **Wallet adapter** — detects and connects to Phantom (and others).
+- **Connection** — a client pointed at an RPC endpoint (devnet or mainnet).
+- **Transactions** — built on the client, signed by the wallet, sent on-chain.
+
+## Keep the UI honest
+
+Users need to know what's happening at every step:
+
+1. *Connect* — show the connected address (truncated).
+2. *Sign* — make it clear the wallet popup is expected.
+3. *Confirm* — wait for confirmation and show the result, with an explorer link.
+
+## A note on networks
+
+Develop on **devnet**, test with throwaway keypairs, and only flip to mainnet
+when the flow is solid. Nothing teaches you to handle errors faster than a
+failed transaction with real fees attached.

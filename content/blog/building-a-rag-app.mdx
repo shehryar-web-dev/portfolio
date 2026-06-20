@@ -1,0 +1,35 @@
+---
+title: "Building a RAG app that actually cites its sources"
+description: "Notes from building Chat with My Docs — chunking, embeddings, retrieval, and grounding LLM answers in real documents."
+date: "2026-05-20"
+tags: ["AI", "RAG", "Next.js"]
+---
+
+Retrieval-Augmented Generation (RAG) sounds complicated, but the core idea is
+simple: instead of hoping the model *knows* the answer, you **give it the
+answer** — pulled from documents you control — and ask it to respond using only
+that.
+
+## The pipeline
+
+A working RAG app comes down to a handful of steps:
+
+1. **Chunk** the documents into small, overlapping passages.
+2. **Embed** each chunk into a vector and store it (I use `pgvector`).
+3. On a question, **embed the query** and find the nearest chunks.
+4. **Prompt** the model with those chunks and the question.
+5. **Stream** the answer back, with citations to the source chunks.
+
+## Why grounding matters
+
+The whole point is to reduce hallucinations. If the model can only answer from
+retrieved context, it can't invent facts. And by tracking which chunk each
+answer came from, you can show the user *exactly* where the information lives.
+
+> Grounded answers + visible sources = trust. That's the product.
+
+## What I'd do differently
+
+Evaluation is the part everyone skips. Even a small set of question/answer
+pairs to test against pays for itself the first time a prompt change quietly
+breaks retrieval.
