@@ -61,15 +61,6 @@ export function Navbar() {
       )}
     >
       <nav className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between container-px">
-        <Link
-          href="/"
-          className="text-lg font-bold tracking-tight"
-          onClick={() => setOpen(false)}
-        >
-          {profile.name}
-          <span className="gradient-text">.</span>
-        </Link>
-
         {/* Desktop nav */}
         <div className="hidden items-center gap-1 md:flex">
           {navItems.map((item) => (
@@ -77,9 +68,9 @@ export function Navbar() {
               key={item.id}
               href={item.href}
               className={cn(
-                "rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:text-foreground",
+                "nav-link rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:text-foreground",
                 isHome && active === item.id
-                  ? "text-foreground"
+                  ? "text-accent nav-link-active"
                   : "text-muted-foreground",
               )}
             >

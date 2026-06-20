@@ -103,6 +103,30 @@ body {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
   }
+  .nav-link {
+    position: relative;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0.75rem;
+    right: 0.75rem;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 9999px;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 300ms ease;
+  }
+  .nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  .nav-link-active::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

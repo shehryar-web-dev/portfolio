@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { Intro } from "@/components/intro";
 import { siteConfig } from "@/data/profile";
 
 const geistSans = Geist({
@@ -50,13 +51,25 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
+      <head>
+        {/* Runs before body renders — hides #intro-cover for returning visitors before first paint */}
+        <script dangerouslySetInnerHTML={{
+          __html: `(function(){try{if(localStorage.getItem('visited')==='1'){var s=document.createElement('style');s.textContent='#intro-cover{display:none}';document.head.appendChild(s);}}catch(e){}})();`
+        }} />
+      </head>
+      <body suppressHydrationWarning className="min-h-full flex flex-col bg-background text-foreground">
+        {/* Always server-rendered — covers content on first visit before JS loads */}
+        <div
+          id="intro-cover"
+          style={{ position: "fixed", inset: 0, zIndex: 9998, background: "#0f2b46", overflow: "hidden" }}
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
+          <Intro />
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />

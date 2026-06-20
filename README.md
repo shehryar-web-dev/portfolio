@@ -7,11 +7,26 @@ database, no separate backend.
 
 ## Features
 
-- Animated hero, scroll-reveal sections, dark/light theme (system-aware)
+- Clean dark theme: **#0F2B46** background with **#00CFD1** (bright cyan) accents
+- Animated hero (clean dot-grid), scroll-reveal sections, smooth scrollspy navbar
 - Sections: Hero · About · Skills · Projects · Experience · Blog · Contact
 - File-based **MDX blog** (`content/blog/*.mdx`)
 - **Contact form** that emails you via a Next.js Route Handler + **Nodemailer**
 - SEO: metadata, dynamic Open Graph image, `sitemap.xml`, `robots.txt`
+
+## Color Palette
+
+| Token | Light & Dark | Usage |
+| --- | --- | --- |
+| Background | `#0F2B46` | Page background |
+| Card | `#132F4E` | Cards, inputs, navbar |
+| Border | `#1E3F5C` | Outlines, dividers |
+| Foreground | `#D4E8F5` | Primary text |
+| Muted Foreground | `#5080A0` | Secondary text |
+| **Accent** | **`#00CFD1`** | **Buttons, badges, highlights** |
+| Accent 2 | `#38BDF8` | Gradient secondary color |
+
+All colors are defined in `app/globals.css` — update there to customize.
 
 ## Getting started
 
@@ -33,6 +48,7 @@ Everything is plain TypeScript / MDX — edit and redeploy:
 
 | What | File |
 | --- | --- |
+| **Colors & theme** | `app/globals.css` (CSS variables) |
 | Name, headline, bio, socials, SEO | `data/profile.ts` |
 | Projects (cards) | `data/projects.ts` |
 | Skills (grouped) | `data/skills.ts` |
