@@ -3,24 +3,22 @@
 /* Enable class-based dark mode (driven by next-themes) */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/*
-  Light mode — clean slate that complements the navy dark theme.
-  Accent #23eda3 stays the same across both modes.
-*/
+/* Light mode — blue-tinted white, mirrors the dark navy palette */
 :root {
-  --background: #0f2b46;
-  --foreground: #d4e8f5;
-  --muted: #132f4e;
-  --muted-foreground: #5080a0;
-  --card: #132f4e;
-  --card-foreground: #d4e8f5;
-  --border: #1e3f5c;
-  --accent: #00cfd1;
-  --accent-foreground: #000a0b;
-  --accent-2: #38bdf8;
-  --ring: #00cfd1;
+  --background: #f0f6ff;
+  --foreground: #0d1f35;
+  --muted: #ddeaf8;
+  --muted-foreground: #4a6b8a;
+  --card: #ffffff;
+  --card-foreground: #0d1f35;
+  --border: #bdd5ee;
+  --accent: #00b8ba;
+  --accent-foreground: #ffffff;
+  --accent-2: #0284c7;
+  --ring: #00b8ba;
 }
 
+/* Dark mode — deep navy */
 .dark {
   --background: #0f2b46;
   --foreground: #d4e8f5;
@@ -49,6 +47,17 @@
   --color-ring: var(--ring);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-space-grotesk);
+}
+
+/* Headings use the Space Grotesk display font automatically */
+@layer base {
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display), var(--font-sans), ui-sans-serif, sans-serif;
+    letter-spacing: -0.02em;
+  }
 }
 
 * {
@@ -88,11 +97,12 @@ body {
 }
 
 @layer utilities {
+  /* Solid accent — gradients intentionally removed sitewide */
   .gradient-text {
-    background-image: linear-gradient(135deg, var(--accent), var(--accent-2));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: var(--accent);
+  }
+  .font-display {
+    font-family: var(--font-display), var(--font-sans), ui-sans-serif, sans-serif;
   }
   .glass {
     background: color-mix(in oklab, var(--card) 75%, transparent);
@@ -127,6 +137,86 @@ body {
     transform: scaleX(1);
     transform-origin: left;
   }
+
+  /* Sweeping light reflection for buttons (monochrome shine, not a color gradient) */
+  .btn-shine {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .btn-shine::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      120deg,
+      transparent 0%,
+      color-mix(in oklab, #ffffff 40%, transparent) 50%,
+      transparent 100%
+    );
+    transform: translateX(-130%);
+    transition: transform 650ms ease;
+  }
+  .btn-shine:hover::before {
+    transform: translateX(130%);
+  }
+
+}
+
+/* ── Glow orbs (hero parallax background) ── */
+.orb {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+  will-change: transform;
+  opacity: 0.18;
+}
+.dark .orb {
+  opacity: 0.32;
+}
+
+.orb-1 {
+  width: 560px;
+  height: 560px;
+  background: radial-gradient(circle at 40% 40%, var(--accent) 0%, transparent 70%);
+  filter: blur(90px);
+  top: -12%;
+  left: -12%;
+  animation: orb-drift-1 14s ease-in-out infinite alternate;
+}
+
+.orb-2 {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle at 60% 50%, var(--accent-2) 0%, transparent 70%);
+  filter: blur(80px);
+  top: 15%;
+  right: -8%;
+  animation: orb-drift-2 18s ease-in-out infinite alternate;
+}
+
+.orb-3 {
+  width: 340px;
+  height: 340px;
+  background: radial-gradient(circle at 50% 60%, var(--accent) 0%, transparent 70%);
+  filter: blur(70px);
+  bottom: 8%;
+  left: 28%;
+  animation: orb-drift-3 11s ease-in-out infinite alternate;
+}
+
+@keyframes orb-drift-1 {
+  from { transform: translate(0px, 0px) scale(1); }
+  to   { transform: translate(45px, 35px) scale(1.08); }
+}
+@keyframes orb-drift-2 {
+  from { transform: translate(0px, 0px) scale(1); }
+  to   { transform: translate(-35px, 50px) scale(0.94); }
+}
+@keyframes orb-drift-3 {
+  from { transform: translate(0px, 0px) scale(1); }
+  to   { transform: translate(25px, -40px) scale(1.06); }
 }
 
 @media (prefers-reduced-motion: reduce) {

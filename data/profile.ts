@@ -5,27 +5,33 @@
 
 export const profile = {
   name: "Shehryar",
-  /** Used in <title> and headings, e.g. "Shehryar — Full-Stack Engineer" */
-  role: "Full-Stack · Blockchain · AI Engineer",
-  headline: "Full-Stack Engineer building AI-powered & Solana dApps.",
+  /** Used in <title> and headings */
+  role: "Senior Full Stack Engineer",
+  /** Keep it short — exactly one "&" (the part after it is highlighted in the hero) */
+  headline: "I build fast, modern web & AI products.",
   subline:
-    "I'm Shehryar — I build fast, interactive web apps with React/Next.js, on-chain (Solana) integrations, and AI-powered products. I turn ideas into polished, production-ready software.",
+    "I design and build polished products end to end — from clean, interactive interfaces to reliable backends and AI features that feel effortless.",
 
   aboutShort:
-    "I'm a full-stack developer who builds modern, interactive web apps with React and Next.js, backed by Node/NestJS APIs. I've gone deep into two high-impact areas: blockchain — integrating Solana wallets and writing on-chain smart contracts — and AI engineering, where I build chatbots and RAG (“chat with your docs”) apps on top of LLM APIs. I also work fluently with AI tools to ship faster and smarter.",
+    "I'm a full-stack engineer who turns ideas into clean, production-ready products. I care about fast, intuitive interfaces, dependable backends, and AI features that genuinely help people — and I love owning a product from idea to launch.",
 
   aboutLong:
-    "My background is in web development — building responsive, accessible interfaces with React, Next.js, TypeScript, and Tailwind, paired with Node.js/NestJS backends. As the web evolved, so did I: I started integrating Solana into apps (wallet connections, on-chain transactions, and smart contracts with Rust/Anchor) and building AI features — from streaming chatbots to retrieval-augmented apps that answer questions from a user's own documents. What sets my work apart is that I don't just use AI to write code — I build with it deliberately, combining solid web fundamentals with modern AI and blockchain layers. If you need someone who can own the frontend, wire up the integrations, and ship — that's me.",
+    "I build modern products end to end — from the interface a user touches to the services and data behind it. Lately I've focused on AI: chat assistants, retrieval over your own documents, and workflow automation that removes busywork. What sets my work apart is shipping: I take an idea, build it cleanly, and get it live.",
 
-  email: "usamalatif13001@gmail.com",
+  email: "shehryarwebdev@gmail.com",
+  /** Placeholder — replace with your real number */
+  phone: "+92 300 0000000",
   location: "Remote · Available worldwide",
+
+  /** Photo shown in the About section. Drop a file at /public/profile.jpg */
+  imagePath: "/profile.jpg",
 
   /** Path to the resume PDF inside /public */
   resumePath: "/resume.pdf",
 
   socials: {
-    github: "https://github.com/shehryar",
-    linkedin: "https://www.linkedin.com/in/shehryar",
+    github: "https://github.com/shehryar-web-dev",
+    linkedin: "https://www.linkedin.com/in/shehryar-naeem-831691213/",
     twitter: "https://x.com/shehryar",
   },
 } as const;
@@ -35,16 +41,14 @@ export const siteConfig = {
   url: "https://shehryar.dev",
   title: `${profile.name} — ${profile.role}`,
   description:
-    "Portfolio of Shehryar, a full-stack engineer building AI-powered web apps, RAG chatbots, and Solana dApps with React, Next.js, NestJS, Rust, and LLM APIs.",
+    "Portfolio of Shehryar — a full-stack & AI engineer who designs and builds fast, modern, production-ready products from idea to launch.",
   keywords: [
     "Shehryar",
     "Full-Stack Engineer",
-    "Next.js Developer",
-    "React Developer",
-    "Solana dApp",
-    "Blockchain Developer",
+    "Software Engineer",
     "AI Engineer",
-    "RAG",
-    "NestJS",
+    "Web Developer",
+    "React Native Developer",
+    "Portfolio",
   ],
 } as const;

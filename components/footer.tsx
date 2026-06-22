@@ -1,25 +1,23 @@
 import Link from "next/link";
-import { Mail } from "lucide-react";
-import { GithubIcon, LinkedinIcon, XIcon } from "@/components/icons";
+import { GithubIcon, LinkedinIcon } from "@/components/icons";
 import { profile } from "@/data/profile";
 
 const links = [
   { label: "About", href: "/#about" },
   { label: "Projects", href: "/#projects" },
   { label: "Blog", href: "/#blog" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Contact", href: "/contact" },
 ];
 
+/** Footer is visible on mobile only — desktop uses the sticky social sidebar. */
 export function Footer() {
-  const year = new Date().getFullYear();
-
   return (
-    <footer className="border-t border-border">
+    <footer className="border-t border-border md:hidden">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 py-10 container-px sm:flex-row sm:items-center sm:justify-between">
         <div>
           <Link href="/" className="text-lg font-bold tracking-tight">
             {profile.name}
-            <span className="gradient-text">.</span>
+            <span className="text-accent">.</span>
           </Link>
           <p className="mt-2 max-w-xs text-sm text-muted-foreground">
             {profile.role}
@@ -57,29 +55,7 @@ export function Footer() {
           >
             <LinkedinIcon className="h-5 w-5" />
           </a>
-          <a
-            href={profile.socials.twitter}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Twitter / X"
-            className="transition-colors hover:text-foreground"
-          >
-            <XIcon className="h-5 w-5" />
-          </a>
-          <a
-            href={`mailto:${profile.email}`}
-            aria-label="Email"
-            className="transition-colors hover:text-foreground"
-          >
-            <Mail className="h-5 w-5" />
-          </a>
         </div>
-      </div>
-
-      <div className="border-t border-border py-5">
-        <p className="mx-auto max-w-6xl text-center text-xs text-muted-foreground container-px">
-          © {year} {profile.name}. Built with Next.js, Tailwind & Framer Motion.
-        </p>
       </div>
     </footer>
   );

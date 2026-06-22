@@ -6,33 +6,21 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { ButtonLink } from "@/components/ui/button";
-import { profile } from "@/data/profile";
 
 const navItems = [
   { label: "About", href: "/#about", id: "about" },
-  { label: "Skills", href: "/#skills", id: "skills" },
   { label: "Projects", href: "/#projects", id: "projects" },
   { label: "Experience", href: "/#experience", id: "experience" },
   { label: "Blog", href: "/#blog", id: "blog" },
-  { label: "Contact", href: "/#contact", id: "contact" },
+  { label: "Contact", href: "/contact", id: "contact" },
 ];
 
 export function Navbar() {
   const pathname = usePathname();
   const isHome = pathname === "/";
-  const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState<string>("");
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // Scrollspy — only relevant on the home page where the sections exist.
   useEffect(() => {
     if (!isHome) return;
     const ids = navItems.map((n) => n.id);
@@ -53,47 +41,38 @@ export function Navbar() {
 
   return (
     <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all",
-        scrolled
-          ? "glass border-b border-border"
-          : "border-b border-transparent",
-      )}
+      className="fixed inset-x-0 top-0 z-50"
     >
-      <nav className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between container-px">
-        {/* Desktop nav */}
-        <div className="hidden items-center gap-1 md:flex">
-          {navItems.map((item) => (
-            <Link
-              key={item.id}
-              href={item.href}
-              className={cn(
-                "nav-link rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:text-foreground",
-                isHome && active === item.id
-                  ? "text-accent nav-link-active"
-                  : "text-muted-foreground",
-              )}
-            >
-              {item.label}
-            </Link>
-          ))}
+      {/* Centered nav links, theme toggle pinned to the right */}
+      <nav className="relative mx-auto flex h-16 w-full max-w-6xl items-center justify-center container-px">
+        {/* Center group: pill nav + theme toggle immediately to its right */}
+        <div className="hidden items-center gap-3 md:flex">
+          <div className="flex items-center gap-1 rounded-full border border-border bg-card/80 px-2 py-1.5 shadow-sm backdrop-blur">
+            {navItems.map((item) => (
+              <Link
+                key={item.id}
+                href={item.href}
+                className={cn(
+                  "rounded-full px-4 py-1.5 text-sm font-medium transition-all duration-200",
+                  isHome && active === item.id
+                    ? "bg-accent text-accent-foreground shadow-sm"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground",
+                )}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+          <ThemeToggle />
         </div>
 
-        <div className="flex items-center gap-2">
+        {/* Mobile: theme toggle + hamburger (pinned right) */}
+        <div className="absolute right-5 flex items-center gap-2 md:hidden xl:right-8">
           <ThemeToggle />
-          <ButtonLink
-            href={profile.resumePath}
-            external
-            variant="primary"
-            size="sm"
-            className="hidden sm:inline-flex"
-          >
-            Resume
-          </ButtonLink>
           <button
             type="button"
             aria-label="Toggle menu"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-card md:hidden"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-card"
             onClick={() => setOpen((v) => !v)}
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -101,7 +80,7 @@ export function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile menu */}
+      {/* Mobile dropdown */}
       {open && (
         <div className="glass border-t border-border md:hidden">
           <div className="mx-auto flex max-w-6xl flex-col gap-1 py-3 container-px">

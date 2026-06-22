@@ -11,9 +11,9 @@ export function Projects() {
       title="Things I've shipped"
       description="A few products that show how I work across frontend, blockchain, and AI. Live demos and code where available."
     >
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="flex flex-col gap-8">
         {projects.map((project, i) => (
-          <Reveal key={project.slug} delay={(i % 2) * 0.08}>
+          <Reveal key={project.slug}>
             <ProjectCard project={project} index={i} />
           </Reveal>
         ))}

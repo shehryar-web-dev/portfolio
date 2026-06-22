@@ -4,13 +4,6 @@ import { GithubIcon } from "@/components/icons";
 import { cn } from "@/lib/utils";
 import type { Project } from "@/data/projects";
 
-const coverGradients = [
-  "from-violet-500/30 via-fuchsia-500/20 to-cyan-500/30",
-  "from-cyan-500/30 via-blue-500/20 to-violet-500/30",
-  "from-emerald-500/30 via-teal-500/20 to-cyan-500/30",
-  "from-orange-500/30 via-pink-500/20 to-violet-500/30",
-];
-
 export function ProjectCard({
   project,
   index,
@@ -18,33 +11,28 @@ export function ProjectCard({
   project: Project;
   index: number;
 }) {
-  const gradient = coverGradients[index % coverGradients.length];
+  const reversed = index % 2 === 1;
 
   return (
     <article
       className={cn(
-        "group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all hover:-translate-y-1 hover:border-accent/40 hover:shadow-lg hover:shadow-accent/5",
-        project.featured && "lg:col-span-1",
+        "group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-xl hover:shadow-accent/10 md:flex-row",
+        reversed && "md:flex-row-reverse",
       )}
     >
       {/* Cover */}
-      <div className="relative aspect-video overflow-hidden border-b border-border">
+      <div className="relative aspect-video w-full overflow-hidden border-b border-border md:aspect-auto md:w-2/5 md:border-b-0">
         {project.image ? (
           <Image
             src={project.image}
             alt={`${project.title} screenshot`}
             fill
-            sizes="(max-width: 768px) 100vw, 50vw"
+            sizes="(max-width: 768px) 100vw, 40vw"
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
-          <div
-            className={cn(
-              "flex h-full w-full items-center justify-center bg-linear-to-br",
-              gradient,
-            )}
-          >
-            <span className="select-none text-6xl font-black text-foreground/80">
+          <div className="flex h-full min-h-44 w-full items-center justify-center bg-accent/10">
+            <span className="font-display select-none text-7xl font-black text-accent/80">
               {project.title.charAt(0)}
             </span>
           </div>
@@ -57,9 +45,9 @@ export function ProjectCard({
       </div>
 
       {/* Body */}
-      <div className="flex flex-1 flex-col p-6">
-        <h3 className="text-xl font-bold">{project.title}</h3>
-        <p className="mt-1 text-sm font-medium gradient-text">
+      <div className="flex flex-1 flex-col justify-center p-6 sm:p-8">
+        <h3 className="text-2xl font-bold">{project.title}</h3>
+        <p className="mt-1 text-sm font-medium text-accent">
           {project.tagline}
         </p>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -81,7 +69,7 @@ export function ProjectCard({
           ))}
         </ul>
 
-        <div className="mt-6 flex items-center gap-3 pt-2">
+        <div className="mt-6 flex items-center gap-4 pt-2">
           {project.liveUrl ? (
             <a
               href={project.liveUrl}
