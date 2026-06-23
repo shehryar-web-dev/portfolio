@@ -9,12 +9,14 @@ export function Experience() {
       eyebrow="Experience"
       title="Where I've focused"
       description="Outcomes over titles — here's what I've built and the impact along the way."
+      watermark="CAREER"
+      className="bg-background-alt"
     >
       <div className="relative">
         {/* Vertical line */}
         <div
           aria-hidden
-          className="absolute left-[7px] top-2 bottom-2 w-px bg-border sm:left-[9px]"
+          className="absolute left-1.75 top-2 bottom-2 w-px bg-border sm:left-2.25"
         />
         <div className="space-y-10">
           {experiences.map((exp, i) => (

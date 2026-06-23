@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" fill="none">
+  <rect width="800" height="600" fill="#0c1f33"/>
+  <rect x="110" y="80" width="580" height="440" rx="14" fill="#0f2b46" stroke="#1e3f5c" stroke-width="2"/>
+  <rect x="110" y="80" width="200" height="440" rx="14" fill="#102a45"/>
+  <rect x="134" y="120" width="150" height="30" rx="6" fill="#132f4e"/>
+  <rect x="134" y="166" width="150" height="14" rx="7" fill="#5080a0" opacity="0.5"/>
+  <rect x="134" y="194" width="120" height="14" rx="7" fill="#5080a0" opacity="0.3"/>
+  <rect x="134" y="240" width="150" height="14" rx="7" fill="#00cfd1" opacity="0.6"/>
+  <rect x="134" y="268" width="100" height="14" rx="7" fill="#5080a0" opacity="0.3"/>
+  <!-- chat bubbles -->
+  <rect x="350" y="130" width="300" height="56" rx="12" fill="#132f4e"/>
+  <rect x="372" y="150" width="220" height="10" rx="5" fill="#5080a0" opacity="0.6"/>
+  <rect x="372" y="166" width="160" height="10" rx="5" fill="#5080a0" opacity="0.4"/>
+  <rect x="400" y="210" width="250" height="70" rx="12" fill="#00cfd1" opacity="0.18"/>
+  <rect x="422" y="230" width="200" height="10" rx="5" fill="#00cfd1" opacity="0.7"/>
+  <rect x="422" y="248" width="170" height="10" rx="5" fill="#00cfd1" opacity="0.5"/>
+  <rect x="350" y="304" width="300" height="56" rx="12" fill="#132f4e"/>
+  <rect x="372" y="324" width="240" height="10" rx="5" fill="#5080a0" opacity="0.6"/>
+  <rect x="372" y="340" width="180" height="10" rx="5" fill="#5080a0" opacity="0.4"/>
+  <rect x="350" y="440" width="300" height="44" rx="22" fill="#102a45" stroke="#1e3f5c" stroke-width="2"/>
+  <rect x="372" y="456" width="180" height="12" rx="6" fill="#5080a0" opacity="0.4"/>
+  <circle cx="626" cy="462" r="14" fill="#00cfd1"/>
+  <text x="400" y="560" font-family="monospace" font-size="20" fill="#00cfd1" text-anchor="middle" opacity="0.8">CHAT WITH MY DOCS</text>
+</svg>

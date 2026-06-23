@@ -3,7 +3,6 @@ import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
 import { Intro } from "@/components/intro";
 import { Background } from "@/components/background";
 import { SocialSidebar } from "@/components/social-sidebar";
@@ -56,6 +55,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
+      data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
       <head>
@@ -81,7 +81,6 @@ export default function RootLayout({
           <Intro />
           <Navbar />
           <main className="flex-1 pb-16 md:pb-0">{children}</main>
-          <Footer />
         </ThemeProvider>
       </body>
     </html>

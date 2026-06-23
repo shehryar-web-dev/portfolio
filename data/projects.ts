@@ -31,6 +31,7 @@ export const projects: Project[] = [
     tech: ["Next.js 14", "HTML Canvas", "TypeScript", "Tailwind", "SEO / SSG"],
     liveUrl: "https://needaiforthis.com",
     githubUrl: undefined,
+    image: "/projects/ai-pixel-board.svg",
     featured: true,
   },
   {
@@ -49,6 +50,7 @@ export const projects: Project[] = [
     ],
     liveUrl: undefined,
     githubUrl: undefined,
+    image: "/projects/chat-with-my-docs.svg",
     featured: true,
   },
   {
@@ -61,6 +63,7 @@ export const projects: Project[] = [
     tech: ["n8n", "Webhooks", "REST APIs", "AI actions"],
     liveUrl: undefined,
     githubUrl: undefined,
+    image: "/projects/automation-suite.svg",
     placeholder: true,
   },
   {
@@ -73,6 +76,7 @@ export const projects: Project[] = [
     tech: ["React Native", "TypeScript", "TanStack Query", "Redux Toolkit"],
     liveUrl: undefined,
     githubUrl: undefined,
+    image: "/projects/cross-platform-app.svg",
     placeholder: true,
   },
 ];

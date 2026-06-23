@@ -56,22 +56,6 @@ export function SocialSidebar() {
         <span className="h-24 w-px bg-border" />
       </aside>
 
-      {/* ── Mobile: fixed bottom bar ── */}
-      <nav className="fixed bottom-0 inset-x-0 z-40 flex items-center justify-center gap-6 border-t border-border bg-background/95 py-3 backdrop-blur md:hidden">
-        {socials.map(({ label, href, icon: Icon, external }) => (
-          <a
-            key={label}
-            href={href}
-            aria-label={label}
-            {...(external
-              ? { target: "_blank", rel: "noopener noreferrer" }
-              : {})}
-            className="flex h-9 w-9 items-center justify-center rounded-lg text-white/70 transition-colors hover:text-white"
-          >
-            <Icon className="h-5 w-5" />
-          </a>
-        ))}
-      </nav>
     </>
   );
 }

@@ -1,48 +1,65 @@
-/**
- * Skills grouped by category, shown in the About section.
- */
-
 export type SkillGroup = {
   category: string;
-  /** Short tagline for the group */
-  blurb: string;
   skills: string[];
 };
 
 export const skillGroups: SkillGroup[] = [
   {
-    category: "Core Stack",
-    blurb: "Languages and frameworks I build with every day.",
+    category: "Frontend",
     skills: [
-      "JavaScript",
-      "TypeScript",
       "React",
+      "TypeScript",
       "Next.js",
-      "React Native",
-      "TanStack",
-      "Redux Toolkit",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Vue",
+      "Redux",
+      "Zustand",
     ],
   },
   {
-    category: "Databases",
-    blurb: "Relational, document, realtime, and vector stores.",
+    category: "Backend",
     skills: [
+      "Node.js",
+      "Express",
       "PostgreSQL",
       "MongoDB",
-      "Firebase",
-      "Supabase",
+      "GraphQL",
+      "REST API",
+      "Prisma",
       "Redis",
-      "Vector databases",
     ],
-  },
-  {
-    category: "Cloud & DevOps",
-    blurb: "Shipping, scaling, and hosting in production.",
-    skills: ["AWS", "Docker", "Kubernetes", "S3"],
   },
   {
     category: "AI & Automation",
-    blurb: "LLM apps, retrieval, and automated workflows.",
-    skills: ["LLMs", "RAG", "Workflow Automation", "n8n"],
+    skills: [
+      "LLMs",
+      "RAG",
+      "LangChain",
+      "OpenAI API",
+      "Pinecone",
+      "n8n",
+      "Workflow Automation",
+    ],
   },
+  {
+    category: "Tools & Others",
+    skills: [
+      "Git",
+      "Docker",
+      "AWS",
+      "Figma",
+      "Jest",
+      "Cypress",
+      "Vite",
+      "Webpack",
+    ],
+  },
+];
+
+export const stats = [
+  { value: "3+", label: "Years Experience" },
+  { value: "40+", label: "Projects Shipped" },
+  { value: "20+", label: "Happy Clients" },
+  { value: "15+", label: "Technologies" },
 ];

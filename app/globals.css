@@ -6,6 +6,7 @@
 /* Light mode — blue-tinted white, mirrors the dark navy palette */
 :root {
   --background: #f0f6ff;
+  --background-alt: #ddeaf8;
   --foreground: #0d1f35;
   --muted: #ddeaf8;
   --muted-foreground: #4a6b8a;
@@ -21,6 +22,7 @@
 /* Dark mode — deep navy */
 .dark {
   --background: #0f2b46;
+  --background-alt: #091829;
   --foreground: #d4e8f5;
   --muted: #132f4e;
   --muted-foreground: #5080a0;
@@ -35,6 +37,7 @@
 
 @theme inline {
   --color-background: var(--background);
+  --color-background-alt: var(--background-alt);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
@@ -217,6 +220,16 @@ body {
 @keyframes orb-drift-3 {
   from { transform: translate(0px, 0px) scale(1); }
   to   { transform: translate(25px, -40px) scale(1.06); }
+}
+
+/* ── Hero grid cell pulse ── */
+@keyframes grid-cell-pulse {
+  0%, 100% { opacity: 0; }
+  50%       { opacity: 1; }
+}
+.hero-grid-cell {
+  animation: grid-cell-pulse var(--duration, 3s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
 }
 
 @media (prefers-reduced-motion: reduce) {

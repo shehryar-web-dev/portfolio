@@ -2,11 +2,11 @@ import { Section } from "@/components/section";
 import { Reveal } from "@/components/reveal";
 import { ProfilePhoto } from "@/components/profile-photo";
 import { profile } from "@/data/profile";
-import { skillGroups } from "@/data/skills";
+import { skillGroups, stats } from "@/data/skills";
 
 export function About() {
   return (
-    <Section id="about" eyebrow="About" title="A bit about me">
+    <Section id="about" eyebrow="About" title="A bit about me" watermark="ABOUT" className="bg-background-alt">
       <div className="grid gap-10 lg:grid-cols-5 lg:items-start">
         {/* Photo */}
         <Reveal className="lg:col-span-2">
@@ -29,33 +29,72 @@ export function About() {
         </Reveal>
       </div>
 
-      {/* Skills */}
-      <div className="mt-16" id="skills">
-        <Reveal>
-          <h3 className="text-xl font-semibold">Skills &amp; tools</h3>
+      {/* ── Skills ── */}
+      <div className="mt-24" id="skills">
+        {/* "MY EXPERTISE" heading with "SKILLS" watermark */}
+        <Reveal className="relative mb-14 overflow-hidden py-20 text-center">
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 flex select-none items-center justify-center font-display text-[clamp(5rem,18vw,12rem)] font-black leading-none text-foreground/5"
+          >
+            SKILLS
+          </span>
+          <div className="relative z-10">
+            <h3 className="font-display text-4xl font-black tracking-tight sm:text-5xl">
+              MY <span className="text-accent">EXPERTISE</span>
+            </h3>
+          </div>
         </Reveal>
-        <div className="mt-6 grid gap-5 sm:grid-cols-2">
+
+        {/* Category rows */}
+        <div className="space-y-10">
           {skillGroups.map((group, i) => (
-            <Reveal key={group.category} delay={i * 0.06}>
-              <div className="h-full rounded-2xl border border-border bg-card p-6 transition-colors hover:border-accent/40">
-                <h4 className="text-lg font-semibold">{group.category}</h4>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  {group.blurb}
-                </p>
-                <ul className="mt-4 flex flex-wrap gap-2">
-                  {group.skills.map((skill) => (
-                    <li
-                      key={skill}
-                      className="rounded-lg border border-accent/30 bg-accent/10 px-2.5 py-1 text-xs font-medium text-accent"
-                    >
-                      {skill}
-                    </li>
-                  ))}
-                </ul>
+            <Reveal key={group.category} delay={i * 0.07}>
+              {/* Row header */}
+              <div className="mb-4 flex items-center gap-3">
+                <span className="text-accent" aria-hidden>◆</span>
+                <span className="font-mono text-xs text-muted-foreground">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h4 className="font-display text-base font-black uppercase tracking-widest">
+                  {group.category}
+                </h4>
+                <div className="h-px flex-1 bg-border" />
               </div>
+
+              {/* Skill tags */}
+              <ul className="flex flex-wrap gap-2">
+                {group.skills.map((skill) => (
+                  <li
+                    key={skill}
+                    className="border border-border bg-card px-3 py-1.5 text-sm font-medium text-foreground transition-colors hover:border-accent/60 hover:text-accent"
+                  >
+                    {skill}
+                  </li>
+                ))}
+              </ul>
             </Reveal>
           ))}
         </div>
+
+        {/* Stats bar */}
+        <Reveal delay={0.1}>
+          <div className="mt-12 grid grid-cols-2 divide-x divide-y divide-border border border-border sm:grid-cols-4 sm:divide-y-0">
+            {stats.map((s) => (
+              <div
+                key={s.label}
+                className="flex flex-col items-center justify-center px-6 py-8"
+              >
+                <span className="font-display text-4xl font-black text-accent">
+                  {s.value}
+                </span>
+                <span className="mt-2 text-center text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                  {s.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </Reveal>
       </div>
     </Section>
   );

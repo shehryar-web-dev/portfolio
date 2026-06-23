@@ -20,11 +20,11 @@ export const profile = {
 
   email: "shehryarwebdev@gmail.com",
   /** Placeholder — replace with your real number */
-  phone: "+92 300 0000000",
+  phone: "+92 311 1404107",
   location: "Remote · Available worldwide",
 
   /** Photo shown in the About section. Drop a file at /public/profile.jpg */
-  imagePath: "/profile.jpg",
+  imagePath: "/profile.png",
 
   /** Path to the resume PDF inside /public */
   resumePath: "/resume.pdf",
