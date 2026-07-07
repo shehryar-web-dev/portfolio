@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { ArrowRight, Download, MapPin } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button";
 import { profile } from "@/data/profile";
@@ -11,125 +11,127 @@ const specializations = [
   "Mobile Developer",
   "Blockchain Integration",
   "AI Automation",
-  "Agents & RAG",
+  "AI Agents & RAG",
 ];
 
-const GRID = 48;
-/* Cells constrained to the clearly-visible 3-D floor zone */
-const COL_MIN = 5;   // x ≥ 240px — clear of side vignette
-const COL_MAX = 23;  // x ≤ 1104px — clear of side vignette
-const ROW_MIN = 3;   // y ≥ 144px — below the tiny horizon fade
-const ROW_MAX = 10;  // y ≤ 480px — stays on-screen after perspective expansion
+const DOT_GAP = 22; // px between dots
+const SPOT_RADIUS = 170; // px — how far the cursor spotlight reaches
 
-const FADE = 500; // ms for fade out before teleport
-const intervals = [3400, 4200, 3800, 2900, 4600, 3100, 4000, 3600];
-
-function randomPos() {
-  return {
-    left: (COL_MIN + Math.floor(Math.random() * (COL_MAX - COL_MIN))) * GRID,
-    top:  (ROW_MIN + Math.floor(Math.random() * (ROW_MAX - ROW_MIN))) * GRID,
-  };
-}
-
-/* Pick a position not adjacent to any existing cell */
-function randomPosAway(others: { left: number; top: number }[]) {
-  let pos = randomPos();
-  for (let t = 0; t < 120; t++) {
-    const ok = others.every(
-      (o) => Math.abs(pos.left - o.left) > GRID || Math.abs(pos.top - o.top) > GRID
-    );
-    if (ok) return pos;
-    pos = randomPos();
-  }
-  return pos;
-}
-
-/* Seed initial positions with no adjacency */
-function seedCells() {
-  const placed: { left: number; top: number }[] = [];
-  return intervals.map(() => {
-    const pos = randomPosAway(placed);
-    placed.push(pos);
-    return { ...pos, visible: true };
-  });
-}
-
-type Cell = { left: number; top: number; visible: boolean };
+// Evenly-spaced dot field; `color` is theme-driven via color-mix.
+const dotLayer = (color: string) => `radial-gradient(circle, ${color} 1px, transparent 1.5px)`;
+// Reveal mask / glow centred on the cursor. Falls back off-screen before the
+// first mousemove so nothing is stuck at (0,0).
+const cursorAt = (radius: number) =>
+  `circle ${radius}px at var(--mx, -200px) var(--my, -200px)`;
 
 export function Hero() {
-  const [cells, setCells] = useState<Cell[]>(seedCells);
+  const rootRef = useRef<HTMLElement>(null);
 
+  // Cursor spotlight: write pointer position + a fade flag to CSS variables so
+  // the mask-reveal happens on the GPU with no React re-render per move.
   useEffect(() => {
-    const timers = intervals.map((ms, i) =>
-      setInterval(() => {
-        // 1 — fade out this cell
-        setCells((prev) => prev.map((c, j) => j === i ? { ...c, visible: false } : c));
-        // 2 — after fade, teleport to a non-adjacent spot and fade back in
-        setTimeout(() => {
-          setCells((prev) => {
-            const others = prev.filter((_, j) => j !== i);
-            const pos = randomPosAway(others);
-            return prev.map((c, j) => j === i ? { ...pos, visible: true } : c);
-          });
-        }, FADE);
-      }, ms)
-    );
-    return () => timers.forEach(clearInterval);
+    const el = rootRef.current;
+    if (!el) return;
+    // Respect reduced motion — keep the static dots, skip the pointer spotlight.
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+
+    let raf = 0;
+    let px = 0;
+    let py = 0;
+
+    const apply = () => {
+      raf = 0;
+      el.style.setProperty("--mx", `${px}px`);
+      el.style.setProperty("--my", `${py}px`);
+      el.style.setProperty("--spot-opacity", "1");
+    };
+
+    const onMove = (e: MouseEvent) => {
+      const rect = el.getBoundingClientRect();
+      px = e.clientX - rect.left;
+      py = e.clientY - rect.top;
+      if (!raf) raf = requestAnimationFrame(apply);
+    };
+
+    const onLeave = () => {
+      if (raf) {
+        cancelAnimationFrame(raf);
+        raf = 0;
+      }
+      el.style.setProperty("--spot-opacity", "0");
+    };
+
+    el.addEventListener("mousemove", onMove);
+    el.addEventListener("mouseleave", onLeave);
+
+    return () => {
+      el.removeEventListener("mousemove", onMove);
+      el.removeEventListener("mouseleave", onLeave);
+      if (raf) cancelAnimationFrame(raf);
+    };
   }, []);
+
   return (
     <section
+      ref={rootRef}
       id="home"
       className="relative flex min-h-[92vh] items-center overflow-hidden pb-28 pt-20 md:pb-10"
     >
-      {/* ── Animated 3-D grid background ── */}
+      {/* ── Interactive dotted-grid background ── */}
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
 
-        {/* Grid lines + cells share the same 3-D plane.
-            transformOrigin "50% 0%" pins the pivot at the TOP edge so the
-            horizon sits at the very top of the section and the floor fills
-            the entire hero from top to bottom. */}
+        {/* Soft central glow so the field reads as depth, not a flat mesh */}
         <div
           style={{
             position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: "-60%",   /* extra canvas so bottom rows don't get clipped */
-            transformOrigin: "50% 0%",
-            transform: "perspective(700px) rotateX(55deg)",
-            backgroundImage: `
-              linear-gradient(rgba(0,207,209,0.14) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(0,207,209,0.14) 1px, transparent 1px)
-            `,
-            backgroundSize: "48px 48px",
+            inset: 0,
+            background:
+              "radial-gradient(60% 45% at 50% 34%, color-mix(in oklab, var(--accent) 14%, transparent) 0%, transparent 70%)",
           }}
-        >
-          {/* Pulsing cells — on the same plane so they tilt with the grid */}
-          {cells.map((cell, i) => (
-            <motion.span
-              key={i}
-              className="absolute bg-accent/30"
-              animate={{ opacity: cell.visible ? 1 : 0 }}
-              transition={{ duration: FADE / 1000, ease: "easeInOut" }}
-              style={{ left: cell.left, top: cell.top, width: 47, height: 47 }}
-            />
-          ))}
-        </div>
+        />
 
-        {/* Gradient masks — z-index:2 forces paint above the GPU-composited 3-D layer */}
-        {/* Top: tiny fade to smooth the horizon line */}
+        {/* Base dots — dim, cover the whole area */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: dotLayer("color-mix(in oklab, var(--accent) 14%, transparent)"),
+            backgroundSize: `${DOT_GAP}px ${DOT_GAP}px`,
+          }}
+        />
+
+        {/* Spotlight dots — brighter, revealed only within the cursor mask */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: dotLayer("color-mix(in oklab, var(--accent) 60%, transparent)"),
+            backgroundSize: `${DOT_GAP}px ${DOT_GAP}px`,
+            opacity: "var(--spot-opacity, 0)",
+            transition: "opacity 500ms ease",
+            maskImage: `radial-gradient(${cursorAt(SPOT_RADIUS)}, #000 0%, transparent 70%)`,
+            WebkitMaskImage: `radial-gradient(${cursorAt(SPOT_RADIUS)}, #000 0%, transparent 70%)`,
+          }}
+        />
+
+        {/* Faint accent halo trailing the cursor for extra depth */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            opacity: "var(--spot-opacity, 0)",
+            transition: "opacity 500ms ease",
+            background: `radial-gradient(${cursorAt(SPOT_RADIUS + 60)}, color-mix(in oklab, var(--accent) 12%, transparent) 0%, transparent 70%)`,
+          }}
+        />
+
+        {/* Edge fades so the grid dissolves into the page background */}
         <div style={{
-          position: "absolute", inset: 0, zIndex: 2,
-          background: "linear-gradient(to bottom, var(--background) 0%, transparent 10%)",
+          position: "absolute", inset: 0,
+          background: "linear-gradient(to bottom, var(--background) 0%, transparent 12%, transparent 88%, var(--background) 100%)",
         }} />
-        {/* Bottom edge */}
         <div style={{
-          position: "absolute", inset: 0, zIndex: 2,
-          background: "linear-gradient(to top, var(--background) 0%, transparent 8%)",
-        }} />
-        {/* Left / right edges */}
-        <div style={{
-          position: "absolute", inset: 0, zIndex: 2,
+          position: "absolute", inset: 0,
           background: "linear-gradient(to right, var(--background) 0%, transparent 12%, transparent 88%, var(--background) 100%)",
         }} />
       </div>
@@ -154,19 +156,15 @@ export function Hero() {
               <span className="text-accent">{profile.name}</span>
             </h1>
 
-            {/* Role badge — ornamental border with flower accents */}
-            <div className="mt-6 flex justify-center">
-              <div className="relative inline-flex items-center gap-3 rounded-full border border-accent/40 px-6 py-2.5">
-                <span className="absolute -left-2 -top-2 text-accent" aria-hidden>✦</span>
-                <span className="absolute -right-2 -top-2 text-accent" aria-hidden>✦</span>
-                <span className="absolute -left-2 -bottom-2 text-accent" aria-hidden>✦</span>
-                <span className="absolute -right-2 -bottom-2 text-accent" aria-hidden>✦</span>
-                <span className="text-xs text-accent/60" aria-hidden>❖</span>
-                <span className="font-display text-sm font-black uppercase tracking-[0.2em] text-foreground sm:text-base">
-                  AI Engineer
-                </span>
-                <span className="text-xs text-accent/60" aria-hidden>❖</span>
-              </div>
+            {/* Role — flanked by centered rule lines + diamond accents */}
+            <div className="mt-7 flex items-center justify-center gap-4">
+              <span aria-hidden className="h-px w-14 bg-accent/40 sm:w-20" />
+              <span className="text-xl text-accent/60 sm:text-2xl" aria-hidden>❖</span>
+              <span className="font-display text-base font-black uppercase tracking-[0.25em] text-foreground sm:text-lg">
+                AI Engineer
+              </span>
+              <span className="text-xl text-accent/60 sm:text-2xl" aria-hidden>❖</span>
+              <span aria-hidden className="h-px w-14 bg-accent/40 sm:w-20" />
             </div>
 
             {/* Bio */}

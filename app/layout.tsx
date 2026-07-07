@@ -68,7 +68,7 @@ export default function RootLayout({
         {/* Always server-rendered — covers content on first visit before JS loads */}
         <div
           id="intro-cover"
-          style={{ position: "fixed", inset: 0, zIndex: 9998, background: "#0f2b46", overflow: "hidden" }}
+          style={{ position: "fixed", inset: 0, zIndex: 9998, background: "#0a1626", overflow: "hidden" }}
         />
         <ThemeProvider
           attribute="class"
