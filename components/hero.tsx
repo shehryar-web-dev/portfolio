@@ -161,7 +161,7 @@ export function Hero() {
               <span aria-hidden className="h-px w-14 bg-accent/40 sm:w-20" />
               <span className="text-xl text-accent/60 sm:text-2xl" aria-hidden>❖</span>
               <span className="font-display text-base font-black uppercase tracking-[0.25em] text-foreground sm:text-lg">
-                AI Engineer
+                {profile.role}
               </span>
               <span className="text-xl text-accent/60 sm:text-2xl" aria-hidden>❖</span>
               <span aria-hidden className="h-px w-14 bg-accent/40 sm:w-20" />

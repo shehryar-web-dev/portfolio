@@ -71,25 +71,6 @@ export function About() {
             </Reveal>
           ))}
         </div>
-
-        {/* Stats bar */}
-        <Reveal delay={0.1}>
-          <div className="mt-12 grid grid-cols-2 divide-x divide-y divide-border border border-border sm:grid-cols-4 sm:divide-y-0">
-            {stats.map((s) => (
-              <div
-                key={s.label}
-                className="flex flex-col items-center justify-center px-6 py-8"
-              >
-                <span className="font-display text-4xl font-black text-accent">
-                  {s.value}
-                </span>
-                <span className="mt-2 text-center text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                  {s.label}
-                </span>
-              </div>
-            ))}
-          </div>
-        </Reveal>
       </div>
     </Section>
   );

@@ -12,8 +12,8 @@ type Stat = { label: string; value: string };
 // Hardcoded placeholders for now — dev-appropriate. Swap for real data later.
 const defaultStats: Stat[] = [
   { label: "Projects", value: "40+" },
-  { label: "Clients", value: "20+" },
   { label: "Experience", value: "3+ yrs" },
+  { label: "Technologies", value: "15+" },
 ];
 
 /**
@@ -24,7 +24,7 @@ const defaultStats: Stat[] = [
 export function ProfileCard({
   src = profile.imagePath,
   name = profile.name,
-  role = "AI & Blockchain Engineer",
+  role = profile.role,
   stats = defaultStats,
   className,
 }: {
@@ -47,7 +47,7 @@ export function ProfileCard({
         <span aria-hidden className="pointer-events-none absolute bottom-2 right-2 h-5 w-5 rounded-br-lg border-b-2 border-r-2 border-accent/70" />
 
         {/* Photo */}
-        <div className="relative aspect-4/5 w-full overflow-hidden rounded-xl bg-background">
+        <div className="relative aspect-4/4.5 w-full overflow-hidden rounded-xl bg-background">
           {/* Accent glow behind the subject */}
           <div
             aria-hidden
@@ -63,7 +63,7 @@ export function ProfileCard({
               alt={name}
               fill
               sizes="(max-width: 1024px) 100vw, 24rem"
-              className="object-cover grayscale transition-all duration-500 hover:grayscale-0"
+              className="object-cover"
               onError={() => setErrored(true)}
             />
           ) : (
@@ -113,7 +113,7 @@ export function ProfileCard({
       </div>
 
       {/* ── Floating "live" badge ── */}
-      <div className="glass absolute -bottom-3 -left-3 flex items-center gap-2.5 rounded-xl border border-border px-3 py-2 shadow-lg shadow-black/30">
+      {/* <div className="glass absolute -bottom-3 -left-3 flex items-center gap-2.5 rounded-xl border border-border px-3 py-2 shadow-lg shadow-black/30">
         <span className="grid h-7 w-7 place-items-center rounded-lg bg-accent/15 text-accent">
           <Zap className="h-4 w-4" />
         </span>
@@ -126,7 +126,7 @@ export function ProfileCard({
             Running 24/7
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

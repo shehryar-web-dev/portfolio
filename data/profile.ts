@@ -6,7 +6,7 @@
 export const profile = {
   name: "Shehryar",
   /** Used in <title> and headings */
-  role: "Senior Full Stack Engineer",
+  role: "AI Engineer",
   /** Keep it short — exactly one "&" (the part after it is highlighted in the hero) */
   headline: "I build fast, modern web & AI products.",
   subline:
