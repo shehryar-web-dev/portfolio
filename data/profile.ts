@@ -10,13 +10,18 @@ export const profile = {
   /** Keep it short — exactly one "&" (the part after it is highlighted in the hero) */
   headline: "I build fast, modern web & AI products.",
   subline:
-    "I design and build polished products end to end — from clean, interactive interfaces to reliable backends and AI features that feel effortless.",
+    "Helping businesses turn ambitious ideas into digital reality. Creating solutions that are reliable, scalable, and user-focused.",
 
   aboutShort:
     "I'm a full-stack engineer who turns ideas into clean, production-ready products. I care about fast, intuitive interfaces, dependable backends, and AI features that genuinely help people — and I love owning a product from idea to launch.",
 
-  aboutLong:
-    "I build modern products end to end — from the interface a user touches to the services and data behind it. Lately I've focused on AI: chat assistants, retrieval over your own documents, and workflow automation that removes busywork. What sets my work apart is shipping: I take an idea, build it cleanly, and get it live.",
+  aboutLong: [
+    "I love understanding systems from the inside out.",
+    "Whether it's a web application, a database, or a large language model, I'm always asking the same questions: Why was it built? What problem does it solve? How does it work internally?",
+    "I'm a Software Engineer with experience building modern web applications and I'm currently focused on becoming an AI Engineer. My journey started with web development, but my curiosity has taken me deeper into distributed systems, databases, cloud infrastructure, machine learning, and large language models.",
+    "I enjoy building projects, experimenting with new technologies, and continuously improving my understanding of software architecture. I'm not interested in memorizing frameworks—I prefer learning the underlying concepts that make technologies work.",
+    "My long-term goal is to build intelligent, scalable products that combine strong software engineering practices with artificial intelligence. I believe the best engineers never stop learning, and that's the mindset I bring to every project I work on.",
+  ],
 
   email: "shehryarwebdev@gmail.com",
   /** Placeholder — replace with your real number */

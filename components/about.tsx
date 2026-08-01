@@ -18,9 +18,11 @@ export function About() {
           <p className="text-lg leading-relaxed text-muted-foreground">
             {profile.aboutShort}
           </p>
-          <p className="mt-4 leading-relaxed text-muted-foreground">
-            {profile.aboutLong}
-          </p>
+          {profile.aboutLong.map((paragraph, i) => (
+            <p key={i} className="mt-4 leading-relaxed text-muted-foreground">
+              {paragraph}
+            </p>
+          ))}
         </Reveal>
       </div>
 
