@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { Zap } from "lucide-react";
 import { LogoIcon } from "@/components/logo-icon";
 import { profile } from "@/data/profile";
 import { cn } from "@/lib/utils";
@@ -37,9 +36,9 @@ export function ProfileCard({
   const [errored, setErrored] = useState(false);
 
   return (
-    <div className={cn("relative w-full max-w-sm", className)}>
+    <div className={cn("relative w-full max-w-[22rem]", className)}>
       {/* ── Card ── */}
-      <div className="relative rounded-2xl border border-border bg-card p-3 shadow-xl shadow-black/20 ring-1 ring-inset ring-white/5">
+      <div className="relative rounded-2xl border border-border bg-card p-2 shadow-xl shadow-black/20 ring-1 ring-inset ring-white/5 sm:p-3">
         {/* Corner brackets */}
         <span aria-hidden className="pointer-events-none absolute left-2 top-2 h-5 w-5 rounded-tl-lg border-l-2 border-t-2 border-accent/70" />
         <span aria-hidden className="pointer-events-none absolute right-2 top-2 h-5 w-5 rounded-tr-lg border-r-2 border-t-2 border-accent/70" />
@@ -82,12 +81,12 @@ export function ProfileCard({
         </div>
 
         {/* Identity row */}
-        <div className="mt-4 flex items-center justify-between gap-3 px-1">
+        <div className="mt-4 flex min-w-0 items-center justify-between gap-3 px-1">
           <div className="min-w-0">
             <h3 className="font-display text-2xl font-black leading-tight tracking-tight">
               {name}
             </h3>
-            <p className="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+            <p className="mt-1 break-words text-xs font-semibold uppercase tracking-[0.14em] text-accent">
               {role}
             </p>
           </div>
@@ -95,16 +94,16 @@ export function ProfileCard({
         </div>
 
         {/* Stat tiles */}
-        <div className="mt-4 grid grid-cols-3 gap-2">
+        <div className="mt-4 grid grid-cols-1 gap-2 min-[360px]:grid-cols-3">
           {stats.map((s) => (
             <div
               key={s.label}
-              className="rounded-lg border border-border bg-background/60 px-2 py-3 text-center"
+              className="min-w-0 rounded-lg border border-border bg-background/60 px-2 py-3 text-center"
             >
-              <div className="text-[0.6rem] font-semibold uppercase tracking-widest text-muted-foreground">
+              <div className="break-words text-[0.58rem] font-semibold uppercase leading-tight tracking-wide text-muted-foreground">
                 {s.label}
               </div>
-              <div className="mt-1 font-display text-lg font-black text-foreground">
+              <div className="mt-1 font-display text-base font-black text-foreground sm:text-lg">
                 {s.value}
               </div>
             </div>

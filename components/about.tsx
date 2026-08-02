@@ -2,19 +2,19 @@ import { Section } from "@/components/section";
 import { Reveal } from "@/components/reveal";
 import { ProfileCard } from "@/components/profile-card";
 import { profile } from "@/data/profile";
-import { skillGroups, stats } from "@/data/skills";
+import { skillGroups } from "@/data/skills";
 
 export function About() {
   return (
     <Section id="about" eyebrow="About" title="A bit about me" watermark="ABOUT" className="bg-background-alt">
-      <div className="grid gap-10 lg:grid-cols-5 lg:items-start">
+      <div className="grid min-w-0 gap-10 lg:grid-cols-5 lg:items-start">
         {/* Profile card */}
-        <Reveal className="flex justify-center lg:col-span-2 lg:justify-start">
+        <Reveal className="min-w-0 overflow-hidden sm:overflow-visible flex justify-center lg:col-span-2 lg:justify-start">
           <ProfileCard />
         </Reveal>
 
         {/* Bio */}
-        <Reveal className="lg:col-span-3" delay={0.08}>
+        <Reveal className="min-w-0 lg:col-span-3" delay={0.08}>
           <p className="text-lg leading-relaxed text-muted-foreground">
             {profile.aboutShort}
           </p>
