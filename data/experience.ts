@@ -14,26 +14,36 @@ export type Experience = {
 
 export const experiences: Experience[] = [
   {
-    role: "Full-Stack & AI Product Engineer",
-    org: "Independent / Freelance",
-    period: "2024 — Present",
+    role: "Full Stack Developer",
+    org: "Weiblocks",
+    period: "2023 - 2026",
     current: true,
     highlights: [
-      "Built AI Pixel Board — a two-sided web product with a 1,000,000-pixel HTML Canvas grid and a searchable AI tools directory, with an SEO-driven programmatic-pages strategy.",
-      "Shipped a RAG assistant (“Chat with My Docs”) with a full chunking → embeddings → vector-search pipeline and a streaming chat UI that cites its sources.",
-      "Owned features end to end — UI, API integrations, and LLM/blockchain layers — using AI coding tools to ship faster while keeping quality through review.",
+      "Worked on blockchain-based web applications across frontend, backend, API integration, wallet flows, and production-ready product interfaces.",
+      "Built responsive dashboards and dApp screens using React, Next.js, TypeScript, Tailwind CSS, and modern component patterns.",
+      "Integrated backend services, REST APIs, authentication flows, and Web3 functionality for staking, rewards, marketplace, and loyalty products.",
+      "Collaborated with product and backend teams to turn requirements into scalable full-stack features.",
     ],
-    tech: ["Next.js", "TypeScript", "NestJS", "OpenAI / Anthropic", "pgvector"],
+    tech: [
+      "React",
+      "Next.js",
+      "React native",
+      "TypeScript",
+      "Tailwind CSS",
+      "Node.js",
+      "NestJS",
+      "Web3"
+    ],
   },
   {
-    role: "Frontend / Web3 Developer",
-    org: "Freelance Projects",
-    period: "2023 — 2024",
+    role: "Frontend Developer Intern",
+    org: "Excellence Code Solution",
+    period: "2023 - 2 months",
     highlights: [
-      "Integrated Solana wallets (Phantom) and on-chain transactions into React/Next.js dApp frontends.",
-      "Built responsive, accessible interfaces in React + TypeScript + Tailwind, deployed to production.",
-      "Collaborated with clients to turn requirements into clean, shipped experiences.",
+      "Completed a two-month frontend development internship focused on building responsive web interfaces.",
+      "Practiced React, JavaScript, HTML, CSS, and component-based UI development through real project tasks.",
+      "Worked with senior developers to improve page layouts, fix UI issues, and understand production frontend workflows.",
     ],
-    tech: ["React", "Next.js", "Solana", "@solana/web3.js", "Tailwind"],
+    tech: ["React", "JavaScript", "HTML", "CSS", "Tailwind CSS"],
   },
 ];

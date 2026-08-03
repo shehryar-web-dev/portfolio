@@ -1,0 +1,74 @@
+Project 2 — FinTrust
+
+This project is significantly larger.
+
+It is not simply a staking dApp.
+
+What is it?
+
+FinTrust is a full-stack decentralized staking and rewards platform built on Solana that enables users to purchase platform tokens, stake assets across configurable reward tiers, earn cashback and referral incentives, claim vested NFT-based rewards, and participate in ICO phases through a secure blockchain infrastructure backed by smart contracts and an administrative management system.
+
+Why was it built?
+
+Traditional staking systems usually provide only basic token locking and reward distribution.
+
+FinTrust was designed to create a more complete token economy by combining staking, vesting, referrals, cashback, ICO participation, KYC, and administrative controls into a single platform.
+
+What problem does it solve?
+
+Instead of managing separate systems for token sales, staking, vesting, referral rewards, cashback programs, and compliance, FinTrust integrates these capabilities into one blockchain application with automated reward distribution and configurable tokenomics.
+
+Technologies Used
+
+Frontend
+
+Next.js
+React
+Tailwind CSS
+React Query
+
+Backend
+
+NestJS
+Prisma
+PostgreSQL
+Redis
+BullMQ
+
+Blockchain
+
+Solana
+Anchor
+Rust
+SPL Token
+Metaplex NFT
+
+Infrastructure
+
+Docker
+REST APIs
+My Contributions
+
+Based on the project documentation and the areas you've consistently discussed, your contributions could be described as:
+
+Built wallet-based authentication using Solana Wallet Adapter.
+Developed staking and rewards user interfaces.
+Integrated backend APIs for staking, rewards, referrals, and cashback.
+Implemented transaction history and reward visualization screens.
+Connected frontend with smart contract interactions.
+Developed reusable React components for staking workflows.
+Implemented responsive dashboard layouts.
+Participated in blockchain integration and testing across staking, vesting, and reward flows.
+
+Only include items that you actually worked on.
+
+Biggest Technical Challenges
+Synchronizing on-chain blockchain state with off-chain PostgreSQL data.
+Managing asynchronous blockchain transaction confirmations.
+Designing secure wallet authentication without traditional passwords.
+Handling reward calculations across multiple staking tiers.
+Building responsive interfaces for complex staking workflows.
+Maintaining consistency between smart contract state and backend services.
+Result
+
+Delivered a production-ready Solana staking platform supporting token sales, configurable staking tiers, NFT-based vesting, cashback, referrals, KYC-enabled ICO participation, and an administrative dashboard for managing tokenomics and reward distribution.

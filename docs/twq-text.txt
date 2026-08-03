@@ -1,0 +1,216 @@
+First, what is this project?
+
+From your document, I understand the project as:
+
+TWiQ is an event-driven cryptocurrency analytics platform focused on the Solana ecosystem. It helps traders monitor newly launched tokens, analyze contract risks, receive personalized Telegram alerts, and access AI-powered market insights through a unified dashboard.
+
+This is much stronger than saying:
+
+Crypto Dashboard
+
+Why was it built?
+
+According to your document, traders have to switch between many different tools.
+
+For example:
+
+CoinGecko
+Birdeye
+Solana Explorer
+Telegram groups
+TradingView
+Rug checking websites
+
+The goal of TWiQ was to bring these capabilities into one platform and provide intelligent notifications instead of requiring users to constantly monitor the market themselves.
+
+Resume version:
+
+Built to simplify cryptocurrency market monitoring by aggregating blockchain data, market analytics, contract risk analysis, and personalized alerts into a single platform.
+
+What problem does it solve?
+
+This is one of the strongest sections.
+
+Instead of saying
+
+Provides notifications
+
+say
+
+Cryptocurrency traders often miss profitable opportunities because important market events happen continuously across multiple data sources. TWiQ automatically monitors blockchain activity, evaluates token risk, filters events based on user preferences, and delivers relevant alerts through Telegram.
+
+That explains the business value.
+
+Technologies Used
+
+Only mention technologies you actually worked with.
+
+Example:
+
+Frontend
+
+Next.js
+React
+TypeScript
+Tailwind CSS
+TradingView Charts
+
+Backend
+
+NestJS
+Node.js
+JWT
+Redis
+BullMQ
+
+Blockchain
+
+Solana
+Wallet Adapter
+WalletConnect
+Phantom
+Solflare
+MetaMask
+
+Data Sources
+
+CoinGecko API
+Birdeye API
+
+AI
+
+GPT-4 API
+What was YOUR contribution?
+
+This is the most important section.
+
+From what you've shared over the last few weeks and from this document, I would write something like:
+
+My Contributions
+Developed the wallet authentication flow using Phantom, Solflare, and WalletConnect.
+Implemented wallet signature verification and JWT-based authentication.
+Built responsive dashboard interfaces for market analytics and user preferences.
+Integrated external cryptocurrency data providers including CoinGecko and Birdeye.
+Designed the notification workflow for personalized Telegram alerts.
+Developed contract risk analysis features including liquidity verification and holder distribution analysis.
+Integrated GPT-4 to provide AI-powered chatbot functionality.
+Built reusable frontend components and connected backend APIs.
+Optimized state management and API communication for real-time dashboard updates.
+
+This tells recruiters exactly what you built.
+
+Biggest Technical Challenges
+
+This section is where senior engineers stand out.
+
+From your document, I can identify several real engineering challenges.
+
+Challenge 1
+Supporting Multiple Wallet Providers
+
+Different wallets expose different SDKs and authentication flows.
+
+Solution
+
+Implemented a unified wallet authentication layer that supports Phantom, Solflare, MetaMask, and WalletConnect while maintaining a consistent login experience.
+
+Challenge 2
+Aggregating Real-Time Data
+
+Data comes from multiple APIs.
+
+Each API has
+
+different response formats
+different update frequencies
+rate limits
+
+Solution
+
+Created a data aggregation layer to normalize responses before presenting them in the dashboard.
+
+Challenge 3
+Personalized Notifications
+
+Users don't want every notification.
+
+Each user has
+
+different market cap preferences
+different watchlists
+different risk tolerance
+
+Solution
+
+Implemented preference-based filtering before sending Telegram notifications.
+
+Challenge 4
+Rug Checker
+
+Risk analysis requires combining multiple blockchain metrics.
+
+For example
+
+Liquidity
+Holder concentration
+Contract ownership
+Token metadata
+
+Solution
+
+Built a risk scoring pipeline that evaluates multiple indicators and generates an overall project risk score.
+
+Challenge 5
+Real-Time Dashboard
+
+Crypto prices change every second.
+
+Updating the UI without unnecessary re-rendering is difficult.
+
+Solution
+
+Optimized dashboard updates and API communication to keep market information responsive.
+
+What was the result?
+
+Never write
+
+Successfully completed.
+
+Instead, explain the outcome.
+
+Example:
+
+Delivered an MVP cryptocurrency analytics platform that combines wallet authentication, market analytics, AI-assisted insights, personalized Telegram notifications, and contract risk analysis into a single user experience.
+
+Resume-Friendly Version
+What is it?
+
+An event-driven cryptocurrency analytics platform for the Solana ecosystem that provides market intelligence, wallet authentication, contract risk analysis, AI-powered assistance, and personalized Telegram notifications.
+
+Why was it built?
+
+To help cryptocurrency traders monitor blockchain activity and receive actionable insights without manually tracking multiple platforms.
+
+What problem does it solve?
+
+Aggregates blockchain data, market information, and contract analysis into one platform while delivering personalized notifications based on user preferences.
+
+Technologies
+
+Next.js • React • TypeScript • Node.js • NestJS • Solana Wallet Adapter • WalletConnect • JWT • Redis • CoinGecko API • Birdeye API • GPT-4 • Telegram Bot API
+
+My Contributions
+Developed secure wallet authentication with Phantom, Solflare, and WalletConnect.
+Built responsive dashboard interfaces and user preference management.
+Integrated CoinGecko and Birdeye APIs for cryptocurrency market data.
+Developed personalized Telegram notification workflows.
+Implemented contract risk analysis including liquidity and holder distribution checks.
+Integrated GPT-4 for AI-powered chatbot functionality.
+Built reusable frontend components and connected backend services.
+Technical Challenges
+Supporting multiple blockchain wallets with a unified authentication flow.
+Normalizing real-time cryptocurrency data from multiple APIs.
+Delivering personalized notifications while minimizing alert fatigue.
+Implementing blockchain-based risk analysis for token evaluation.
+Maintaining responsive dashboard updates with frequently changing market data.

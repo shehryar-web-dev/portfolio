@@ -43,6 +43,24 @@ export default async function ProjectDetailPage({
     project.liveUrl ? { label: "Live Site", href: project.liveUrl } : null,
     project.githubUrl ? { label: "Source Code", href: project.githubUrl } : null,
   ].filter((link): link is { label: string; href: string } => Boolean(link));
+  const overviewSections = [
+    project.businessProblem
+      ? { label: "Business Problem", body: project.businessProblem }
+      : null,
+    project.solution ? { label: "Solution", body: project.solution } : null,
+    project.result ? { label: "Result", body: project.result } : null,
+  ].filter((section): section is { label: string; body: string } => Boolean(section));
+  const detailLists = [
+    project.keyFeatures?.length
+      ? { label: "Key Features", items: project.keyFeatures }
+      : null,
+    project.contributions?.length
+      ? { label: "My Contributions", items: project.contributions }
+      : null,
+    project.challenges?.length
+      ? { label: "Technical Challenges", items: project.challenges }
+      : null,
+  ].filter((section): section is { label: string; items: string[] } => Boolean(section));
 
   return (
     <article className="mx-auto w-full max-w-6xl px-5 pb-24 pt-28">
@@ -102,6 +120,50 @@ export default async function ProjectDetailPage({
           )}
         </div>
       </header>
+
+      {(overviewSections.length > 0 || detailLists.length > 0) && (
+        <section className="mt-12 space-y-10">
+          {overviewSections.length > 0 && (
+            <div className="grid gap-5 md:grid-cols-3">
+              {overviewSections.map((section) => (
+                <div
+                  key={section.label}
+                  className="rounded-lg border border-border bg-card p-5"
+                >
+                  <p className="text-xs font-bold uppercase tracking-widest text-accent">
+                    {section.label}
+                  </p>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {section.body}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {detailLists.length > 0 && (
+            <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
+              {detailLists.map((section) => (
+                <section key={section.label}>
+                  <p className="text-xs font-bold uppercase tracking-widest text-accent">
+                    {section.label}
+                  </p>
+                  <ul className="mt-4 space-y-3">
+                    {section.items.map((item) => (
+                      <li
+                        key={item}
+                        className="border-l border-border pl-4 text-sm leading-relaxed text-muted-foreground"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ))}
+            </div>
+          )}
+        </section>
+      )}
 
       {images.length > 0 && (
         <section className="mt-10">

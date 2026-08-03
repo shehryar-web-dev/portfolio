@@ -8,7 +8,7 @@ export function Experience() {
       id="experience"
       eyebrow="Experience"
       title="Where I've focused"
-      description="Outcomes over titles — here's what I've built and the impact along the way."
+      description="Three-plus years building frontend, full-stack, and blockchain-based product experiences."
       watermark="CAREER"
       className="bg-background-alt"
     >
@@ -35,7 +35,7 @@ export function Experience() {
                 <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                   <h3 className="text-lg font-semibold">
                     {exp.role}{" "}
-                    <span className="text-muted-foreground">· {exp.org}</span>
+                    <span className="text-muted-foreground">- {exp.org}</span>
                   </h3>
                   <span className="font-mono text-xs text-muted-foreground">
                     {exp.period}

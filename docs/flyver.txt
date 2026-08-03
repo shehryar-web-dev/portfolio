@@ -1,0 +1,178 @@
+1. What is Flyverr?
+Resume Version
+
+Flyverr is a modern digital marketplace that enables creators to sell limited digital products such as eBooks, templates, courses, and other downloadable assets. The platform also introduces a controlled resale marketplace where buyers can purchase products either for personal use or for future resale under platform-defined licensing rules. It provides a complete marketplace experience including authentication, product management, payments, user dashboards, reviews, and analytics.
+
+2. Why was it built?
+
+The project was built to solve several problems.
+
+Before Flyverr
+
+Digital creators usually have only two options:
+
+Sell products once
+Lose all future earning opportunities
+
+Traditional marketplaces don't create scarcity and don't encourage product resale.
+
+Flyverr introduces a different business model where:
+
+creators earn
+buyers can earn
+the platform earns
+
+This creates an ecosystem rather than just a download website.
+
+3. What problem does it solve?
+
+Interviewers love this question.
+
+Instead of saying
+
+"It is a marketplace."
+
+say this:
+
+Problems Solved
+Enables creators to monetize digital products.
+Allows buyers to purchase products for personal use or resale.
+Makes digital products feel more valuable through limited licensing.
+Creates recurring earning opportunities using resale and royalty mechanisms.
+Provides a centralized platform for managing products, licenses, transactions, earnings, and payouts.
+Delivers a user-friendly marketplace experience with modern UI and responsive design.
+4. Technologies Used
+
+Based on the documentation.
+
+Frontend
+Next.js 14
+React
+TypeScript
+Tailwind CSS
+ShadCN UI
+Axios
+App Router
+Backend
+Node.js
+Express.js
+Database
+Supabase
+PostgreSQL
+Authentication
+JWT
+Supabase Auth
+Payments
+Stripe
+Paystack
+Monitoring
+Sentry
+Analytics
+PostHog
+Email
+SendGrid
+Storage
+Supabase Storage
+Other
+REST APIs
+Responsive Design
+Component-based Architecture
+
+5. Your Contribution (Resume Ready)
+
+This is the most important part because it should describe your actual work.
+
+Your Role
+
+Frontend Developer
+
+Responsibilities
+Designed and implemented responsive user interfaces using Next.js, TypeScript, Tailwind CSS, and ShadCN UI.
+Built reusable and scalable UI components to improve maintainability.
+Integrated frontend with backend REST APIs using Axios.
+Implemented authentication, marketplace, product detail, dashboard, and profile-related screens.
+Focused on delivering a smooth and intuitive user experience across desktop and mobile devices.
+Collaborated closely with backend developers to integrate APIs and ensure accurate data flow.
+Participated in UI refinement, usability improvements, and frontend optimization.
+
+You told me your focus was
+
+frontend design
+API integration
+user experience
+
+so I would not claim things like
+
+built backend
+designed database
+Stripe integration
+
+unless you actually did them.
+
+6. Biggest Technical Challenges
+
+Interviewers ask this almost every time.
+
+Here are realistic challenges based on your role.
+
+Challenge 1
+
+Building a scalable component architecture.
+
+Problem:
+
+Many marketplace pages shared similar UI elements.
+
+Solution:
+
+Created reusable components using ShadCN UI and Tailwind CSS to reduce duplication and improve consistency.
+
+Challenge 2
+
+API Integration
+
+Problem:
+
+Different pages required multiple backend endpoints while maintaining a responsive interface.
+
+Solution:
+
+Integrated APIs using Axios with centralized configuration and handled loading, error, and success states to improve user experience.
+
+Challenge 3
+
+Responsive Design
+
+Problem:
+
+Marketplace pages contained complex layouts with filters, product cards, dashboards, and tables that needed to work across different screen sizes.
+
+Solution:
+
+Designed responsive layouts using Tailwind CSS and tested across desktop, tablet, and mobile devices.
+
+Challenge 4
+
+User Experience
+
+Problem:
+
+Marketplace applications can become confusing because users interact with many different pages.
+
+Solution:
+
+Improved navigation, page consistency, and visual hierarchy to make common tasks such as browsing products, viewing dashboards, and managing accounts more intuitive.
+
+7. What was the Result?
+
+Never say
+
+"Website completed."
+
+Instead say
+
+Result
+Delivered a modern, responsive marketplace interface aligned with product requirements.
+Improved overall user experience through intuitive navigation and reusable UI components.
+Successfully integrated frontend with backend APIs, enabling core marketplace functionality.
+Built a scalable frontend architecture that supports future feature development and maintenance.
