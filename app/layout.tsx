@@ -33,9 +33,9 @@ export const metadata: Metadata = {
   keywords: [...siteConfig.keywords],
   authors: [{ name: "Shehryar" }],
   icons: {
-    icon: "/Gemini_Generated_Image_ubop55ubop55ubop-removebg-preview.png",
-    shortcut: "/Gemini_Generated_Image_ubop55ubop55ubop-removebg-preview.png",
-    apple: "/Gemini_Generated_Image_ubop55ubop55ubop-removebg-preview.png",
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
   },
   openGraph: {
     type: "website",
