@@ -45,7 +45,10 @@ export function Navbar() {
   return (
     <>
       {/* ── Desktop: pill nav at top ── */}
-      <header className="fixed inset-x-0 top-0 z-50 hidden md:block">
+      <header
+        data-site-navbar
+        className="fixed inset-x-0 top-0 z-50 hidden md:block"
+      >
         <nav className="mx-auto flex h-16 w-full max-w-6xl items-center justify-center container-px">
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-1 rounded-full border border-border bg-card/80 px-2 py-1.5 shadow-sm backdrop-blur">
@@ -71,7 +74,10 @@ export function Navbar() {
       </header>
 
       {/* ── Mobile: fixed bottom nav bar ── */}
-      <nav className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-card/95 backdrop-blur md:hidden">
+      <nav
+        data-site-navbar
+        className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-card/95 backdrop-blur md:hidden"
+      >
         <div className="grid grid-cols-5 items-stretch px-1 pb-safe">
           {navItems.map(({ label, href, id, Icon }) => (
             <Link

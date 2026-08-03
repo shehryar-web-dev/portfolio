@@ -29,7 +29,10 @@ export function SocialSidebar() {
   return (
     <>
       {/* ── Desktop: fixed left column ── */}
-      <aside className="fixed bottom-0 left-5 z-40 hidden flex-col items-center gap-5 md:flex xl:left-8">
+      <aside
+        data-social-sidebar
+        className="fixed bottom-0 left-5 z-40 hidden flex-col items-center gap-5 md:flex xl:left-8"
+      >
         {socials.map(({ label, href, icon: Icon, external }) => (
           <a
             key={label}
