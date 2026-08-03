@@ -7,30 +7,30 @@
 :root {
   --background: #f0f6ff;
   --background-alt: #ddeaf8;
-  --foreground: #0d1f35;
+  --foreground: #ffffff;
   --muted: #ddeaf8;
-  --muted-foreground: #4a6b8a;
+  --muted-foreground: #ffffff;
   --card: #ffffff;
-  --card-foreground: #0d1f35;
+  --card-foreground: #ffffff;
   --border: #bdd5ee;
-  --accent: #00b8ba;
+  --accent: #00cfd1;
   --accent-foreground: #ffffff;
   --accent-2: #0284c7;
-  --ring: #00b8ba;
+  --ring: #00cfd1;
 }
 
 /* Dark mode — deep navy */
 .dark {
   --background: #0a1626;
   --background-alt: #091829;
-  --foreground: #d4e8f5;
+  --foreground: #ffffff;
   --muted: #132f4e;
-  --muted-foreground: #5080a0;
+  --muted-foreground: #ffffff;
   --card: #132f4e;
-  --card-foreground: #d4e8f5;
+  --card-foreground: #ffffff;
   --border: #1e3f5c;
   --accent: #00cfd1;
-  --accent-foreground: #000a0b;
+  --accent-foreground: #ffffff;
   --accent-2: #38bdf8;
   --ring: #00cfd1;
 }
@@ -78,6 +78,13 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+body:has([data-not-found-page]) [data-site-navbar],
+body:has([data-not-found-page]) [data-social-sidebar],
+body:has([data-not-found-page]) #intro-cover,
+body:has([data-not-found-page]) [data-intro-overlay] {
+  display: none !important;
+}
+
 ::selection {
   background: color-mix(in oklab, var(--accent) 28%, transparent);
 }
@@ -103,6 +110,19 @@ body {
   /* Solid accent — gradients intentionally removed sitewide */
   .gradient-text {
     color: var(--accent);
+    font-weight: 700;
+  }
+  .text-accent,
+  .hover\:text-accent:hover,
+  .group:hover .group-hover\:text-accent {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .text-accent\/60 {
+    color: color-mix(in oklab, var(--accent) 60%, transparent);
+  }
+  .text-accent\/20 {
+    color: color-mix(in oklab, var(--accent) 20%, transparent);
   }
   .font-display {
     font-family: var(--font-display), var(--font-sans), ui-sans-serif, sans-serif;

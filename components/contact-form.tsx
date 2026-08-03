@@ -45,7 +45,7 @@ export function ContactForm() {
         </div>
         <h3 className="mt-4 text-lg font-semibold">Message sent!</h3>
         <p className="mt-1 text-sm text-muted-foreground">
-          Thanks for reaching out — I'll get back to you soon.
+          Thanks for reaching out — I&apos;ll get back to you soon.
         </p>
         <Button
           variant="outline"

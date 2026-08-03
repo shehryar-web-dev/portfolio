@@ -19,7 +19,7 @@ export function Intro() {
     }
 
     if (localStorage.getItem("visited") !== "1") {
-      setShow(true);
+      queueMicrotask(() => setShow(true));
       document.body.style.overflow = "hidden";
     }
   }, []);
@@ -63,7 +63,7 @@ export function Intro() {
             {/* Terminal prompt */}
             <span
               className="font-mono text-2xl font-semibold"
-              style={{ color: "var(--accent)" }}
+              style={{ color: "var(--foreground)" }}
             >
               &gt;
             </span>
@@ -81,7 +81,7 @@ export function Intro() {
                 >
                   {STAGES[stageIndex]}
                   <motion.span
-                    style={{ color: "var(--accent)" }}
+                    style={{ color: "var(--foreground)" }}
                     animate={{ opacity: [1, 0] }}
                     transition={{
                       duration: 0.6,

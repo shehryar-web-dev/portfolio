@@ -21,7 +21,7 @@ export default function BlogIndexPage() {
           Writing & notes
         </h1>
         <p className="mt-4 text-muted-foreground">
-          Thoughts on what I'm building and learning across web, blockchain, and
+          Thoughts on what I&apos;m building and learning across web, blockchain, and
           AI.
         </p>
       </header>

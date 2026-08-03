@@ -32,6 +32,11 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   keywords: [...siteConfig.keywords],
   authors: [{ name: "Shehryar" }],
+  icons: {
+    icon: "/Gemini_Generated_Image_ubop55ubop55ubop-removebg-preview.png",
+    shortcut: "/Gemini_Generated_Image_ubop55ubop55ubop-removebg-preview.png",
+    apple: "/Gemini_Generated_Image_ubop55ubop55ubop-removebg-preview.png",
+  },
   openGraph: {
     type: "website",
     url: siteConfig.url,
