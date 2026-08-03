@@ -72,26 +72,30 @@ export function Navbar() {
 
       {/* ── Mobile: fixed bottom nav bar ── */}
       <nav className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-card/95 backdrop-blur md:hidden">
-        <div className="flex items-center justify-around px-1 pb-safe">
+        <div className="grid grid-cols-5 items-stretch px-1 pb-safe">
           {navItems.map(({ label, href, id, Icon }) => (
             <Link
               key={id}
               href={href}
               onClick={(e) => handleNavClick(e, id)}
               className={cn(
-                "flex flex-col items-center gap-1 px-4 py-3 transition-colors",
+                "flex min-w-0 flex-col items-center justify-center gap-1 px-1 py-3 transition-colors",
                 isHome && active === id
                   ? "text-accent"
                   : "text-muted-foreground hover:text-foreground",
               )}
             >
               <Icon className="h-5 w-5" />
-              <span className="text-[10px] font-semibold">{label}</span>
+              <span className="max-w-full truncate text-[9px] font-semibold leading-none sm:text-[10px]">
+                {label}
+              </span>
             </Link>
           ))}
-          <div className="flex flex-col items-center gap-1 px-4 py-3">
+          <div className="flex min-w-0 flex-col items-center justify-center gap-1 px-1 py-3">
             <ThemeToggle />
-            <span className="text-[10px] font-semibold text-muted-foreground">Theme</span>
+            <span className="max-w-full truncate text-[9px] font-semibold leading-none text-muted-foreground sm:text-[10px]">
+              Theme
+            </span>
           </div>
         </div>
       </nav>
