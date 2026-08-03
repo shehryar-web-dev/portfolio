@@ -12,6 +12,12 @@ export function Intro() {
 
   // useLayoutEffect fires before the browser paints — no flash in either direction
   useLayoutEffect(() => {
+    if (document.querySelector("[data-not-found-page]")) {
+      document.getElementById("intro-cover")?.remove();
+      document.body.style.overflow = "";
+      return;
+    }
+
     if (localStorage.getItem("visited") !== "1") {
       setShow(true);
       document.body.style.overflow = "hidden";
@@ -46,6 +52,7 @@ export function Intro() {
       {show && (
         <motion.div
           key="intro"
+          data-intro-overlay
           className="fixed inset-0 z-9999 flex items-center justify-center bg-background overflow-hidden"
           initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}

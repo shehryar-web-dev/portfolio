@@ -11,7 +11,9 @@ export default function NotFound() {
     <>
       <style jsx global>{`
         body:has([data-not-found-page]) [data-site-navbar],
-        body:has([data-not-found-page]) [data-social-sidebar] {
+        body:has([data-not-found-page]) [data-social-sidebar],
+        body:has([data-not-found-page]) #intro-cover,
+        body:has([data-not-found-page]) [data-intro-overlay] {
           display: none !important;
         }
       `}</style>
