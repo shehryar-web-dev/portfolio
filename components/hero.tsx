@@ -75,7 +75,7 @@ export function Hero() {
     <section
       ref={rootRef}
       id="home"
-      className="relative flex min-h-[92vh] items-center overflow-hidden pb-28 pt-20 md:pb-10"
+      className="relative flex min-h-[92vh] items-center overflow-hidden pb-28 md:pt-20 pt-10 md:pb-10"
     >
       {/* ── Interactive dotted-grid background ── */}
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
