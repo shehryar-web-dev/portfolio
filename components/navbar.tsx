@@ -8,10 +8,10 @@ import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 const navItems = [
-  { label: "About",      href: "/#about",      id: "about",      Icon: User },
-  { label: "Projects",   href: "/#projects",   id: "projects",   Icon: Layers },
+  { label: "About", href: "/#about", id: "about", Icon: User },
+  { label: "Projects", href: "/#projects", id: "projects", Icon: Layers },
   { label: "Experience", href: "/#experience", id: "experience", Icon: Briefcase },
-  { label: "Contact",    href: "/#contact",    id: "contact",    Icon: Mail },
+  { label: "Contact", href: "/#contact", id: "contact", Icon: Mail },
 ];
 
 export function Navbar() {
@@ -68,7 +68,7 @@ export function Navbar() {
                 </Link>
               ))}
             </div>
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
           </div>
         </nav>
       </header>
@@ -78,7 +78,7 @@ export function Navbar() {
         data-site-navbar
         className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-card/95 backdrop-blur md:hidden"
       >
-        <div className="grid grid-cols-5 items-stretch px-1 pb-safe">
+        <div className="grid grid-cols-4 items-stretch px-1 pb-safe">
           {navItems.map(({ label, href, id, Icon }) => (
             <Link
               key={id}
@@ -97,12 +97,12 @@ export function Navbar() {
               </span>
             </Link>
           ))}
-          <div className="flex min-w-0 flex-col items-center justify-center gap-1 px-1 py-3">
+          {/* <div className="flex min-w-0 flex-col items-center justify-center gap-1 px-1 py-3">
             <ThemeToggle />
             <span className="max-w-full truncate text-[9px] font-semibold leading-none text-muted-foreground sm:text-[10px]">
               Theme
             </span>
-          </div>
+          </div> */}
         </div>
       </nav>
     </>
