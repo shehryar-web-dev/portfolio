@@ -35,11 +35,11 @@ export const projects: Project[] = [
     summary:
       "An event-driven crypto analytics platform for Solana traders with market intelligence, wallet authentication, rug checks, AI insights, and Telegram alerts.",
     description:
-      "TWiQ is an event-driven cryptocurrency analytics platform focused on the Solana ecosystem. It helps traders monitor newly launched tokens, analyze contract risks, receive personalized Telegram alerts, and access AI-powered market insights through one unified dashboard.",
+      "TWQ is an event-driven cryptocurrency analytics platform focused on the Solana ecosystem. It helps traders monitor newly launched tokens, analyze contract risks, receive personalized Telegram alerts, and access AI-powered market insights through one unified dashboard.",
     businessProblem:
       "Crypto traders often switch between CoinGecko, Birdeye, Solana Explorer, Telegram groups, TradingView, and rug-checking tools. Important opportunities and risks can be missed because market events happen continuously across many disconnected sources.",
     solution:
-      "TWiQ aggregates blockchain activity, token market data, wallet authentication, contract risk analysis, AI-assisted insights, and preference-based notifications into a single product experience.",
+      "TWQ aggregates blockchain activity, token market data, wallet authentication, contract risk analysis, AI-assisted insights, and preference-based notifications into a single product experience.",
     keyFeatures: [
       "Solana market analytics dashboard",
       "Wallet authentication with Phantom, Solflare, MetaMask, and WalletConnect",

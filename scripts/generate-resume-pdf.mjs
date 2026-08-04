@@ -32,7 +32,7 @@ const resume = {
   ],
   projects: [
     {
-      name: "TWiQ",
+      name: "TWQ",
       summary:
         "Event-driven cryptocurrency analytics platform for Solana traders with wallet authentication, market analytics, rug checks, GPT-4 insights, and personalized Telegram alerts.",
       bullets: [

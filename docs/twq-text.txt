@@ -2,7 +2,7 @@ First, what is this project?
 
 From your document, I understand the project as:
 
-TWiQ is an event-driven cryptocurrency analytics platform focused on the Solana ecosystem. It helps traders monitor newly launched tokens, analyze contract risks, receive personalized Telegram alerts, and access AI-powered market insights through a unified dashboard.
+TWQ is an event-driven cryptocurrency analytics platform focused on the Solana ecosystem. It helps traders monitor newly launched tokens, analyze contract risks, receive personalized Telegram alerts, and access AI-powered market insights through a unified dashboard.
 
 This is much stronger than saying:
 
@@ -21,7 +21,7 @@ Telegram groups
 TradingView
 Rug checking websites
 
-The goal of TWiQ was to bring these capabilities into one platform and provide intelligent notifications instead of requiring users to constantly monitor the market themselves.
+The goal of TWQ was to bring these capabilities into one platform and provide intelligent notifications instead of requiring users to constantly monitor the market themselves.
 
 Resume version:
 
@@ -37,7 +37,7 @@ Provides notifications
 
 say
 
-Cryptocurrency traders often miss profitable opportunities because important market events happen continuously across multiple data sources. TWiQ automatically monitors blockchain activity, evaluates token risk, filters events based on user preferences, and delivers relevant alerts through Telegram.
+Cryptocurrency traders often miss profitable opportunities because important market events happen continuously across multiple data sources. TWQ automatically monitors blockchain activity, evaluates token risk, filters events based on user preferences, and delivers relevant alerts through Telegram.
 
 That explains the business value.
 
