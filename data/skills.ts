@@ -50,9 +50,7 @@ export const skillGroups: SkillGroup[] = [
       "AWS",
       "Figma",
       "Jest",
-      "Cypress",
-      "Vite",
-      "Webpack",
+      "CI/CD",
     ],
   },
 ];
