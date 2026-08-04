@@ -58,20 +58,20 @@ const resume = {
         "Built merchant/admin dashboard interfaces, REST API integrations, Privy wallet authentication, NFT minting flows, and tier upgrade experiences.",
       ],
     },
-    {
-      name: "Flyverr",
-      summary:
-        "Digital marketplace for limited downloadable products with creator selling tools, licensing-aware resale flows, dashboards, reviews, analytics, and payments.",
-      bullets: [
-        "Implemented marketplace, product detail, dashboard, profile, authentication, and responsive UI screens using Next.js, TypeScript, Tailwind CSS, ShadCN UI, and Axios.",
-      ],
-    },
+    // {
+    //   name: "Flyverr",
+    //   summary:
+    //     "Digital marketplace for limited downloadable products with creator selling tools, licensing-aware resale flows, dashboards, reviews, analytics, and payments.",
+    //   bullets: [
+    //     "Implemented marketplace, product detail, dashboard, profile, authentication, and responsive UI screens using Next.js, TypeScript, Tailwind CSS, ShadCN UI, and Axios.",
+    //   ],
+    // },
   ],
   skills: [
     "Frontend: React, Next.js, TypeScript, JavaScript, Tailwind CSS, ShadCN UI, Framer Motion, Redux, Zustand",
-    "Backend: Node.js, Express.js, NestJS, REST APIs, GraphQL, Prisma, PostgreSQL, MongoDB, Redis, BullMQ",
+    "Backend: Node.js, Express.js, NestJS, REST APIs, Prisma, PostgreSQL, MongoDB, Redis, BullMQ",
     "Blockchain: Solana, Web3, Wallet Adapter, WalletConnect, Phantom, Solflare, MetaMask, Anchor, SPL Token, Metaplex NFT, Privy",
-    "AI & Tools: OpenAI API, GPT-4, RAG concepts, Docker, Git, AWS, Vite, Sentry, PostHog, Supabase, Stripe, Paystack",
+    "AI & Tools: OpenAI API, GPT-4, RAG concepts, Docker, Git, AWS, Vite, Supabase, Stripe",
   ],
 };
 

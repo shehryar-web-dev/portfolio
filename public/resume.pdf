@@ -3,7 +3,7 @@
 << /Type /Catalog /Pages 2 0 R >>
 endobj
 2 0 obj
-<< /Type /Pages /Kids [6 0 R 8 0 R] /Count 2 >>
+<< /Type /Pages /Kids [6 0 R] /Count 1 >>
 endobj
 3 0 obj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
@@ -12,7 +12,7 @@ endobj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
 endobj
 5 0 obj
-<< /Length 5543 >>
+<< /Length 5474 >>
 stream
 BT /F2 24 Tf 48 746 Td (Shehryar) Tj ET
 BT /F2 11 Tf 48 718 Td (Full Stack Developer | Blockchain & AI Product Engineer) Tj ET
@@ -59,44 +59,29 @@ BT /F1 9.1 Tf 48 203.89999999999992 Td (Customer loyalty platform using NFC chec
 BT /F1 9.1 Tf 48 191.89999999999992 Td (admin dashboard, and backend services.) Tj ET
 BT /F1 8.9 Tf 62 179.89999999999992 Td (- Built merchant/admin dashboard interfaces, REST API integrations, Privy wallet authentication, NFT minting flows, and) Tj ET
 BT /F1 8.9 Tf 62 167.99999999999991 Td (  tier upgrade experiences.) Tj ET
-BT /F2 10.5 Tf 48 152.0999999999999 Td (Flyverr) Tj ET
-BT /F1 9.1 Tf 48 139.0999999999999 Td (Digital marketplace for limited downloadable products with creator selling tools, licensing-aware resale flows,) Tj ET
-BT /F1 9.1 Tf 48 127.09999999999991 Td (dashboards, reviews, analytics, and payments.) Tj ET
-BT /F1 8.9 Tf 62 115.09999999999991 Td (- Implemented marketplace, product detail, dashboard, profile, authentication, and responsive UI screens using Next.js,) Tj ET
-BT /F1 8.9 Tf 62 103.1999999999999 Td (  TypeScript, Tailwind CSS, ShadCN UI, and Axios.) Tj ET
-BT /F2 10 Tf 48 84.2999999999999 Td (TECHNICAL SKILLS) Tj ET
-48 74.2999999999999 m 564 74.2999999999999 l S
-BT /F1 8.9 Tf 48 62.2999999999999 Td (- Frontend: React, Next.js, TypeScript, JavaScript, Tailwind CSS, ShadCN UI, Framer Motion, Redux, Zustand) Tj ET
+BT /F2 10 Tf 48 149.0999999999999 Td (TECHNICAL SKILLS) Tj ET
+48 139.0999999999999 m 564 139.0999999999999 l S
+BT /F1 8.9 Tf 48 127.09999999999991 Td (- Frontend: React, Next.js, TypeScript, JavaScript, Tailwind CSS, ShadCN UI, Framer Motion, Redux, Zustand) Tj ET
+BT /F1 8.9 Tf 48 115.1999999999999 Td (- Backend: Node.js, Express.js, NestJS, REST APIs, Prisma, PostgreSQL, MongoDB, Redis, BullMQ) Tj ET
+BT /F1 8.9 Tf 48 103.2999999999999 Td (- Blockchain: Solana, Web3, Wallet Adapter, WalletConnect, Phantom, Solflare, MetaMask, Anchor, SPL Token, Metaplex NFT,) Tj ET
+BT /F1 8.9 Tf 48 91.39999999999989 Td (  Privy) Tj ET
+BT /F1 8.9 Tf 48 79.49999999999989 Td (- AI & Tools: OpenAI API, GPT-4, RAG concepts, Docker, Git, AWS, Vite, Supabase, Stripe) Tj ET
 endstream
 endobj
 6 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
 endobj
-7 0 obj
-<< /Length 492 >>
-stream
-BT /F1 8.9 Tf 48 746 Td (- Backend: Node.js, Express.js, NestJS, REST APIs, GraphQL, Prisma, PostgreSQL, MongoDB, Redis, BullMQ) Tj ET
-BT /F1 8.9 Tf 48 734.1 Td (- Blockchain: Solana, Web3, Wallet Adapter, WalletConnect, Phantom, Solflare, MetaMask, Anchor, SPL Token, Metaplex NFT,) Tj ET
-BT /F1 8.9 Tf 48 722.2 Td (  Privy) Tj ET
-BT /F1 8.9 Tf 48 710.3000000000001 Td (- AI & Tools: OpenAI API, GPT-4, RAG concepts, Docker, Git, AWS, Vite, Sentry, PostHog, Supabase, Stripe, Paystack) Tj ET
-endstream
-endobj
-8 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
-endobj
 xref
-0 9
+0 7
 0000000000 65535 f 
 0000000009 00000 n 
 0000000058 00000 n 
-0000000121 00000 n 
-0000000191 00000 n 
-0000000266 00000 n 
-0000005861 00000 n 
-0000005997 00000 n 
-0000006540 00000 n 
+0000000115 00000 n 
+0000000185 00000 n 
+0000000260 00000 n 
+0000005786 00000 n 
 trailer
-<< /Size 9 /Root 1 0 R >>
+<< /Size 7 /Root 1 0 R >>
 startxref
-6676
+5922
 %%EOF

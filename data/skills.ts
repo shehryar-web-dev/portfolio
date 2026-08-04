@@ -10,9 +10,9 @@ export const skillGroups: SkillGroup[] = [
       "React",
       "TypeScript",
       "Next.js",
+      "React Native",
       "Tailwind CSS",
       "Framer Motion",
-      "Vue",
       "Redux",
       "Zustand",
     ],
@@ -57,7 +57,7 @@ export const skillGroups: SkillGroup[] = [
 
 export const stats = [
   { value: "3+", label: "Years Experience" },
-  { value: "40+", label: "Projects Shipped" },
+  { value: "25+", label: "Projects Shipped" },
   { value: "20+", label: "Happy Clients" },
   { value: "15+", label: "Technologies" },
 ];
