@@ -3,7 +3,6 @@ import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
-import { Intro } from "@/components/intro";
 import { Background } from "@/components/background";
 import { SocialSidebar } from "@/components/social-sidebar";
 import { siteConfig } from "@/data/profile";
@@ -70,11 +69,6 @@ export default function RootLayout({
         }} />
       </head>
       <body suppressHydrationWarning className="min-h-full flex flex-col bg-background text-foreground">
-        {/* Always server-rendered — covers content on first visit before JS loads */}
-        <div
-          id="intro-cover"
-          style={{ position: "fixed", inset: 0, zIndex: 9998, background: "#0a1626", overflow: "hidden" }}
-        />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
@@ -83,7 +77,6 @@ export default function RootLayout({
         >
           <Background />
           <SocialSidebar />
-          <Intro />
           <Navbar />
           <main className="flex-1 pb-16 md:pb-0">{children}</main>
         </ThemeProvider>

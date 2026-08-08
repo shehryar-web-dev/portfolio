@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 
 const STAGES = ["compile", "running", "execute"] as const;
 const HOLD_MS = 750;
@@ -47,57 +46,34 @@ export function Intro() {
     };
   }, []);
 
-  return (
-    <AnimatePresence>
-      {show && (
-        <motion.div
-          key="intro"
-          data-intro-overlay
-          className="fixed inset-0 z-9999 flex items-center justify-center bg-background overflow-hidden"
-          initial={{ opacity: 1 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.45, ease: "easeInOut" }}
-        >
-          <div className="flex items-center gap-3 select-none">
-            {/* Terminal prompt */}
-            <span
-              className="font-mono text-2xl font-semibold"
-              style={{ color: "var(--foreground)" }}
-            >
-              &gt;
-            </span>
+  if (!show) {
+    return null;
+  }
 
-            {/* Cycling word */}
-            <AnimatePresence mode="wait">
-              {stageIndex < STAGES.length && (
-                <motion.span
-                  key={stageIndex}
-                  className="font-mono text-2xl font-semibold text-foreground"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2, ease: "easeInOut" }}
-                >
-                  {STAGES[stageIndex]}
-                  <motion.span
-                    style={{ color: "var(--foreground)" }}
-                    animate={{ opacity: [1, 0] }}
-                    transition={{
-                      duration: 0.6,
-                      repeat: Infinity,
-                      repeatType: "reverse",
-                      ease: "linear",
-                    }}
-                  >
-                    _
-                  </motion.span>
-                </motion.span>
-              )}
-            </AnimatePresence>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+  return (
+    <div
+      key="intro"
+      data-intro-overlay
+      className="fixed inset-0 z-9999 flex items-center justify-center bg-background overflow-hidden"
+    >
+      <div className="flex items-center gap-3 select-none">
+        <span
+          className="font-mono text-2xl font-semibold"
+          style={{ color: "var(--foreground)" }}
+        >
+          &gt;
+        </span>
+
+        <span className="font-mono text-2xl font-semibold text-foreground">
+          {STAGES[stageIndex] ?? STAGES[STAGES.length - 1]}
+          <span
+            style={{ color: "var(--foreground)" }}
+            className="animate-pulse"
+          >
+            _
+          </span>
+        </span>
+      </div>
+    </div>
   );
 }
