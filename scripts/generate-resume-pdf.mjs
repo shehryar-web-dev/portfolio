@@ -68,6 +68,7 @@ const resume = {
     // },
   ],
   skills: [
+    "Languages: TypeScript, JavaScript, Python",
     "Frontend: React, Next.js, React Native, Tailwind CSS, Redux, Zustand",
     "Backend: Node.js, Express.js, NestJS, REST APIs, Prisma, PostgreSQL, MongoDB, Redis, BullMQ",
     "Blockchain: Solana, Web3, Wallet Adapter, WalletConnect, Phantom, Solflare, MetaMask, Anchor, SPL Token, Metaplex NFT, Privy",
