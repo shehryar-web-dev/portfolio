@@ -68,7 +68,7 @@ const resume = {
     // },
   ],
   skills: [
-    "Frontend: React, Next.js, TypeScript, JavaScript, Tailwind CSS, ShadCN UI, Framer Motion, Redux, Zustand",
+    "Frontend: React, Next.js, React Native, Tailwind CSS, Redux, Zustand",
     "Backend: Node.js, Express.js, NestJS, REST APIs, Prisma, PostgreSQL, MongoDB, Redis, BullMQ",
     "Blockchain: Solana, Web3, Wallet Adapter, WalletConnect, Phantom, Solflare, MetaMask, Anchor, SPL Token, Metaplex NFT, Privy",
     "AI & Tools: OpenAI API, GPT-4, RAG concepts, Docker, Git, AWS, Vite, Supabase, Stripe",
