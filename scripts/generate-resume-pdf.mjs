@@ -1,4 +1,4 @@
-import { writeFileSync } from "node:fs";
+﻿import { writeFileSync } from "node:fs";
 
 const resume = {
   name: "Shehryar",
@@ -68,19 +68,23 @@ const resume = {
     // },
   ],
   skills: [
-    "Languages: TypeScript, JavaScript, Python",
-    "Frontend: React, Next.js, React Native, Tailwind CSS, Redux, Zustand",
-    "Backend: Node.js, Express.js, NestJS, REST APIs, Prisma, PostgreSQL, MongoDB, Redis, BullMQ",
-    "Blockchain: Solana, Web3, Wallet Adapter, WalletConnect, Phantom, Solflare, MetaMask, Anchor, SPL Token, Metaplex NFT, Privy",
-    "AI & Tools: OpenAI API, GPT-4, RAG concepts, Docker, Git, AWS, Vite, Supabase, Stripe",
+    "Languages: JavaScript, TypeScript, Python",
+    "Frontend: React, Next.js, React Native, Tailwind CSS, Redux, Zustand, HTML5, CSS3",
+    "Backend: Node.js, NestJS, Express.js, REST APIs",
+    "Databases: MongoDB, PostgreSQL, Supabase",
+    "Caching & Queues: Redis, BullMQ",
+    "Blockchain: Solana, Web3, Wallet Adapter, Phantom, Solflare, MetaMask, WalletConnect, Privy, SPL Tokens, NFTs",
+    "AI: OpenAI API, GPT-based applications, AI API integration, RAG fundamentals",
+    "Cloud & DevOps: AWS, Docker, Git, GitHub, Nginx",
+    "Tools & Services: Vite, Axios, Supabase, Cloudinary, Helius, CoinGecko, Birdeye",
   ],
 };
 
 const PAGE_WIDTH = 612;
 const PAGE_HEIGHT = 792;
-const MARGIN_X = 48;
-const TOP = 746;
-const BOTTOM = 48;
+const MARGIN_X = 36;
+const TOP = 750;
+const BOTTOM = 30;
 const usableWidth = PAGE_WIDTH - MARGIN_X * 2;
 
 const escapePdf = (value) =>
@@ -130,17 +134,24 @@ class ResumePdf {
     if (this.y - space < BOTTOM) this.newPage();
   }
 
-  text(value, { x = MARGIN_X, size = 10, font = "regular", leading = size + 4 } = {}) {
+  text(
+    value,
+    { x = MARGIN_X, size = 10, font = "regular", leading = size + 4 } = {},
+  ) {
     this.ensure(leading);
     const safe = escapePdf(value);
     const fontName = font === "bold" ? "F2" : "F1";
-    this.page().push(`BT /${fontName} ${size} Tf ${x} ${this.y} Td (${safe}) Tj ET`);
+    this.page().push(
+      `BT /${fontName} ${size} Tf ${x} ${this.y} Td (${safe}) Tj ET`,
+    );
     this.y -= leading;
   }
 
   rule() {
     this.ensure(8);
-    this.page().push(`${MARGIN_X} ${this.y + 2} m ${PAGE_WIDTH - MARGIN_X} ${this.y + 2} l S`);
+    this.page().push(
+      `${MARGIN_X} ${this.y + 2} m ${PAGE_WIDTH - MARGIN_X} ${this.y + 2} l S`,
+    );
     this.y -= 10;
   }
 
@@ -149,8 +160,8 @@ class ResumePdf {
   }
 
   section(title) {
-    this.ensure(28);
-    this.gap(3);
+    this.ensure(16);
+    this.gap(0.5);
     this.text(title.toUpperCase(), { size: 10, font: "bold", leading: 12 });
     this.rule();
   }
@@ -185,42 +196,42 @@ class ResumePdf {
   }
 
   role(role, company, period) {
-    this.ensure(34);
-    this.text(`${role} - ${company}`, { size: 11, font: "bold", leading: 13 });
-    this.text(period, { size: 9, font: "bold", leading: 12 });
+    this.ensure(20);
+    this.text(`${role} - ${company}`, { size: 11, font: "bold", leading: 12.5 });
+    this.text(period, { size: 9.5, font: "bold", leading: 11 });
   }
 }
 
 function buildContent() {
   const pdf = new ResumePdf();
 
-  pdf.text(resume.name, { size: 24, font: "bold", leading: 28 });
-  pdf.text(resume.title, { size: 11, font: "bold", leading: 15 });
-  pdf.paragraph(resume.contact, { size: 8.6, leading: 11 });
-  pdf.gap(3);
+  pdf.text(resume.name, { size: 24, font: "bold", leading: 26 });
+  pdf.text(resume.title, { size: 12, font: "bold", leading: 14 });
+  pdf.paragraph(resume.contact, { size: 9.5, leading: 11 });
+  pdf.gap(0.5);
 
   pdf.section("Professional Summary");
-  pdf.paragraph(resume.summary, { size: 9.4, leading: 12.6 });
+  pdf.paragraph(resume.summary, { size: 10, leading: 12.5 });
 
   pdf.section("Experience");
   for (const item of resume.experience) {
     pdf.role(item.role, item.company, item.period);
-    for (const bullet of item.bullets) pdf.bullet(bullet);
-    pdf.gap(5);
+    for (const bullet of item.bullets) pdf.bullet(bullet, { size: 9.5 });
+    pdf.gap(1);
   }
 
   pdf.section("Selected Projects");
   for (const project of resume.projects) {
-    pdf.ensure(44);
-    pdf.text(project.name, { size: 10.5, font: "bold", leading: 13 });
-    pdf.paragraph(project.summary, { size: 9.1, leading: 12 });
-    for (const bullet of project.bullets) pdf.bullet(bullet, { size: 8.9 });
-    pdf.gap(4);
+    pdf.ensure(22);
+    pdf.text(project.name, { size: 10.5, font: "bold", leading: 12.5 });
+    pdf.paragraph(project.summary, { size: 9.2, leading: 11.5 });
+    for (const bullet of project.bullets) pdf.bullet(bullet, { size: 9.2 });
+    pdf.gap(1);
   }
 
   pdf.section("Technical Skills");
   for (const skill of resume.skills) {
-    pdf.bullet(skill, { size: 8.9, indent: 0 });
+    pdf.bullet(skill, { size: 9.2, indent: 0 });
   }
 
   return pdf.pages;
@@ -235,20 +246,27 @@ function makePdf(pages) {
 
   const catalogId = add("<< /Type /Catalog /Pages 2 0 R >>");
   const pagesId = add("");
-  const fontRegularId = add("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>");
-  const fontBoldId = add("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>");
+  const fontRegularId = add(
+    "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>",
+  );
+  const fontBoldId = add(
+    "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>",
+  );
   const pageIds = [];
 
   for (const commands of pages) {
     const stream = commands.join("\n");
-    const contentId = add(`<< /Length ${Buffer.byteLength(stream)} >>\nstream\n${stream}\nendstream`);
+    const contentId = add(
+      `<< /Length ${Buffer.byteLength(stream)} >>\nstream\n${stream}\nendstream`,
+    );
     const pageId = add(
       `<< /Type /Page /Parent ${pagesId} 0 R /MediaBox [0 0 ${PAGE_WIDTH} ${PAGE_HEIGHT}] /Resources << /Font << /F1 ${fontRegularId} 0 R /F2 ${fontBoldId} 0 R >> >> /Contents ${contentId} 0 R >>`,
     );
     pageIds.push(pageId);
   }
 
-  objects[pagesId - 1] = `<< /Type /Pages /Kids [${pageIds.map((id) => `${id} 0 R`).join(" ")}] /Count ${pageIds.length} >>`;
+  objects[pagesId - 1] =
+    `<< /Type /Pages /Kids [${pageIds.map((id) => `${id} 0 R`).join(" ")}] /Count ${pageIds.length} >>`;
 
   let output = "%PDF-1.4\n";
   const offsets = [0];
@@ -268,5 +286,5 @@ function makePdf(pages) {
   return Buffer.from(output, "binary");
 }
 
-writeFileSync("public/resume.pdf", makePdf(buildContent()));
+writeFileSync("../public/resume.pdf", makePdf(buildContent()));
 console.log("Generated public/resume.pdf");
