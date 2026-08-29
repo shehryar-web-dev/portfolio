@@ -7,7 +7,7 @@
 const resume = {
   name: "Shehryar Naeem",
 
-  title: "Senior Full Stack Engineer | Blockchain & AI",
+  title: "Senior Full Stack Engineer",
 
   location: "Lahore, Pakistan",
 
