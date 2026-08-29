@@ -3,7 +3,7 @@
 << /Type /Catalog /Pages 2 0 R >>
 endobj
 2 0 obj
-<< /Type /Pages /Kids [6 0 R] /Count 1 >>
+<< /Type /Pages /Kids [9 0 R] /Count 1 >>
 endobj
 3 0 obj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
@@ -12,12 +12,16 @@ endobj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
 endobj
 5 0 obj
-<< /Length 8253 >>
+<< /Length 8503 >>
 stream
 BT /F2 23 Tf 0.12 0.20 0.32 rg 217 812 Td (Shehryar Naeem) Tj ET
-BT /F2 11.8 Tf 0.18 0.36 0.60 rg 220.8 786.5 Td (Senior Full Stack Engineer) Tj ET
+BT /F2 11.8 Tf 0.18 0.36 0.60 rg 167.7 786.5 Td (Senior Full Stack Engineer | Blockchain & AI) Tj ET
 BT /F1 9.1 Tf 0.38 0.42 0.47 rg 149.625 773 Td (Lahore, Pakistan  |  +92 311 1404107  |  shehryarwebdev@gmail.com) Tj ET
-BT /F1 9.1 Tf 0.18 0.36 0.60 rg 222.425 762.4 Td (Portfolio  |  GitHub  |  LinkedIn) Tj ET
+BT /F1 9.1 Tf 0.18 0.36 0.60 rg 222.425 762.4 Td (Portfolio) Tj ET
+BT /F1 9.1 Tf 0.38 0.42 0.47 rg 263.375 762.4 Td (  |  ) Tj ET
+BT /F1 9.1 Tf 0.18 0.36 0.60 rg 286.125 762.4 Td (GitHub) Tj ET
+BT /F1 9.1 Tf 0.38 0.42 0.47 rg 313.425 762.4 Td (  |  ) Tj ET
+BT /F1 9.1 Tf 0.18 0.36 0.60 rg 336.175 762.4 Td (LinkedIn) Tj ET
 BT /F2 11.6 Tf 0.12 0.20 0.32 rg 38 746.8 Td (PROFESSIONAL SUMMARY) Tj ET
 0.18 0.36 0.60 RG 0.7 w 38 739.0999999999999 m 557 739.0999999999999 l S
 BT /F1 10 Tf 0.15 0.15 0.15 rg 38 727.5999999999999 Td (Full Stack Engineer with 3+ years of experience building scalable web applications, backend services,) Tj ET
@@ -89,19 +93,31 @@ BT /F1 9.4 Tf 0.38 0.42 0.47 rg 38 66.49999999999977 Td (Bachelor's Degree) Tj E
 endstream
 endobj
 6 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+<< /Type /Annot /Subtype /Link /Rect [222.425 760.4 263.375 773.5] /Border [0 0 0] /A << /S /URI /URI (https://shehryar-web-dev.vercel.app/) >> >>
+endobj
+7 0 obj
+<< /Type /Annot /Subtype /Link /Rect [286.125 760.4 313.425 773.5] /Border [0 0 0] /A << /S /URI /URI (https://github.com/shehryar-web-dev/) >> >>
+endobj
+8 0 obj
+<< /Type /Annot /Subtype /Link /Rect [336.175 760.4 372.575 773.5] /Border [0 0 0] /A << /S /URI /URI (https://www.linkedin.com/in/shehryar-naeem-831691213/) >> >>
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Annots [6 0 R 7 0 R 8 0 R] /Contents 5 0 R >>
 endobj
 xref
-0 7
+0 10
 0000000000 65535 f 
 0000000009 00000 n 
 0000000058 00000 n 
 0000000115 00000 n 
 0000000185 00000 n 
 0000000260 00000 n 
-0000008565 00000 n 
+0000008815 00000 n 
+0000008977 00000 n 
+0000009139 00000 n 
+0000009318 00000 n 
 trailer
-<< /Size 7 /Root 1 0 R >>
+<< /Size 10 /Root 1 0 R >>
 startxref
-8701
+9482
 %%EOF

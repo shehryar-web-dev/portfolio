@@ -7,15 +7,18 @@
 const resume = {
   name: "Shehryar Naeem",
 
-  title: "Senior Full Stack Engineer",
+  title: "Senior Full Stack Engineer | Blockchain & AI",
 
   location: "Lahore, Pakistan",
 
   contact:
     "+92 311 1404107  |  shehryarwebdev@gmail.com",
 
-  links:
-    "Portfolio  |  GitHub  |  LinkedIn",
+  links: {
+    portfolio: "https://shehryar-web-dev.vercel.app/",
+    github: "https://github.com/shehryar-web-dev/",
+    linkedin: "https://www.linkedin.com/in/shehryar-naeem-831691213/",
+  },
 
   summary:
     "Full Stack Engineer with 3+ years of experience building scalable web applications, backend services, and blockchain products. Experienced in React, Next.js, TypeScript, Node.js, NestJS, REST APIs, databases, Solana integrations, and AI-powered applications. Delivered production-ready dashboards, dApps, staking and rewards platforms, loyalty systems, Web3 integrations, and maintainable full-stack solutions.",
@@ -196,6 +199,7 @@ function wrapText(text, maxChars) {
     } else {
 
       lines.push(current);
+
       current = word;
     }
   }
@@ -217,7 +221,12 @@ class ResumePdf {
 
   constructor() {
 
-    this.pages = [[]];
+    this.pages = [
+      {
+        commands: [],
+        links: [],
+      },
+    ];
 
     this.y = TOP;
   }
@@ -231,9 +240,18 @@ class ResumePdf {
   }
 
 
+  commands() {
+
+    return this.page().commands;
+  }
+
+
   newPage() {
 
-    this.pages.push([]);
+    this.pages.push({
+      commands: [],
+      links: [],
+    });
 
     this.y = TOP;
   }
@@ -281,7 +299,7 @@ class ResumePdf {
         ? "F2"
         : "F1";
 
-    this.page().push(
+    this.commands().push(
       `BT ` +
       `/${fontName} ${size} Tf ` +
       `${color} rg ` +
@@ -362,7 +380,7 @@ class ResumePdf {
         ? "F2"
         : "F1";
 
-    this.page().push(
+    this.commands().push(
       `BT ` +
       `/${fontName} ${size} Tf ` +
       `${color} rg ` +
@@ -370,6 +388,129 @@ class ResumePdf {
       `(${safe}) Tj ` +
       `ET`,
     );
+  }
+
+
+  // ==========================================================
+  // CLICKABLE LINKS
+  // ==========================================================
+
+  linkRow(
+    links,
+    {
+      size = 9.1,
+      leading = 10.6,
+      color = ACCENT_COLOR,
+    } = {},
+  ) {
+
+    this.ensure(leading);
+
+    const items = [
+      {
+        label: "Portfolio",
+        url: links.portfolio,
+      },
+      {
+        label: "GitHub",
+        url: links.github,
+      },
+      {
+        label: "LinkedIn",
+        url: links.linkedin,
+      },
+    ];
+
+
+    const separator =
+      "  |  ";
+
+
+    const separatorWidth =
+      separator.length *
+      size *
+      0.50;
+
+
+    const itemWidths =
+      items.map(
+        (item) =>
+          item.label.length *
+          size *
+          0.50,
+      );
+
+
+    const totalWidth =
+      itemWidths.reduce(
+        (total, width) =>
+          total + width,
+        0,
+      ) +
+      separatorWidth *
+      (items.length - 1);
+
+
+    let x =
+      (PAGE_WIDTH - totalWidth) / 2;
+
+
+    const startY =
+      this.y;
+
+
+    items.forEach(
+      (item, index) => {
+
+        const width =
+          itemWidths[index];
+
+
+        // Display link text
+        this.commands().push(
+          `BT ` +
+          `/F1 ${size} Tf ` +
+          `${color} rg ` +
+          `${x} ${startY} Td ` +
+          `(${escapePdf(item.label)}) Tj ` +
+          `ET`,
+        );
+
+
+        // Add clickable PDF area
+        this.page().links.push({
+          x,
+          y: startY - 2,
+          width,
+          height: size + 4,
+          url: item.url,
+        });
+
+
+        x += width;
+
+
+        // Add separator
+        if (
+          index < items.length - 1
+        ) {
+
+          this.commands().push(
+            `BT ` +
+            `/F1 ${size} Tf ` +
+            `${MUTED_COLOR} rg ` +
+            `${x} ${startY} Td ` +
+            `(${escapePdf(separator)}) Tj ` +
+            `ET`,
+          );
+
+          x += separatorWidth;
+        }
+      },
+    );
+
+
+    this.y -= leading;
   }
 
 
@@ -385,7 +526,7 @@ class ResumePdf {
     } = {},
   ) {
 
-    this.page().push(
+    this.commands().push(
       `${color} RG ` +
       `${width} w ` +
       `${MARGIN_X} ${y} m ` +
@@ -403,11 +544,9 @@ class ResumePdf {
 
     this.ensure(38);
 
-    // Small gap before section
     this.gap(3);
 
 
-    // Section heading
     this.text(
       title.toUpperCase(),
       {
@@ -419,12 +558,11 @@ class ResumePdf {
     );
 
 
-    // Keep divider close to heading
+    // Divider close to heading
     const lineY =
       this.y + 5.3;
 
 
-    // Divider line
     this.line({
       y: lineY,
       width: 0.7,
@@ -432,7 +570,7 @@ class ResumePdf {
     });
 
 
-    // Proper gap between line and content
+    // Gap between line and paragraph
     this.y =
       lineY - 11.5;
   }
@@ -549,7 +687,6 @@ class ResumePdf {
       this.y;
 
 
-    // Job title
     this.text(
       role,
       {
@@ -561,7 +698,6 @@ class ResumePdf {
     );
 
 
-    // Period
     this.y =
       startY;
 
@@ -574,7 +710,6 @@ class ResumePdf {
     );
 
 
-    // Company
     this.y =
       startY - 14;
 
@@ -589,7 +724,6 @@ class ResumePdf {
     );
 
 
-    // Location
     this.y =
       startY - 14;
 
@@ -602,7 +736,6 @@ class ResumePdf {
     );
 
 
-    // Final position
     this.y =
       startY - 26.5;
   }
@@ -623,7 +756,6 @@ class ResumePdf {
       this.y;
 
 
-    // Project name
     this.text(
       name,
       {
@@ -635,7 +767,6 @@ class ResumePdf {
     );
 
 
-    // Technology stack
     this.y =
       startY;
 
@@ -648,7 +779,6 @@ class ResumePdf {
     );
 
 
-    // Final position after header
     this.y =
       startY - 12.8;
   }
@@ -701,7 +831,11 @@ function buildContent() {
   );
 
 
-  pdf.centeredText(
+  // ==========================================================
+  // CLICKABLE PORTFOLIO / GITHUB / LINKEDIN
+  // ==========================================================
+
+  pdf.linkRow(
     resume.links,
     {
       size: 9.1,
@@ -797,7 +931,6 @@ function buildContent() {
     }
 
 
-    // Gap between jobs
     pdf.gap(2);
   }
 
@@ -821,7 +954,6 @@ function buildContent() {
     );
 
 
-    // Project description
     pdf.paragraph(
       project.summary,
       {
@@ -834,7 +966,6 @@ function buildContent() {
     pdf.gap(0.3);
 
 
-    // Project bullets
     for (
       const bullet of project.bullets
     ) {
@@ -851,7 +982,6 @@ function buildContent() {
     }
 
 
-    // Compact gap between projects
     pdf.gap(1.6);
   }
 
@@ -933,11 +1063,11 @@ function makePdf(pages) {
 
 
   for (
-    const commands of pages
+    const pageData of pages
   ) {
 
     const stream =
-      commands.join("\n");
+      pageData.commands.join("\n");
 
 
     const contentId =
@@ -949,26 +1079,93 @@ function makePdf(pages) {
       );
 
 
+    // ========================================================
+    // CREATE CLICKABLE LINK ANNOTATIONS
+    // ========================================================
+
+    const annotationIds = [];
+
+
+    for (
+      const link of pageData.links
+    ) {
+
+      const annotationId =
+        add(
+          `<< ` +
+          `/Type /Annot ` +
+          `/Subtype /Link ` +
+          `/Rect [` +
+          `${link.x} ` +
+          `${link.y} ` +
+          `${link.x + link.width} ` +
+          `${link.y + link.height}` +
+          `] ` +
+          `/Border [0 0 0] ` +
+          `/A << ` +
+          `/S /URI ` +
+          `/URI (${escapePdf(link.url)}) ` +
+          `>> ` +
+          `>>`,
+        );
+
+
+      annotationIds.push(
+        annotationId,
+      );
+    }
+
+
+    // ========================================================
+    // ADD ANNOTATIONS TO PAGE
+    // ========================================================
+
+    const annotations =
+      annotationIds.length > 0
+        ? `/Annots [` +
+          annotationIds
+            .map(
+              (id) =>
+                `${id} 0 R`,
+            )
+            .join(" ") +
+          `] `
+        : "";
+
+
     const pageId =
       add(
         `<< ` +
         `/Type /Page ` +
         `/Parent ${pagesId} 0 R ` +
         `/MediaBox [0 0 ${PAGE_WIDTH} ${PAGE_HEIGHT}] ` +
+
         `/Resources << ` +
+
         `/Font << ` +
         `/F1 ${fontRegularId} 0 R ` +
         `/F2 ${fontBoldId} 0 R ` +
         `>> ` +
+
         `>> ` +
+
+        `${annotations}` +
+
         `/Contents ${contentId} 0 R ` +
+
         `>>`,
       );
 
 
-    pageIds.push(pageId);
+    pageIds.push(
+      pageId,
+    );
   }
 
+
+  // ==========================================================
+  // PAGES OBJECT
+  // ==========================================================
 
   objects[
     pagesId - 1
@@ -976,15 +1173,24 @@ function makePdf(pages) {
     `<< ` +
     `/Type /Pages ` +
     `/Kids [` +
+
     `${pageIds
       .map(
-        (id) => `${id} 0 R`,
+        (id) =>
+          `${id} 0 R`,
       )
       .join(" ")}` +
+
     `] ` +
+
     `/Count ${pageIds.length} ` +
+
     `>>`;
 
+
+  // ==========================================================
+  // BUILD PDF
+  // ==========================================================
 
   let output =
     "%PDF-1.4\n";
@@ -1001,11 +1207,14 @@ function makePdf(pages) {
         Buffer.byteLength(output),
       );
 
+
       output +=
         `${index + 1} 0 obj\n`;
 
+
       output +=
         `${object}\n`;
+
 
       output +=
         `endobj\n`;
@@ -1041,12 +1250,15 @@ function makePdf(pages) {
 
   output +=
     `trailer\n` +
+
     `<< ` +
     `/Size ${objects.length + 1} ` +
     `/Root ${catalogId} 0 R ` +
     `>>\n` +
+
     `startxref\n` +
     `${xrefOffset}\n` +
+
     `%%EOF\n`;
 
 
@@ -1086,5 +1298,5 @@ writeFileSync(
 
 
 console.log(
-  "Resume PDF generated successfully!",
+  "Resume PDF generated successfully with clickable links!",
 );
