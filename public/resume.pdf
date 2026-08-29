@@ -12,67 +12,84 @@ endobj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
 endobj
 5 0 obj
-<< /Length 5413 >>
+<< /Length 8271 >>
 stream
-BT /F2 24 Tf 36 750 Td (Shehryar) Tj ET
-BT /F2 12 Tf 36 724 Td (Full Stack Developer | Blockchain & AI Product Engineer) Tj ET
-BT /F1 9.5 Tf 36 710 Td (shehryarwebdev@gmail.com | +92 311 1404107 | Remote, Available worldwide | github.com/shehryar-web-dev |) Tj ET
-BT /F1 9.5 Tf 36 699 Td (linkedin.com/in/shehryar-naeem-831691213) Tj ET
-BT /F2 10 Tf 36 687 Td (PROFESSIONAL SUMMARY) Tj ET
-36 677 m 576 677 l S
-BT /F1 10 Tf 36 665 Td (Full-stack developer with 3+ years of experience building modern frontend, backend, and blockchain-based product) Tj ET
-BT /F1 10 Tf 36 652.5 Td (experiences. Skilled in React, Next.js, TypeScript, Node.js, NestJS, REST APIs, wallet authentication, Web3) Tj ET
-BT /F1 10 Tf 36 640 Td (integrations, and responsive UI systems. Strong focus on shipping production-ready dashboards, dApps,) Tj ET
-BT /F1 10 Tf 36 627.5 Td (marketplaces, loyalty systems, staking workflows, and AI-assisted product features.) Tj ET
-BT /F2 10 Tf 36 614.5 Td (EXPERIENCE) Tj ET
-36 604.5 m 576 604.5 l S
-BT /F2 11 Tf 36 592.5 Td (Full Stack Developer - Weiblocks) Tj ET
-BT /F2 9.5 Tf 36 580 Td (2023 - 2026) Tj ET
-BT /F1 9.5 Tf 50 569 Td (- Worked on blockchain-based web applications across frontend, backend, API integration, wallet flows, and) Tj ET
-BT /F1 9.5 Tf 50 556.5 Td (  production-ready product interfaces.) Tj ET
-BT /F1 9.5 Tf 50 544 Td (- Built responsive dashboards and dApp screens using React, Next.js, TypeScript, Tailwind CSS, and modern component) Tj ET
-BT /F1 9.5 Tf 50 531.5 Td (  patterns.) Tj ET
-BT /F1 9.5 Tf 50 519 Td (- Integrated backend services, REST APIs, authentication flows, and Web3 functionality for staking, rewards,) Tj ET
-BT /F1 9.5 Tf 50 506.5 Td (  marketplace, and loyalty products.) Tj ET
-BT /F1 9.5 Tf 50 494 Td (- Collaborated with product and backend teams to turn requirements into scalable full-stack features.) Tj ET
-BT /F2 11 Tf 36 480.5 Td (Frontend Developer Intern - Excellence Code Solution) Tj ET
-BT /F2 9.5 Tf 36 468 Td (2023 - 2 months) Tj ET
-BT /F1 9.5 Tf 50 457 Td (- Completed a two-month frontend development internship focused on building responsive web interfaces.) Tj ET
-BT /F1 9.5 Tf 50 444.5 Td (- Practiced React, JavaScript, HTML, CSS, and component-based UI development through real project tasks.) Tj ET
-BT /F1 9.5 Tf 50 432 Td (- Worked with senior developers to improve page layouts, fix UI issues, and understand production frontend workflows.) Tj ET
-BT /F2 10 Tf 36 418 Td (SELECTED PROJECTS) Tj ET
-36 408 m 576 408 l S
-BT /F2 10.5 Tf 36 396 Td (TWQ) Tj ET
-BT /F1 9.2 Tf 36 383.5 Td (Event-driven cryptocurrency analytics platform for Solana traders with wallet authentication, market analytics, rug) Tj ET
-BT /F1 9.2 Tf 36 372 Td (checks, GPT-4 insights, and personalized Telegram alerts.) Tj ET
-BT /F1 9.2 Tf 50 360.5 Td (- Built responsive market dashboard interfaces and user preference management.) Tj ET
-BT /F1 9.2 Tf 50 348.3 Td (- Integrated CoinGecko and Birdeye APIs plus Phantom, Solflare, MetaMask, and WalletConnect flows.) Tj ET
-BT /F1 9.2 Tf 50 336.1 Td (- Implemented contract risk analysis including liquidity and holder distribution checks.) Tj ET
-BT /F2 10.5 Tf 36 322.90000000000003 Td (FinTrust) Tj ET
-BT /F1 9.2 Tf 36 310.40000000000003 Td (Full-stack decentralized staking and rewards platform on Solana with token purchases, staking tiers, cashback, referrals,) Tj ET
-BT /F1 9.2 Tf 36 298.90000000000003 Td (KYC-enabled ICO participation, and admin controls.) Tj ET
-BT /F1 9.2 Tf 50 287.40000000000003 Td (- Developed staking, rewards, transaction history, and reward visualization interfaces.) Tj ET
-BT /F1 9.2 Tf 50 275.20000000000005 Td (- Connected frontend workflows with backend APIs and Solana smart contract interactions.) Tj ET
-BT /F2 10.5 Tf 36 262.00000000000006 Td (NFC Loyalty System) Tj ET
-BT /F1 9.2 Tf 36 249.50000000000006 Td (Customer loyalty platform using NFC check-ins, NFT rewards, membership tiers, mobile app flows, merchant dashboards, admin) Tj ET
-BT /F1 9.2 Tf 36 238.00000000000006 Td (dashboard, and backend services.) Tj ET
-BT /F1 9.2 Tf 50 226.50000000000006 Td (- Built merchant/admin dashboard interfaces, REST API integrations, Privy wallet authentication, NFT minting flows, and) Tj ET
-BT /F1 9.2 Tf 50 214.30000000000007 Td (  tier upgrade experiences.) Tj ET
-BT /F2 10 Tf 36 200.60000000000008 Td (TECHNICAL SKILLS) Tj ET
-36 190.60000000000008 m 576 190.60000000000008 l S
-BT /F1 9.2 Tf 36 178.60000000000008 Td (- Languages: JavaScript, TypeScript, Python) Tj ET
-BT /F1 9.2 Tf 36 166.4000000000001 Td (- Frontend: React, Next.js, React Native, Tailwind CSS, Redux, Zustand, HTML5, CSS3) Tj ET
-BT /F1 9.2 Tf 36 154.2000000000001 Td (- Backend: Node.js, NestJS, Express.js, REST APIs) Tj ET
-BT /F1 9.2 Tf 36 142.0000000000001 Td (- Databases: MongoDB, PostgreSQL, Supabase) Tj ET
-BT /F1 9.2 Tf 36 129.80000000000013 Td (- Caching & Queues: Redis, BullMQ) Tj ET
-BT /F1 9.2 Tf 36 117.60000000000012 Td (- Blockchain: Solana, Web3, Wallet Adapter, Phantom, Solflare, MetaMask, WalletConnect, Privy, SPL Tokens, NFTs) Tj ET
-BT /F1 9.2 Tf 36 105.40000000000012 Td (- AI: OpenAI API, GPT-based applications, AI API integration, RAG fundamentals) Tj ET
-BT /F1 9.2 Tf 36 93.20000000000012 Td (- Cloud & DevOps: AWS, Docker, Git, GitHub, Nginx) Tj ET
-BT /F1 9.2 Tf 36 81.00000000000011 Td (- Tools & Services: Vite, Axios, Supabase, Cloudinary, Helius, CoinGecko, Birdeye) Tj ET
+BT /F2 23 Tf 0.12 0.20 0.32 rg 217 812 Td (Shehryar Naeem) Tj ET
+BT /F2 11.8 Tf 0.18 0.36 0.60 rg 167.7 786.5 Td (Senior Full Stack Engineer | Blockchain & AI) Tj ET
+BT /F1 9.1 Tf 0.38 0.42 0.47 rg 149.625 773 Td (Lahore, Pakistan  |  +92 311 1404107  |  shehryarwebdev@gmail.com) Tj ET
+BT /F1 9.1 Tf 0.18 0.36 0.60 rg 222.425 762.4 Td (Portfolio  |  GitHub  |  LinkedIn) Tj ET
+BT /F2 11.6 Tf 0.12 0.20 0.32 rg 38 746.8 Td (PROFESSIONAL SUMMARY) Tj ET
+0.18 0.36 0.60 RG 0.7 w 38 739.0999999999999 m 557 739.0999999999999 l S
+BT /F1 10 Tf 0.15 0.15 0.15 rg 38 727.5999999999999 Td (Full Stack Engineer with 3+ years of experience building scalable web applications, backend services,) Tj ET
+BT /F1 10 Tf 0.15 0.15 0.15 rg 38 715.8999999999999 Td (and blockchain products. Experienced in React, Next.js, TypeScript, Node.js, NestJS, REST APIs,) Tj ET
+BT /F1 10 Tf 0.15 0.15 0.15 rg 38 704.1999999999998 Td (databases, Solana integrations, and AI-powered applications. Delivered production-ready dashboards,) Tj ET
+BT /F1 10 Tf 0.15 0.15 0.15 rg 38 692.4999999999998 Td (dApps, staking and rewards platforms, loyalty systems, Web3 integrations, and maintainable full-stack) Tj ET
+BT /F1 10 Tf 0.15 0.15 0.15 rg 38 680.7999999999997 Td (solutions.) Tj ET
+BT /F2 11.6 Tf 0.12 0.20 0.32 rg 38 665.0999999999997 Td (TECHNICAL SKILLS) Tj ET
+0.18 0.36 0.60 RG 0.7 w 38 657.3999999999996 m 557 657.3999999999996 l S
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 645.8999999999996 Td (Languages: JavaScript, TypeScript, Python) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 634.7999999999996 Td (Frontend: React, Next.js, React Native) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 623.6999999999996 Td (Backend: Node.js, NestJS, REST APIs) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 612.5999999999996 Td (Databases: PostgreSQL, MongoDB, Redis) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 601.4999999999995 Td (Blockchain: Solana, Web3, Wallet Authentication, SPL Tokens, NFTs) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 590.3999999999995 Td (AI: OpenAI API, AI-Powered Applications, RAG) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 579.2999999999995 Td (Cloud & DevOps: AWS, Docker, Git, GitHub, Nginx) Tj ET
+BT /F2 11.6 Tf 0.12 0.20 0.32 rg 38 565.1999999999995 Td (PROFESSIONAL EXPERIENCE) Tj ET
+0.18 0.36 0.60 RG 0.7 w 38 557.4999999999994 m 557 557.4999999999994 l S
+BT /F2 11.2 Tf 0.12 0.20 0.32 rg 38 545.9999999999994 Td (Full Stack Developer) Tj ET
+BT /F1 9.1 Tf 0.38 0.42 0.47 rg 506.95 545.9999999999994 Td (2023 - 2026) Tj ET
+BT /F2 9.9 Tf 0.18 0.36 0.60 rg 38 531.9999999999994 Td (Weiblocks) Tj ET
+BT /F1 9 Tf 0.38 0.42 0.47 rg 485 531.9999999999994 Td (Lahore, Pakistan) Tj ET
+BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 519.4999999999994 Td (" Developed and shipped production-ready web applications across frontend, backend, APIs, databases, and) Tj ET
+BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 508.59999999999945 Td (   blockchain integrations.) Tj ET
+BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 497.4999999999995 Td (" Built scalable applications using React, Next.js, and TypeScript with reusable component architecture.) Tj ET
+BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 486.3999999999995 Td (" Developed REST APIs and integrated authentication and Web3 workflows for staking, rewards, marketplace,) Tj ET
+BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 475.49999999999955 Td (   and loyalty products.) Tj ET
+BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 464.3999999999996 Td (" Collaborated with product and engineering teams to translate business requirements into maintainable) Tj ET
+BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 453.4999999999996 Td (   production features.) Tj ET
+BT /F2 11.2 Tf 0.12 0.20 0.32 rg 38 440.39999999999964 Td (Frontend Developer Intern) Tj ET
+BT /F1 9.1 Tf 0.38 0.42 0.47 rg 488.75 440.39999999999964 Td (2023 - 2 Months) Tj ET
+BT /F2 9.9 Tf 0.18 0.36 0.60 rg 38 426.39999999999964 Td (Excellence Code Solution) Tj ET
+BT /F1 9 Tf 0.38 0.42 0.47 rg 485 426.39999999999964 Td (Lahore, Pakistan) Tj ET
+BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 413.89999999999964 Td (" Built responsive user interfaces and reusable React components for production web applications.) Tj ET
+BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 402.79999999999967 Td (" Collaborated with senior developers to refine layouts, resolve UI issues, and follow production) Tj ET
+BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 391.8999999999997 Td (   development practices.) Tj ET
+BT /F2 11.6 Tf 0.12 0.20 0.32 rg 38 375.7999999999997 Td (KEY PROJECTS) Tj ET
+0.18 0.36 0.60 RG 0.7 w 38 368.09999999999974 m 557 368.09999999999974 l S
+BT /F2 10.9 Tf 0.12 0.20 0.32 rg 38 356.59999999999974 Td (TWQ) Tj ET
+BT /F1 8.8 Tf 0.38 0.42 0.47 rg 407.4 356.59999999999974 Td (Next.js, NestJS, Redis, OpenAI API) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 343.7999999999997 Td (Solana analytics and AI-powered trading platform featuring wallet authentication, token risk analysis,) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 332.89999999999975 Td (real-time market insights, personalized dashboards, and automated Telegram alerts for monitoring trading) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 321.9999999999998 Td (opportunities and blockchain activity.) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 310.7999999999998 Td (" Built responsive analytics dashboards and personalized user preference workflows.) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 300.3999999999998 Td (" Integrated market data APIs, wallet authentication, and token risk analysis using liquidity and) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 289.99999999999983 Td (   holder-distribution data.) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 279.59999999999985 Td (" Implemented AI-powered insights and automated alert workflows to help users monitor tokens and important) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 269.1999999999999 Td (   market activity.) Tj ET
+BT /F2 10.9 Tf 0.12 0.20 0.32 rg 38 257.1999999999999 Td (FinTrust) Tj ET
+BT /F1 8.8 Tf 0.38 0.42 0.47 rg 407.4 257.1999999999999 Td (Next.js, PostgreSQL, Prisma, Redis) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 244.39999999999986 Td (Decentralized staking and rewards platform supporting token staking, cashback, referrals, ICO participation,) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 233.49999999999986 Td (transaction tracking, reward visualization, and administrative controls for managing platform operations and) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 222.59999999999985 Td (user activity.) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 211.39999999999984 Td (" Developed staking, rewards, transaction history, and reward visualization workflows.) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 200.99999999999983 Td (" Connected frontend workflows with backend APIs and Solana smart-contract interactions.) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 190.59999999999982 Td (" Built administrative functionality for managing users, platform rewards, transactions, and operational) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 180.19999999999982 Td (   workflows.) Tj ET
+BT /F2 10.9 Tf 0.12 0.20 0.32 rg 38 168.19999999999982 Td (NFC Loyalty System) Tj ET
+BT /F1 8.8 Tf 0.38 0.42 0.47 rg 455.8 168.19999999999982 Td (React, Node.js, MongoDB) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 155.3999999999998 Td (Customer loyalty platform featuring NFC-based check-ins, NFT rewards, membership tiers, merchant and admin) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 144.4999999999998 Td (dashboards, authentication workflows, and backend services for managing customers and loyalty programs.) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 133.29999999999978 Td (" Built merchant and admin dashboards with REST API and authentication integrations.) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 122.89999999999978 Td (" Implemented NFT reward flows and membership-tier upgrade workflows.) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 112.49999999999977 Td (" Developed backend services for managing customers, loyalty activity, rewards, merchants, and membership data.) Tj ET
+BT /F2 11.6 Tf 0.12 0.20 0.32 rg 38 97.49999999999977 Td (EDUCATION) Tj ET
+0.18 0.36 0.60 RG 0.7 w 38 89.79999999999977 m 557 89.79999999999977 l S
+BT /F2 10.6 Tf 0.12 0.20 0.32 rg 38 78.29999999999977 Td (University of Education) Tj ET
+BT /F1 9.4 Tf 0.38 0.42 0.47 rg 38 66.49999999999977 Td (Bachelor's Degree) Tj ET
 endstream
 endobj
 6 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
 endobj
 xref
 0 7
@@ -82,9 +99,9 @@ xref
 0000000115 00000 n 
 0000000185 00000 n 
 0000000260 00000 n 
-0000005725 00000 n 
+0000008583 00000 n 
 trailer
 << /Size 7 /Root 1 0 R >>
 startxref
-5861
+8719
 %%EOF
