@@ -31,7 +31,7 @@ const resume = {
 
       location: "Lahore, Pakistan (Remote)",
 
-      period: "Jan 2023 - Present",
+      period: "Jun 2023 - Present",
 
       bullets: [
         "Engineered and shipped 8 production full-stack systems across fintech, blockchain, AI, and social/marketplace domains using React, Next.js, TypeScript, Node.js, NestJS, and Solana/XRPL blockchain integrations.",
