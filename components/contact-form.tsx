@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { Loader2, Send } from "lucide-react";
+import { Check, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 type Status = "idle" | "loading" | "success" | "error";
 
 const inputClasses =
-  "w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-accent focus:ring-2 focus:ring-ring/40";
+  "w-full rounded-md border border-border bg-background px-3 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-faint focus:border-accent focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-ring";
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -39,20 +39,19 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="flex h-full min-h-[320px] flex-col items-center justify-center rounded-2xl border border-border bg-card p-8 text-center">
-        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/10 text-accent">
-          <Send className="h-5 w-5" />
+      <div
+        role="status"
+        className="flex min-h-[320px] flex-col items-center justify-center text-center"
+      >
+        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-foreground">
+          <Check className="h-4 w-4" />
         </div>
-        <h3 className="mt-4 text-lg font-semibold">Message sent!</h3>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Thanks for reaching out — I&apos;ll get back to you soon.
+        <h3 className="mt-4 text-base font-semibold">Message sent</h3>
+        <p className="mt-1.5 max-w-xs text-sm text-muted-foreground">
+          Thanks for reaching out — I&apos;ll reply from {" "}
+          <span className="whitespace-nowrap">shehryarwebdev@gmail.com</span>.
         </p>
-        <Button
-          variant="outline"
-          size="sm"
-          className="mt-5"
-          onClick={() => setStatus("idle")}
-        >
+        <Button variant="outline" size="sm" className="mt-5" onClick={() => setStatus("idle")}>
           Send another
         </Button>
       </div>
@@ -60,18 +59,17 @@ export function ContactForm() {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="rounded-2xl border border-border bg-card p-6 sm:p-8"
-    >
-      {/* Honeypot (hidden from humans) */}
+    <form onSubmit={handleSubmit} noValidate={false}>
+      <p className="label mb-5">Send a message</p>
+
+      {/* Honeypot — hidden from humans, catches naive bots. */}
       <input
         type="text"
         name="company"
         tabIndex={-1}
         autoComplete="off"
         className="hidden"
-        aria-hidden
+        aria-hidden="true"
       />
 
       <div className="grid gap-4 sm:grid-cols-2">
@@ -84,6 +82,7 @@ export function ContactForm() {
             name="name"
             required
             minLength={2}
+            autoComplete="name"
             placeholder="Jane Doe"
             className={inputClasses}
           />
@@ -97,6 +96,7 @@ export function ContactForm() {
             name="email"
             type="email"
             required
+            autoComplete="email"
             placeholder="jane@company.com"
             className={inputClasses}
           />
@@ -105,12 +105,12 @@ export function ContactForm() {
 
       <div className="mt-4">
         <label htmlFor="subject" className="mb-1.5 block text-sm font-medium">
-          Subject <span className="text-muted-foreground">(optional)</span>
+          Subject <span className="font-normal text-faint">(optional)</span>
         </label>
         <input
           id="subject"
           name="subject"
-          placeholder="Let's work together"
+          placeholder="Backend role at…"
           className={inputClasses}
         />
       </div>
@@ -125,31 +125,24 @@ export function ContactForm() {
           required
           minLength={10}
           rows={5}
-          placeholder="Tell me about your project or role…"
+          placeholder="A little about the role or the problem you're working on…"
           className={`${inputClasses} resize-y`}
         />
       </div>
 
       {status === "error" && (
-        <p className="mt-3 text-sm text-red-500" role="alert">
+        <p className="mt-3 text-sm text-red-400" role="alert">
           {error}
         </p>
       )}
 
-      <Button
-        type="submit"
-        size="lg"
-        className="mt-6 w-full"
-        disabled={status === "loading"}
-      >
+      <Button type="submit" size="lg" className="mt-6 w-full" disabled={status === "loading"}>
         {status === "loading" ? (
           <>
-            <Loader2 className="h-4 w-4 animate-spin" /> Sending…
+            <Loader2 aria-hidden="true" className="h-4 w-4 animate-spin" /> Sending…
           </>
         ) : (
-          <>
-            Send message <Send className="h-4 w-4" />
-          </>
+          "Send message"
         )}
       </Button>
     </form>

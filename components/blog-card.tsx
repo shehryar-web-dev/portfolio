@@ -6,22 +6,23 @@ export function BlogCard({ post }: { post: PostMeta }) {
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="group flex h-full flex-col rounded-2xl border border-border bg-card p-6 transition-all hover:-translate-y-1 hover:border-accent/40"
+      className="group flex h-full w-full flex-col rounded-lg border border-border bg-background p-5 transition-colors hover:border-border-strong sm:p-6"
     >
-      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+      <p className="label flex items-center gap-2">
         <time dateTime={post.date}>{formatDate(post.date)}</time>
-        <span>·</span>
+        <span aria-hidden="true">·</span>
         <span>{post.readingTime}</span>
-      </div>
-      <h3 className="mt-3 text-lg font-semibold transition-colors group-hover:text-accent">
-        {post.title}
-      </h3>
+      </p>
+      <h2 className="mt-3 text-lg font-semibold">{post.title}</h2>
       <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
         {post.description}
       </p>
-      <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-accent">
-        Read more
-        <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+      <span className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-foreground">
+        Read
+        <ArrowUpRight
+          aria-hidden="true"
+          className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+        />
       </span>
     </Link>
   );

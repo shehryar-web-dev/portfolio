@@ -1,263 +1,311 @@
 @import "tailwindcss";
 
-/* Enable class-based dark mode (driven by next-themes) */
-@custom-variant dark (&:where(.dark, .dark *));
+/* ─────────────────────────────────────────────────────────────
+   Design tokens
 
-/* Light mode — blue-tinted white, mirrors the dark navy palette */
+   One fixed theme — no light/dark variants. Dark navy background,
+   white text, teal accent, everywhere, on every page.
+   ───────────────────────────────────────────────────────────── */
 :root {
-  --background: #f0f6ff;
-  --background-alt: #ddeaf8;
+  --background: #091829;
+  --surface: #0e2136;
+  --surface-2: #142b44;
   --foreground: #ffffff;
-  --muted: #ddeaf8;
-  --muted-foreground: #ffffff;
-  --card: #ffffff;
-  --card-foreground: #ffffff;
-  --border: #bdd5ee;
-  --accent: #00cfd1;
-  --accent-foreground: #ffffff;
-  --accent-2: #0284c7;
-  --ring: #00cfd1;
-}
+  --foreground-soft: #d6e2ec;
+  --muted-foreground: #9db3c7;
+  --faint: #71889d;
 
-/* Dark mode — deep navy */
-.dark {
-  --background: #0a1626;
-  --background-alt: #091829;
-  --foreground: #ffffff;
-  --muted: #132f4e;
-  --muted-foreground: #ffffff;
-  --card: #132f4e;
-  --card-foreground: #ffffff;
-  --border: #1e3f5c;
+  --border: #1f3a56;
+  --border-strong: #2f4e6c;
+
   --accent: #00cfd1;
-  --accent-foreground: #ffffff;
-  --accent-2: #38bdf8;
+  --accent-hover: #33dcdd;
+  --accent-soft: #0d2e33;
+  --accent-foreground: #091829;
   --ring: #00cfd1;
+
+  /* Aliases kept so older components keep compiling. */
+  --background-alt: var(--surface);
+  --muted: var(--surface-2);
+  --card: var(--surface);
+  --card-foreground: var(--foreground);
+  --accent-2: var(--accent);
+
+  /*
+   * "Slab" tokens: the heading banner used to punctuate each section (and
+   * the Contact section). Same palette as the rest of the site now, kept
+   * as separate tokens because components already reference them.
+   */
+  --slab-bg: #0a1626;
+  --slab-bg-2: #091829;
+  --slab-fg: #ffffff;
+  --slab-muted: rgba(255, 255, 255, 0.64);
+  --slab-accent: #00cfd1;
+  --slab-border: rgba(255, 255, 255, 0.1);
+  --slab-watermark: rgba(255, 255, 255, 0.05);
 }
 
 @theme inline {
   --color-background: var(--background);
-  --color-background-alt: var(--background-alt);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-foreground: var(--foreground);
-  --color-muted: var(--muted);
+  --color-foreground-soft: var(--foreground-soft);
   --color-muted-foreground: var(--muted-foreground);
+  --color-faint: var(--faint);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-ring: var(--ring);
+
+  /* Compatibility aliases. */
+  --color-background-alt: var(--background-alt);
+  --color-muted: var(--muted);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
-  --color-border: var(--border);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
   --color-accent-2: var(--accent-2);
-  --color-ring: var(--ring);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-display: var(--font-space-grotesk);
+  --font-display: var(--font-geist-sans);
 }
 
-/* Headings use the Space Grotesk display font automatically */
+/* ─────────────────────────────────────────────────────────────
+   Base
+   ───────────────────────────────────────────────────────────── */
 @layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "cv11", "ss01";
+  }
+
   h1,
   h2,
-  h3 {
-    font-family: var(--font-display), var(--font-sans), ui-sans-serif, sans-serif;
-    letter-spacing: -0.02em;
+  h3,
+  h4 {
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+    color: var(--foreground);
+  }
+
+  h1 {
+    letter-spacing: -0.04em;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* One consistent, always-visible focus treatment. */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--accent) 18%, transparent);
+  }
+
+  /* Keep long code/identifiers from forcing horizontal page scroll. */
+  code {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 0.9em;
+    overflow-wrap: anywhere;
   }
 }
 
-* {
-  border-color: var(--border);
-}
-
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  -webkit-font-smoothing: antialiased;
-}
-
-body:has([data-not-found-page]) [data-site-navbar],
-body:has([data-not-found-page]) [data-social-sidebar],
-body:has([data-not-found-page]) #intro-cover,
-body:has([data-not-found-page]) [data-intro-overlay] {
-  display: none !important;
-}
-
-::selection {
-  background: color-mix(in oklab, var(--accent) 28%, transparent);
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-::-webkit-scrollbar-track {
-  background: var(--background);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 9999px;
-  border: 2px solid var(--background);
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--muted-foreground);
-}
-
+/* ─────────────────────────────────────────────────────────────
+   Utilities
+   ───────────────────────────────────────────────────────────── */
 @layer utilities {
-  /* Solid accent — gradients intentionally removed sitewide */
-  .gradient-text {
-    color: var(--accent);
-    font-weight: 700;
-  }
-  .text-accent,
-  .hover\:text-accent:hover,
-  .group:hover .group-hover\:text-accent {
-    color: var(--accent);
-    font-weight: 700;
-  }
-  .text-accent\/60 {
-    color: color-mix(in oklab, var(--accent) 60%, transparent);
-  }
-  .text-accent\/20 {
-    color: color-mix(in oklab, var(--accent) 20%, transparent);
-  }
-  .font-display {
-    font-family: var(--font-display), var(--font-sans), ui-sans-serif, sans-serif;
-  }
-  .glass {
-    background: color-mix(in oklab, var(--card) 75%, transparent);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-  }
+  /* Single page gutter. Never let anything overflow past it. */
   .container-px {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
   }
-  .nav-link {
-    position: relative;
-  }
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: 2px;
-    left: 0.75rem;
-    right: 0.75rem;
-    height: 2px;
-    background: var(--accent);
-    border-radius: 9999px;
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 300ms ease;
-  }
-  .nav-link:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
-  }
-  .nav-link-active::after {
-    transform: scaleX(1);
-    transform-origin: left;
+  @media (min-width: 640px) {
+    .container-px {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
   }
 
-  /* Sweeping light reflection for buttons (monochrome shine, not a color gradient) */
-  .btn-shine {
+  .shell {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 72rem;
+  }
+
+  .shell-narrow {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 48rem;
+  }
+
+  /* Small monospace label used for eyebrows, indices and diagram nodes. */
+  .label {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+
+  .rule {
+    border-top: 1px solid var(--border);
+  }
+
+  /* Hairline grid used behind the hero — static, extremely low contrast. */
+  .hairline-grid {
+    background-image:
+      linear-gradient(to right, var(--border) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+    background-size: 72px 72px;
+    opacity: 0.5;
+  }
+
+  .link-underline {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    text-decoration-color: color-mix(in oklab, currentColor 35%, transparent);
+    transition: text-decoration-color 150ms ease;
+  }
+  .link-underline:hover {
+    text-decoration-color: currentColor;
+  }
+
+  /* Horizontally scrollable region for tables and wide diagrams. */
+  .scroll-x {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+  }
+
+  /*
+   * Entrance animation. Runs on first paint rather than on scroll, so content
+   * is never parked at opacity 0 waiting for JavaScript, and is skipped
+   * entirely under prefers-reduced-motion (see the media query at the end).
+   */
+  .reveal {
+    animation: reveal-in 450ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+
+  /* The dark navy/teal heading slab — see the --slab-* tokens above. */
+  .slab {
     position: relative;
     overflow: hidden;
-    isolation: isolate;
+    background: var(--slab-bg);
+    color: var(--slab-fg);
   }
-  .btn-shine::before {
-    content: "";
+  .slab-label {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--slab-accent);
+  }
+  /*
+   * Full-bleed background word, centred behind the slab's content. Kept very
+   * faint (see --slab-watermark) and the foreground heading kept small (see
+   * SectionBanner / Contact) so the two read as background/foreground rather
+   * than colliding.
+   */
+  .slab-watermark {
     position: absolute;
     inset: 0;
-    z-index: -1;
-    background: linear-gradient(
-      120deg,
-      transparent 0%,
-      color-mix(in oklab, #ffffff 40%, transparent) 50%,
-      transparent 100%
-    );
-    transform: translateX(-130%);
-    transition: transform 650ms ease;
-  }
-  .btn-shine:hover::before {
-    transform: translateX(130%);
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+    font-weight: 800;
+    font-size: clamp(3.25rem, 13vw, 8.5rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--slab-watermark);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
   }
 
+  /* Compatibility shims for any legacy component still referencing these. */
+  .gradient-text {
+    color: var(--accent);
+  }
+  .font-display {
+    font-family: var(--font-sans), ui-sans-serif, sans-serif;
+  }
+  .glass {
+    background: color-mix(in oklab, var(--background) 85%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
 }
 
-/* ── Glow orbs (hero parallax background) ── */
-.orb {
-  position: absolute;
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Subtle, non-decorative scrollbar. */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
   border-radius: 9999px;
-  pointer-events: none;
-  will-change: transform;
-  opacity: 0.18;
+  border: 3px solid var(--background);
 }
-.dark .orb {
-  opacity: 0.32;
+::-webkit-scrollbar-thumb:hover {
+  background: var(--faint);
 }
 
-.orb-1 {
-  width: 560px;
-  height: 560px;
-  background: radial-gradient(circle at 40% 40%, var(--accent) 0%, transparent 70%);
-  filter: blur(90px);
-  top: -12%;
-  left: -12%;
-  animation: orb-drift-1 14s ease-in-out infinite alternate;
-}
-
-.orb-2 {
-  width: 420px;
-  height: 420px;
-  background: radial-gradient(circle at 60% 50%, var(--accent-2) 0%, transparent 70%);
-  filter: blur(80px);
-  top: 15%;
-  right: -8%;
-  animation: orb-drift-2 18s ease-in-out infinite alternate;
-}
-
-.orb-3 {
-  width: 340px;
-  height: 340px;
-  background: radial-gradient(circle at 50% 60%, var(--accent) 0%, transparent 70%);
-  filter: blur(70px);
-  bottom: 8%;
-  left: 28%;
-  animation: orb-drift-3 11s ease-in-out infinite alternate;
-}
-
-@keyframes orb-drift-1 {
-  from { transform: translate(0px, 0px) scale(1); }
-  to   { transform: translate(45px, 35px) scale(1.08); }
-}
-@keyframes orb-drift-2 {
-  from { transform: translate(0px, 0px) scale(1); }
-  to   { transform: translate(-35px, 50px) scale(0.94); }
-}
-@keyframes orb-drift-3 {
-  from { transform: translate(0px, 0px) scale(1); }
-  to   { transform: translate(25px, -40px) scale(1.06); }
-}
-
-/* ── Hero grid cell pulse ── */
-@keyframes grid-cell-pulse {
-  0%, 100% { opacity: 0; }
-  50%       { opacity: 1; }
-}
-.hero-grid-cell {
-  animation: grid-cell-pulse var(--duration, 3s) ease-in-out infinite;
-  animation-delay: var(--delay, 0s);
-}
-
+/* Respect the user's motion preference everywhere, without exception. */
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
   *,
   *::before,
   *::after {
     animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
+  }
+  /* Skip the entrance animation outright rather than fast-forwarding it. */
+  .reveal {
+    animation: none !important;
   }
 }

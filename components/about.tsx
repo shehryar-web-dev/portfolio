@@ -1,78 +1,57 @@
+import Image from "next/image";
+import { profile } from "@/data/profile";
 import { Section } from "@/components/section";
 import { Reveal } from "@/components/reveal";
-import { ProfileCard } from "@/components/profile-card";
-import { profile } from "@/data/profile";
-import { skillGroups } from "@/data/skills";
 
+/** About — full copy. This is a single page, so there is no separate /about to link to. */
 export function About() {
   return (
-    <Section id="about" eyebrow="About" title="A bit about me" watermark="ABOUT" className="bg-background-alt">
-      <div className="grid min-w-0 gap-10 lg:grid-cols-5 lg:items-start">
-        {/* Profile card */}
-        <Reveal className="min-w-0 overflow-hidden sm:overflow-visible flex justify-center lg:col-span-2 lg:justify-start">
-          <ProfileCard />
-        </Reveal>
-
-        {/* Bio */}
-        <Reveal className="min-w-0 lg:col-span-3" delay={0.08}>
-          <p className="text-lg leading-relaxed text-muted-foreground">
-            {profile.aboutShort}
-          </p>
-          {profile.aboutLong.map((paragraph, i) => (
-            <p key={i} className="mt-4 leading-relaxed text-muted-foreground">
-              {paragraph}
-            </p>
-          ))}
-        </Reveal>
-      </div>
-
-      {/* ── Skills ── */}
-      <div className="mt-24" id="skills">
-        {/* "MY EXPERTISE" heading with "SKILLS" watermark */}
-        <Reveal className="relative mb-14 overflow-hidden py-20 text-center">
-          <span
-            aria-hidden
-            className="pointer-events-none absolute inset-0 flex select-none items-center justify-center font-display text-[clamp(5rem,18vw,12rem)] font-black leading-none text-foreground/5"
-          >
-            SKILLS
-          </span>
-          <div className="relative z-10">
-            <h3 className="font-display text-4xl font-black tracking-tight sm:text-5xl">
-              MY <span className="text-accent">EXPERTISE</span>
-            </h3>
+    <Section
+      id="about"
+      eyebrow="About"
+      title="Engineer first, framework second"
+      watermark="ABOUT"
+    >
+      <div className="grid gap-10 lg:grid-cols-[1fr_18rem] lg:gap-16">
+        <Reveal>
+          <div className="max-w-2xl space-y-5">
+            {profile.aboutLong.map((paragraph) => (
+              <p key={paragraph} className="text-base leading-relaxed text-muted-foreground">
+                {paragraph}
+              </p>
+            ))}
           </div>
         </Reveal>
 
-        {/* Category rows */}
-        <div className="space-y-10">
-          {skillGroups.map((group, i) => (
-            <Reveal key={group.category} delay={i * 0.07}>
-              {/* Row header */}
-              <div className="mb-4 flex items-center gap-3">
-                <span className="text-accent" aria-hidden>◆</span>
-                <span className="font-mono text-xs text-muted-foreground">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h4 className="font-display text-base font-black uppercase tracking-widest">
-                  {group.category}
-                </h4>
-                <div className="h-px flex-1 bg-border" />
+        <Reveal delay={0.05}>
+          <div className="lg:sticky lg:top-24">
+            <div className="relative aspect-[4/5] w-full max-w-[16rem] overflow-hidden rounded-lg border border-border bg-surface">
+              <Image
+                src={profile.imagePath}
+                alt={`Portrait of ${profile.fullName}`}
+                fill
+                sizes="(max-width: 1024px) 60vw, 16rem"
+                className="object-cover object-top"
+              />
+            </div>
+            <dl className="mt-6 space-y-4 text-sm">
+              <div>
+                <dt className="label mb-1">Currently</dt>
+                <dd className="text-muted-foreground">
+                  Full Stack Developer at Weiblocks
+                </dd>
               </div>
-
-              {/* Skill tags */}
-              <ul className="flex flex-wrap gap-2">
-                {group.skills.map((skill) => (
-                  <li
-                    key={skill}
-                    className="border border-border bg-card px-3 py-1.5 text-sm font-medium text-foreground transition-colors hover:border-accent/60 hover:text-accent"
-                  >
-                    {skill}
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-          ))}
-        </div>
+              <div>
+                <dt className="label mb-1">Based</dt>
+                <dd className="text-muted-foreground">{profile.location}</dd>
+              </div>
+              <div>
+                <dt className="label mb-1">Open to</dt>
+                <dd className="text-muted-foreground">{profile.openTo.join(", ")}</dd>
+              </div>
+            </dl>
+          </div>
+        </Reveal>
       </div>
     </Section>
   );

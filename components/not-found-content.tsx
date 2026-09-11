@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, Home, Search } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { ButtonLink, buttonClasses } from "@/components/ui/button";
 
@@ -8,36 +8,37 @@ export function NotFoundContent() {
   const router = useRouter();
 
   return (
-    <section
+    <main
       data-not-found-page
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-background px-5 py-20 text-center text-foreground"
+      className="flex min-h-screen items-center justify-center px-5 py-24"
     >
-      <div>
-        <p className="mb-4 inline-flex items-center justify-center gap-2 text-sm font-bold uppercase tracking-widest text-accent">
-          <Search className="h-4 w-4" aria-hidden="true" />
-          404
+      <div className="max-w-md">
+        <p className="label">404</p>
+        <h1 className="mt-3 text-3xl font-semibold sm:text-4xl">Page not found</h1>
+        <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+          That page does not exist, or it has moved. Project case studies now live under{" "}
+          <code className="rounded border border-border bg-surface px-1.5 py-0.5">
+            /work/[slug]
+          </code>
+          , linked from the work section on the home page.
         </p>
-        <h1 className="font-display text-5xl font-black leading-none sm:text-7xl">
-          Page not found
-        </h1>
-        <p className="mx-auto mt-5 max-w-xl text-base leading-7 text-muted-foreground sm:text-lg">
-          The page you requested does not exist or may have moved.
-        </p>
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
+        <div className="mt-8 flex flex-wrap gap-3">
+          <ButtonLink href="/" size="md">
+            Home
+          </ButtonLink>
+          <ButtonLink href="/#work" variant="outline" size="md">
+            All work
+          </ButtonLink>
           <button
             type="button"
             onClick={() => router.back()}
-            className={buttonClasses("outline", "lg")}
+            className={buttonClasses("ghost", "md")}
           >
-            <ArrowLeft className="h-4 w-4" />
+            <ArrowLeft aria-hidden="true" className="h-4 w-4" />
             Go back
           </button>
-          <ButtonLink href="/" size="lg">
-            <Home className="h-4 w-4" />
-            Home
-          </ButtonLink>
         </div>
       </div>
-    </section>
+    </main>
   );
 }

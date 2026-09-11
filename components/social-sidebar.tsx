@@ -31,7 +31,7 @@ export function SocialSidebar() {
       {/* ── Desktop: fixed left column ── */}
       <aside
         data-social-sidebar
-        className="fixed bottom-0 left-5 z-40 hidden flex-col items-center gap-5 md:flex xl:left-8"
+        className="fixed bottom-0 left-5 z-40 flex flex-col items-center gap-5 xl:left-8"
       >
         {socials.map(({ label, href, icon: Icon, external }) => (
           <a
@@ -50,7 +50,7 @@ export function SocialSidebar() {
             >
               {label}
             </span>
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg text-white/70 transition-colors hover:text-white">
+            <span className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground">
               <Icon className="h-5 w-5" />
             </span>
           </a>

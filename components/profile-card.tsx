@@ -62,7 +62,7 @@ export function ProfileCard({
               alt={name}
               fill
               sizes="(max-width: 1024px) 100vw, 24rem"
-              className="object-cover"
+              className="object-cover object-top"
               onError={() => setErrored(true)}
             />
           ) : (

@@ -1,27 +1,32 @@
-"use client";
-
-import { motion } from "framer-motion";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
+import { cn } from "@/lib/utils";
 
 type RevealProps = {
   children: ReactNode;
   className?: string;
+  /** Stagger, in seconds. Capped so nothing is ever invisible for long. */
   delay?: number;
-  /** Direction the element enters from */
+  /** Accepted for API compatibility; travel distance is fixed in CSS. */
   y?: number;
 };
 
-/** Animates children into view once, on scroll. */
-export function Reveal({ children, className, delay = 0, y = 24 }: RevealProps) {
+/**
+ * A one-shot entrance animation implemented entirely in CSS.
+ *
+ * Deliberately NOT a scroll-triggered, JavaScript-driven reveal: that pattern
+ * parks content at opacity 0 until an IntersectionObserver fires, which means
+ * the page renders blank without JS, prints blank, and ships framer-motion to
+ * the client for every section. This runs on first paint, needs no JavaScript,
+ * and is switched off entirely by prefers-reduced-motion.
+ */
+export function Reveal({ children, className, delay = 0 }: RevealProps) {
+  const clamped = Math.min(Math.max(delay, 0), 0.24);
+  const style: CSSProperties | undefined =
+    clamped > 0 ? { animationDelay: `${clamped}s` } : undefined;
+
   return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.5, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
-    >
+    <div className={cn("reveal", className)} style={style}>
       {children}
-    </motion.div>
+    </div>
   );
 }

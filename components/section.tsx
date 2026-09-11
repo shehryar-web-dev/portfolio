@@ -1,18 +1,23 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import { Reveal } from "@/components/reveal";
+import { SectionBanner } from "@/components/section-banner";
 
 type SectionProps = {
   id: string;
-  eyebrow?: string;
+  eyebrow: string;
   title: string;
   description?: string;
   children: ReactNode;
   className?: string;
+  /** Short word for the giant watermark behind the heading. Defaults to the eyebrow. */
   watermark?: string;
 };
 
-/** A standard page section with a consistent heading block. */
+/**
+ * The page-section primitive: a dark navy/teal heading slab (eyebrow, title,
+ * optional lead, giant watermark word), followed by the section's content on
+ * the normal light page background.
+ */
 export function Section({
   id,
   eyebrow,
@@ -23,39 +28,46 @@ export function Section({
   watermark,
 }: SectionProps) {
   return (
-    <section
-      id={id}
-      className={cn("scroll-mt-20 py-20 sm:py-28", className)}
-    >
-      <div className="mx-auto w-full max-w-6xl container-px">
-        <Reveal className="relative mb-12 overflow-hidden py-4 text-center">
-          {/* Watermark background text */}
-          {watermark && (
-            <span
-              aria-hidden
-              className="pointer-events-none absolute inset-0 flex select-none items-center justify-center font-display text-[clamp(4rem,14vw,10rem)] font-black leading-none text-foreground/5"
-            >
-              {watermark}
-            </span>
-          )}
-          <div className="relative z-10">
-            {eyebrow && (
-              <p className="mb-2 text-sm font-semibold tracking-wide gradient-text uppercase">
-                {eyebrow}
-              </p>
-            )}
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              {title}
-            </h2>
-            {description && (
-              <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
-                {description}
-              </p>
-            )}
-          </div>
-        </Reveal>
-        {children}
-      </div>
+    <section id={id} className={cn("scroll-mt-16", className)}>
+      <SectionBanner
+        eyebrow={eyebrow}
+        title={title}
+        description={description}
+        watermark={watermark}
+      />
+      <div className="shell container-px py-14 sm:py-20">{children}</div>
     </section>
+  );
+}
+
+/** A plain (non-slab) heading block, for lighter-weight pages like /blog. */
+export function SectionHeading({
+  eyebrow,
+  title,
+  description,
+  className,
+  as: Tag = "h2",
+}: {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  className?: string;
+  as?: "h1" | "h2" | "h3";
+}) {
+  return (
+    <div className={cn("max-w-3xl", className)}>
+      {eyebrow && <p className="label mb-3">{eyebrow}</p>}
+      <Tag
+        className={cn(
+          "font-semibold",
+          Tag === "h1" ? "text-3xl sm:text-5xl" : "text-2xl sm:text-3xl",
+        )}
+      >
+        {title}
+      </Tag>
+      {description && (
+        <p className="mt-4 text-base leading-relaxed text-muted-foreground">{description}</p>
+      )}
+    </div>
   );
 }

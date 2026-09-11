@@ -1,89 +1,203 @@
 /**
- * Projects shown across the homepage, all-projects page, and project details.
- * Store screenshots under /public/projects and reference them from the site root.
+ * Engineering case studies.
+ *
+ * Every project below follows the same eight-part structure so they can be
+ * compared against each other:
+ *   01 Problem · 02 Product · 03 My Role · 04 Architecture
+ *   05 Engineering Challenges · 06 Engineering Decisions · 07 Outcome · 08 Technology
+ *
+ * CONTENT RULE: no invented metrics. `facts` entries are structural counts read
+ * directly from the codebase, schema, config or commit history. Nothing here is
+ * traffic, revenue, user counts, or business results, because none of these
+ * repositories carry that instrumentation.
  */
+
+export type ArchitectureLayer = {
+  label: string;
+  nodes: { name: string; note?: string }[];
+};
+
+export type Architecture = {
+  /** One-sentence description of the shape of the system. */
+  summary: string;
+  /** A linear event/data pipeline, rendered as a chained flow diagram. */
+  pipeline?: { name: string; note?: string }[];
+  /** Stacked tiers, rendered as a layered diagram. */
+  layers?: ArchitectureLayer[];
+};
+
+export type Decision = {
+  /** The choice, phrased as a decision. */
+  choice: string;
+  /** Why — the constraint that forced it. */
+  because: string;
+  /** What it cost. A decision with no trade-off is not a decision. */
+  tradeoff: string;
+};
 
 export type Project = {
   slug: string;
   title: string;
+  /** Short domain label, e.g. "Trading infrastructure". */
+  category: string;
   tagline: string;
+  /** One-line product description used on cards. */
   summary: string;
-  description: string;
-  businessProblem?: string;
-  solution?: string;
-  keyFeatures?: string[];
-  contributions?: string[];
-  challenges?: string[];
-  result?: string;
-  role: string;
-  tech: string[];
+
+  /** 01 */ problem: string;
+  /** 02 */ product: string;
+  /** 03 */ role: string;
+  /** 03 */ owned: string[];
+  /** 04 */ architecture: Architecture;
+  /** 05 */ challenges: string[];
+  /** 06 */ decisions: Decision[];
+  /** 07 */ outcome: string[];
+  /** 08 */ tech: string[];
+
+  /** Verifiable structural counts. Shown as a small stat row. */
+  facts?: { value: string; label: string }[];
+
   liveUrl?: string;
   githubUrl?: string;
   image?: string;
   imageFit?: "cover" | "contain";
   galleryLayout?: "screens" | "mobile";
   gallery?: string[];
-  /** Featured projects render first and larger */
+  /** Featured projects appear on the homepage, ordered by engineering depth. */
   featured?: boolean;
 };
 
 export const projects: Project[] = [
+  /* ─────────────────────────────────────────────────────────────── */
   {
     slug: "twq",
     title: "TWQ",
-    tagline: "Trading intelligence for Solana markets",
+    category: "Event-driven market intelligence",
+    tagline: "Acknowledge the webhook first, process it later",
     summary:
-      "An event-driven crypto analytics platform for Solana traders with market intelligence, wallet authentication, rug checks, AI insights, and Telegram alerts.",
-    description:
-      "TWQ is an event-driven cryptocurrency analytics platform focused on the Solana ecosystem. It helps traders monitor newly launched tokens, analyze contract risks, receive personalized Telegram alerts, and access AI-powered market insights through one unified dashboard.",
-    businessProblem:
-      "Crypto traders often switch between CoinGecko, Birdeye, Solana Explorer, Telegram groups, TradingView, and rug-checking tools. Important opportunities and risks can be missed because market events happen continuously across many disconnected sources.",
-    solution:
-      "TWQ aggregates blockchain activity, token market data, wallet authentication, contract risk analysis, AI-assisted insights, and preference-based notifications into a single product experience.",
-    keyFeatures: [
-      "Solana market analytics dashboard",
-      "Wallet authentication with Phantom, Solflare, MetaMask, and WalletConnect",
-      "Contract risk analysis with liquidity and holder distribution checks",
-      "Personalized Telegram notification workflows",
-      "AI-powered chatbot and market insight experience",
-      "User preference management for alert filtering",
+      "A Solana token intelligence platform built on webhook ingestion, Redis Streams and queue workers — with contract risk analysis, Telegram alerting, and AI advisory grounded in indicators computed from raw price history.",
+
+    problem:
+      "Blockchain events do not wait. Helius disconnects a webhook subscriber that responds slowly, and a dropped event is simply gone — there is no replay. Doing real work inside the webhook handler therefore guarantees data loss under exactly the conditions the product exists for: high market activity. On top of that, the token data the product depends on arrives from providers with different response shapes, update frequencies and rate limits, and it is frequently incomplete.",
+    product:
+      "A single dashboard for Solana traders: newly launched token tracking, contract risk analysis with liquidity and holder-distribution checks, preference-filtered Telegram alerts, wallet-signature login, and an AI advisory layer.",
+    role:
+      "Sole engineer — backend, frontend, and all eight external integrations.",
+    owned: [
+      "Built the ingestion path that acknowledges a webhook before doing any validation or work, writing the raw event to a capped Redis Stream for a separate worker pool to consume.",
+      "Implemented eight technical indicators — RSI, MACD, SMA, EMA, Bollinger Bands, Stochastic, ADX, OBV — from primary formulas, with no charting library involved.",
+      "Built the AI advisory layer to explain computed indicators rather than predict from raw prices, cached, with a weighted rule-based scorer that still produces a real answer when OpenAI is unavailable.",
+      "Designed the alert-matching engine and the preference model that filters Telegram notifications per user.",
+      "Built the Next.js frontend on a single HTTP client with centralized token injection and 401 handling — no ad-hoc fetch calls anywhere in the codebase.",
+      "Tuned cache lifetimes to how fast the underlying data actually changes: 30 seconds for live prices, up to 24 hours for reference data.",
     ],
-    contributions: [
-      "Developed the wallet authentication flow using Phantom, Solflare, and WalletConnect.",
-      "Implemented wallet signature verification and JWT-based authentication.",
-      "Built responsive dashboard interfaces for market analytics and user preferences.",
-      "Integrated external cryptocurrency data providers including CoinGecko and Birdeye.",
-      "Designed the notification workflow for personalized Telegram alerts.",
-      "Developed contract risk analysis features including liquidity verification and holder distribution analysis.",
-      "Integrated GPT-4 for AI-powered chatbot functionality.",
-      "Built reusable frontend components and connected backend APIs.",
-      "Optimized state management and API communication for real-time dashboard updates.",
-    ],
+
+    architecture: {
+      summary:
+        "Ingestion is fully decoupled from processing: the handler's only job is to return 200 fast and durably record the event.",
+      pipeline: [
+        { name: "Solana", note: "on-chain activity" },
+        { name: "Helius webhook", note: "disconnects slow subscribers" },
+        { name: "Handler", note: "ACK 200 before any work" },
+        { name: "Redis Stream", note: "capped at ~100k entries" },
+        { name: "Worker pool", note: "3 BullMQ queues" },
+        { name: "MongoDB", note: "tokens, rules, history" },
+        { name: "Alert matcher", note: "per-user preferences" },
+        { name: "Telegram", note: "3 delivery modes" },
+      ],
+      layers: [
+        {
+          label: "Client",
+          nodes: [
+            { name: "Next.js 14 dashboard", note: "single HTTP client · JWT" },
+            { name: "Wallet auth", note: "nonce → sign → verify" },
+          ],
+        },
+        {
+          label: "Services",
+          nodes: [
+            { name: "Ingestion", note: "ACK-then-process" },
+            { name: "Indicator engine", note: "8 indicators from raw formulas" },
+            { name: "AI advisory", note: "180-min cache + rule-based fallback" },
+            { name: "Alerting", note: "preference-filtered" },
+          ],
+        },
+        {
+          label: "Data & providers",
+          nodes: [
+            { name: "MongoDB · Redis" },
+            { name: "Helius · Birdeye · RugCheck" },
+            { name: "DexScreener · CoinGecko · CoinGlass" },
+            { name: "OpenAI · Telegram" },
+          ],
+        },
+      ],
+    },
+
     challenges: [
-      "Supporting multiple wallet providers while keeping one consistent login experience.",
-      "Normalizing real-time cryptocurrency data from APIs with different response formats, update frequencies, and rate limits.",
-      "Filtering Telegram alerts around user preferences to reduce unnecessary notifications.",
-      "Combining liquidity, holder concentration, ownership, and token metadata into a practical risk analysis flow.",
-      "Keeping market dashboard updates responsive while token prices and events change frequently.",
+      "Helius drops slow subscribers, so any work done before acknowledging the webhook is a data-loss risk.",
+      "Six market data providers return different shapes, refresh at different rates, and enforce different rate limits.",
+      "Liquidity data is often missing for exactly the newly launched tokens the product exists to surface.",
+      "An LLM asked to predict prices from raw numbers produces confident nonsense, and it can be down when a user asks.",
+      "Supporting Phantom, Solflare, MetaMask and WalletConnect while keeping one consistent login experience and one session model.",
     ],
-    result:
-      "Delivered an MVP cryptocurrency analytics platform that combines wallet authentication, market analytics, AI-assisted insights, personalized Telegram notifications, and contract risk analysis in one user experience.",
-    role: "Frontend Developer focused on wallet authentication, dashboard UI, API integration, notifications, and user experience.",
+
+    decisions: [
+      {
+        choice: "Acknowledge the webhook before validating or processing it.",
+        because:
+          "The provider's timeout behaviour, not the application's convenience, determines what the handler is allowed to do.",
+        tradeoff:
+          "The system becomes eventually consistent, and there are two moving parts to reason about instead of one.",
+      },
+      {
+        choice: "Treat a missing liquidity value as 'skip this check', not 'reject this token'.",
+        because:
+          "A naive numeric filter silently discards brand-new tokens, which are precisely what the product is for.",
+        tradeoff:
+          "More false positives — accepted deliberately, because a missed alert is worse than an extra one.",
+      },
+      {
+        choice:
+          "Compute the indicators deterministically and use the model only to explain them, with a non-AI fallback.",
+        because:
+          "Grounding the model in real computed signals makes the output checkable, and the product must still work when OpenAI does not.",
+        tradeoff: "A cached answer can be up to three hours stale.",
+      },
+    ],
+
+    outcome: [
+      "Webhook response time is fully decoupled from downstream processing, so a slow third-party API or stalled worker can no longer cause a dropped event.",
+      "Token research moved from a manual routine across several disconnected tools into one workflow that runs unattended.",
+      "The AI layer degrades to a real, deterministic prediction instead of an error page when the model provider is unavailable.",
+      "No passwords and no private keys are stored anywhere in the system — authentication is a signature challenge.",
+    ],
+
+    facts: [
+      { value: "8", label: "external providers integrated" },
+      { value: "8", label: "indicators from primary formulas" },
+      { value: "3", label: "BullMQ queues" },
+      { value: "~100k", label: "capped Redis Stream entries" },
+    ],
+
     tech: [
-      "Next.js",
-      "React",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Redis",
+      "Redis Streams",
+      "BullMQ",
+      "Next.js 14",
+      "React 18",
       "TypeScript",
       "Tailwind CSS",
-      "Node.js",
-      "NestJS",
       "Solana Wallet Adapter",
       "WalletConnect",
       "JWT",
-      "Redis",
-      "CoinGecko API",
-      "Birdeye API",
-      "GPT-4",
+      "OpenAI GPT-4",
       "Telegram Bot API",
+      "Helius",
+      "Birdeye",
     ],
     image: "/projects/TWQ/one.png",
     gallery: [
@@ -99,140 +213,131 @@ export const projects: Project[] = [
     ],
     featured: true,
   },
+
+  /* ─────────────────────────────────────────────────────────────── */
   {
-    slug: "fintrust",
-    title: "Fintrust",
-    tagline: "Solana staking and rewards platform",
+    slug: "dibzi",
+    title: "Dibzi",
+    category: "NFC loyalty + on-chain rewards",
+    tagline: "Making an immutable reward editable",
     summary:
-      "A full-stack decentralized staking platform on Solana with token purchases, configurable staking tiers, referrals, cashback, vesting, and admin controls.",
-    description:
-      "FinTrust is a full-stack decentralized staking and rewards platform built on Solana. It enables users to purchase platform tokens, stake assets across configurable reward tiers, earn cashback and referral incentives, claim vested NFT-based rewards, and participate in ICO phases through smart contracts and an administrative management system.",
-    businessProblem:
-      "Traditional staking products often stop at basic token locking and reward distribution. FinTrust was built to combine staking, vesting, referrals, cashback, ICO participation, KYC, and administrative tokenomics controls in one blockchain application.",
-    solution:
-      "The platform connects a responsive dashboard, backend reward services, PostgreSQL data, and Solana smart contract interactions so users and administrators can manage the complete staking economy from one place.",
-    keyFeatures: [
-      "Wallet-based authentication with Solana Wallet Adapter",
-      "Token purchase and ICO participation flows",
-      "Configurable staking tiers and reward visualization",
-      "Cashback, referral, and transaction history screens",
-      "NFT-based vesting and reward claim experience",
-      "Administrative dashboard for tokenomics and reward management",
+      "An NFC check-in loyalty platform where rewards are blockchain tokens — spanning a mobile app, two role-scoped dashboards and a backend, with 90% of commits across four codebases.",
+
+    problem:
+      "The product's core mechanic is tier progression: check in, climb a tier, get better reward artwork. But a reward minted as a blockchain token with metadata pinned to IPFS is permanently frozen — a merchant can never update the artwork or copy on a reward already issued. The full IPFS pipeline was built and working before that immutability was understood to be structurally wrong for the product. Separately, an incorrect tier downgrade would be written permanently and publicly to a chain.",
+    product:
+      "Customers tap an NFC tag at a participating business, earn token-based loyalty rewards, and progress through membership tiers in a mobile app. Merchants manage customers and activity in one dashboard; platform admins manage merchants, rewards and settings in another.",
+    role:
+      "Lead engineer across four codebases — backend API, React Native app, admin dashboard, merchant dashboard.",
+    owned: [
+      "Inverted the NFT metadata architecture: the token URI became a permanent address pointing at Dibzi's own API, and the document it returns is computed at request time from live database state.",
+      "Built the tier-resolution engine to recompute eligibility from thresholds on every check-in, making an incorrect downgrade structurally inexpressible rather than merely guarded against.",
+      "Engineered the NFC hardware session lifecycle, releasing the hardware lock in a finally on every exit path and bounding every wait with an explicit 60-second timeout.",
+      "Solved the Node/browser build bridge that let a Node-only Web3/IPFS dependency tree bundle for a browser at all — an explicit builtin alias map, a dev/prod polyfill plugin pair, and a 15-line interop shim for a transitive dependency with no documented fix.",
+      "Shipped a per-visit history schema migration across three simultaneously-live data formats with no downtime and no data loss.",
+      "Modelled loyalty state as belonging to the merchant–customer relationship rather than to either party.",
+      "Produced a ranked defect audit of the platform, including findings against my own work.",
     ],
-    contributions: [
-      "Built wallet-based authentication using Solana Wallet Adapter.",
-      "Developed staking and rewards user interfaces.",
-      "Integrated backend APIs for staking, rewards, referrals, and cashback.",
-      "Implemented transaction history and reward visualization screens.",
-      "Connected frontend screens with smart contract interactions.",
-      "Developed reusable React components for staking workflows.",
-      "Implemented responsive dashboard layouts.",
-      "Participated in blockchain integration and testing across staking, vesting, and reward flows.",
-    ],
+
+    architecture: {
+      summary:
+        "The token points at a stable URL; the metadata behind that URL is generated on demand, so editing a reward is a database write rather than a blockchain transaction.",
+      pipeline: [
+        { name: "NFC tap", note: "hardware session, 60s bound" },
+        { name: "Check-in API", note: "identify merchant + verify user" },
+        { name: "Tier resolution", note: "recomputed from thresholds" },
+        { name: "Mint / upgrade", note: "ethers.js" },
+        { name: "Token URI", note: "fixed → Dibzi API" },
+        { name: "Metadata endpoint", note: "computed from live DB state" },
+        { name: "Dashboards", note: "merchant + admin" },
+      ],
+      layers: [
+        {
+          label: "Clients",
+          nodes: [
+            { name: "React Native app", note: "Expo · NFC check-in" },
+            { name: "Merchant dashboard", note: "React 19 · Vite" },
+            { name: "Admin dashboard", note: "11 vendor chunk groups" },
+          ],
+        },
+        {
+          label: "API",
+          nodes: [
+            { name: "Node / Express" },
+            { name: "3 auth guards", note: "read from DB on every request" },
+            { name: "Dynamic metadata service" },
+          ],
+        },
+        {
+          label: "State",
+          nodes: [
+            { name: "MongoDB", note: "relationship-as-entity loyalty model" },
+            { name: "Blockchain", note: "ethers.js minting" },
+            { name: "Cloudinary · IPFS", note: "media" },
+          ],
+        },
+      ],
+    },
+
     challenges: [
-      "Synchronizing on-chain blockchain state with off-chain PostgreSQL data.",
-      "Managing asynchronous blockchain transaction confirmations.",
-      "Designing secure wallet authentication without traditional passwords.",
-      "Handling reward calculations across multiple staking tiers.",
-      "Building responsive interfaces for complex staking workflows.",
-      "Maintaining consistency between smart contract state and backend services.",
+      "Reward artwork on an already-issued token has to be editable, but the token itself is immutable by design.",
+      "A wrong tier downgrade is a permanent, public record — guarding against it in application code is not strong enough.",
+      "NFC hardware fails in three distinguishable ways — absent, disabled, or working — and the app previously failed silently across all of them.",
+      "A Node-only Web3/IPFS dependency tree would not bundle for a browser, and one transitive dependency had no documented fix anywhere.",
+      "Shipping a new per-visit history format while two older formats were still live in production, with no downtime window available.",
     ],
-    result:
-      "Delivered a production-ready Solana staking platform supporting token sales, configurable staking tiers, NFT-based vesting, cashback, referrals, KYC-enabled ICO participation, and administrative reward controls.",
-    role: "Frontend Developer focused on wallet authentication, staking workflows, dashboard UI, API integration, and blockchain flow testing.",
-    tech: [
-      "Next.js",
-      "React",
-      "Tailwind CSS",
-      "React Query",
-      "NestJS",
-      "Prisma",
-      "PostgreSQL",
-      "Redis",
-      "BullMQ",
-      "Solana",
-      "Anchor",
-      "Rust",
-      "SPL Token",
-      "Metaplex NFT",
-      "Docker",
-      "REST APIs",
+
+    decisions: [
+      {
+        choice:
+          "Point the token URI at a permanent address on Dibzi's own API and compute the metadata document per request.",
+        because:
+          "Immutable storage is the right default for provenance and the wrong default for a reward whose artwork the merchant is expected to edit.",
+        tradeoff:
+          "Metadata correctness now depends on this API's uptime rather than on a decentralized network's.",
+      },
+      {
+        choice: "Recompute tier eligibility from thresholds on every check-in, never from a stored position.",
+        because:
+          "If a downgrade cannot be expressed by the code path at all, it cannot happen — which is stronger than validating against it.",
+        tradeoff: "A sort on every check-in instead of an O(1) stored-pointer lookup.",
+      },
+      {
+        choice: "Express invitation-token validity inside the database query predicate itself.",
+        because:
+          "Security that depends on a developer remembering to check something after the fetch will eventually be forgotten.",
+        tradeoff: "The rule lives in the query rather than somewhere obvious in the service layer.",
+      },
     ],
-    image: "/projects/fintrust/one.png",
-    gallery: [
-      "/projects/fintrust/one.png",
-      "/projects/fintrust/two.png",
-      "/projects/fintrust/three.png",
-      "/projects/fintrust/four.png",
-      "/projects/fintrust/five.png",
-      "/projects/fintrust/six.png",
-      "/projects/fintrust/seven.png",
-      "/projects/fintrust/eight.png",
-      "/projects/fintrust/nine.png",
-      "/projects/fintrust/ten.png",
-      "/projects/fintrust/eleven.png",
-      "/projects/fintrust/image 39.png",
+
+    outcome: [
+      "Tier progression — the mechanic the entire product is built on — became possible at all.",
+      "Artwork and copy on already-issued rewards are now updated from a web form at no blockchain cost.",
+      "A hardware interaction that used to fail silently now distinguishes absent hardware from disabled hardware and recovers.",
+      "Per-visit history shipped across three live schema formats with zero downtime and zero data loss.",
     ],
-    featured: true,
-  },
-  {
-    slug: "nfc-app",
-    title: "NFC App",
-    tagline: "Mobile loyalty program experience",
-    summary:
-      "A full-stack customer loyalty platform using NFC check-ins, blockchain-backed NFT rewards, mobile membership flows, and merchant/admin dashboards.",
-    description:
-      "NFC Loyalty System is a full-stack customer loyalty platform that enables merchants to build stronger customer relationships using NFC technology and blockchain-based NFTs. Customers can check in at participating businesses, earn NFT-based loyalty rewards, progress through membership tiers, and manage their loyalty history through a mobile app while merchants and administrators manage the ecosystem through web dashboards.",
-    businessProblem:
-      "Traditional loyalty programs rely on physical cards, QR codes, or manual points systems that are easy to lose, hard to manage, and limited in customer engagement.",
-    solution:
-      "The system modernizes loyalty by combining NFC-based check-ins, blockchain-powered NFT rewards, merchant management, centralized administration, and mobile customer history into one digital platform.",
-    keyFeatures: [
-      "Mobile loyalty application for customers",
-      "NFC customer check-in workflows",
-      "NFT rewards and membership tier progression",
-      "Merchant dashboard for customer and activity management",
-      "Admin dashboard for merchants, users, rewards, and settings",
-      "Cloud media, map, email, and IPFS integrations",
+
+    facts: [
+      { value: "4", label: "codebases kept in sync" },
+      { value: "3,345", label: "lines of documentation, sole author" },
+      { value: "23", label: "defects found and ranked in audit" },
     ],
-    contributions: [
-      "Developed responsive user interfaces for the merchant and administration dashboards.",
-      "Built and integrated REST APIs with the frontend.",
-      "Implemented wallet-based user authentication using Privy.",
-      "Developed customer check-in and merchant connection workflows.",
-      "Integrated NFT minting and tier upgrade functionality into the application flow.",
-      "Built reusable React components and optimized application state management.",
-      "Connected Google Maps, Cloudinary, and IPFS services with backend APIs.",
-      "Participated in deployment and production environment configuration using PM2 and Nginx.",
-    ],
-    challenges: [
-      "Integrating secure wallet authentication with Privy and backend token validation.",
-      "Synchronizing NFT minting and tier upgrades with customer check-in flows.",
-      "Keeping mobile app, merchant dashboard, admin dashboard, and backend behavior aligned through shared APIs.",
-      "Designing a check-in workflow that identifies merchants, verifies users, records visits, upgrades tiers, mints NFTs, and updates dashboards.",
-      "Managing NFT media and metadata through Cloudinary and Pinata/IPFS.",
-      "Deploying independent applications behind Nginx with PM2 process management and production API communication.",
-    ],
-    result:
-      "Successfully delivered a full-stack NFC loyalty platform with mobile, merchant, admin, and backend services that helps businesses digitize loyalty through NFC check-ins, NFT rewards, centralized merchant management, and automated customer engagement workflows.",
-    role: "Full-stack contributor focused on dashboards, REST API integration, wallet authentication, NFC check-in flows, NFT rewards, and deployment support.",
+
     tech: [
       "React Native",
       "Expo",
-      "React",
-      "Vite",
       "Node.js",
-      "Express.js",
+      "Express",
       "MongoDB",
-      "JWT Authentication",
-      "Privy Authentication",
-      "Wallet Authentication",
-      "NFT Minting",
+      "ethers.js",
+      "React 19",
+      "Vite",
+      "Privy",
+      "JWT",
       "IPFS",
       "Pinata",
       "Cloudinary",
       "Google Maps API",
-      "Brevo Email",
       "PM2",
       "Nginx",
     ],
@@ -253,65 +358,401 @@ export const projects: Project[] = [
     ],
     featured: true,
   },
+
+  /* ─────────────────────────────────────────────────────────────── */
   {
-    slug: "flyver",
-    title: "Flyverr",
-    tagline: "Digital marketplace interface",
+    slug: "socialfi-trading",
+    title: "SocialFi Trading",
+    category: "Social trading platform",
+    tagline: "Every post and comment is a tradeable on-chain asset",
     summary:
-      "A digital marketplace for limited downloadable products with creator selling tools, licensing, resale flows, dashboards, reviews, analytics, and payments.",
-    description:
-      "Flyverr is a modern digital marketplace that enables creators to sell limited digital products such as eBooks, templates, courses, and downloadable assets. The platform also introduces a controlled resale marketplace where buyers can purchase products either for personal use or future resale under platform-defined licensing rules.",
-    businessProblem:
-      "Digital creators usually sell products once and lose future earning opportunities. Traditional marketplaces do not create scarcity or encourage resale, so creators, buyers, and the platform have limited ways to keep earning after the first sale.",
-    solution:
-      "Flyverr creates a complete marketplace ecosystem with authentication, product management, payments, user dashboards, reviews, analytics, and licensing-aware resale flows.",
-    keyFeatures: [
-      "Creator product listing and management screens",
-      "Marketplace browsing, filters, and product detail pages",
-      "Controlled digital product licensing and resale model",
-      "User dashboard, profile, reviews, and analytics experiences",
-      "Authentication and account management flows",
-      "Payment-ready frontend integrations for marketplace checkout",
+      "A social platform where content is priced on a Solana bonding curve — real-time feeds and comments on one side, a non-custodial trading engine and four smart contracts on the other.",
+
+    problem:
+      "A social product where content carries real financial value cannot be built the way a normal social app is built. Every like-equivalent is a trade, every trade moves money, and the platform sits between a user's wallet and an on-chain program that confirms asynchronously. The original implementation held user funds custodially and priced trades from a cached database row — which produced a recurring, named failure mode where a trade quoted against stale supply was rejected on-chain for slippage.",
+    product:
+      "A mobile-first social network where posts and comments are minted as tradeable assets priced by a bonding curve. Users post, comment with audio and video, share content in from other apps, follow each other, and buy or sell positions in content — with a moderation pipeline, staking, lending, a DAO module, and an admin analytics console behind it.",
+    role:
+      "Full-stack engineer across the NestJS backend, four Solana Anchor programs, the React Native app, and the React admin console.",
+    owned: [
+      "Migrated the trading engine from a custodial, database-only ledger to a non-custodial, wallet-signed model — the backend builds transactions but never signs on a user's behalf.",
+      "Built the blockchain indexer that reconciles on-chain trade events against the synchronous write path, keyed on an idempotency hash derived from the transaction signature.",
+      "Engineered the real-time comment and notification pipeline on a transactional outbox with a poller, fanned out over Socket.IO rooms scoped per entry and per user.",
+      "Built a native iOS Share Extension in Swift, handing content into React Native through App Groups and shared UserDefaults.",
+      "Remediated two security findings: a platform signer keypair held in plaintext environment variables, and a single hardcoded encryption key shared across every mobile install.",
+      "Wrote admin-only on-chain recovery instructions that bypass normal Borsh deserialization to rescue program-derived accounts stranded in an incompatible layout after an upgrade.",
     ],
-    contributions: [
-      "Designed and implemented responsive user interfaces using Next.js, TypeScript, Tailwind CSS, and ShadCN UI.",
-      "Built reusable and scalable UI components to improve maintainability.",
-      "Integrated frontend screens with backend REST APIs using Axios.",
-      "Implemented authentication, marketplace, product detail, dashboard, and profile-related screens.",
-      "Focused on smooth user experience across desktop and mobile devices.",
-      "Collaborated with backend developers to integrate APIs and ensure accurate data flow.",
-      "Participated in UI refinement, usability improvements, and frontend optimization.",
-    ],
+
+    architecture: {
+      summary:
+        "Trades are prepared server-side, signed in the user's wallet, and confirmed on-chain — then reconciled by an indexer that cannot double-write, because the idempotency key is derived from the transaction signature itself.",
+      pipeline: [
+        { name: "Mobile app", note: "React Native" },
+        { name: "Prepare trade", note: "NestJS builds unsigned tx" },
+        { name: "Wallet deep link", note: "user signs in Phantom" },
+        { name: "Broadcast", note: "Solana bonding-curve program" },
+        { name: "Indexer", note: "reads on-chain trade events" },
+        { name: "Idempotent write", note: "sha256(txSignature) key" },
+        { name: "Outbox", note: "notification recorded in same tx" },
+        { name: "Poller → Socket.IO", note: "per-entry / per-user rooms" },
+      ],
+      layers: [
+        {
+          label: "Clients",
+          nodes: [
+            { name: "React Native app", note: "feed, trading, audio/video comments" },
+            { name: "iOS Share Extension", note: "Swift · App Groups" },
+            { name: "Admin console", note: "React 19 · Recharts" },
+          ],
+        },
+        {
+          label: "Services",
+          nodes: [
+            { name: "Trading", note: "quotes from live chain state" },
+            { name: "Blockchain / indexer" },
+            { name: "Notifications", note: "outbox + gateway" },
+            { name: "Moderation, staking, lending, DAO" },
+          ],
+        },
+        {
+          label: "State",
+          nodes: [
+            { name: "PostgreSQL / Prisma", note: "ledger accounts, earnings split" },
+            { name: "Redis + BullMQ", note: "queues and fan-out" },
+            { name: "Solana programs", note: "4 Anchor contracts" },
+          ],
+        },
+      ],
+    },
+
     challenges: [
-      "Building scalable marketplace component architecture for shared cards, filters, dashboards, and account screens.",
-      "Integrating multiple backend endpoints while maintaining loading, error, and success states.",
-      "Designing responsive layouts for filters, product grids, dashboards, and tables across desktop, tablet, and mobile.",
-      "Improving navigation, page consistency, and visual hierarchy across many marketplace workflows.",
+      "A mobile wallet round trip can be interrupted by the operating system suspending the app — the signing session has to survive process recreation, not just a backgrounded screen.",
+      "The bonding-curve pricing formula and fee constants exist in both Rust and TypeScript and cannot share an implementation, so they have to be proven numerically identical from two sides.",
+      "A single trade changes data rendered on many unrelated screens — feed, market, holdings, portfolio, wallet transactions, leaderboard — so cache invalidation is a design problem, not an afterthought.",
+      "A program upgrade left program-derived accounts in an old memory layout that the new Anchor code refused to deserialize, surfacing in production as error 3003.",
+      "Fixing the shared mobile encryption key could not simply rotate it — existing installs held data encrypted under the old one.",
     ],
-    result:
-      "Delivered a modern, responsive marketplace interface aligned with product requirements, integrated with backend APIs, and structured around reusable UI components that support future feature development.",
-    role: "Frontend Developer focused on frontend design, API integration, reusable components, marketplace flows, and user experience.",
+
+    decisions: [
+      {
+        choice:
+          "Move trading off a custodial database ledger to non-custodial, wallet-signed transactions.",
+        because:
+          "A platform that holds user funds to execute trades carries a custodial-loss failure class no amount of application code removes.",
+        tradeoff:
+          "The backend can build a transaction but cannot complete one on the user's behalf — every trade needs a live wallet round trip, including on mobile.",
+      },
+      {
+        choice: "Recompute trade cost from live on-chain state, never the cached database copy.",
+        because:
+          "The database copy of token supply lags the chain, and quoting against it is what produced the recurring on-chain slippage rejections.",
+        tradeoff: "An extra RPC read on every quote, in exchange for closing a named bug class.",
+      },
+      {
+        choice:
+          "Derive the trade idempotency key from the on-chain transaction signature — sha256(\"onchain:\" + txSignature).",
+        because:
+          "The indexer and the synchronous confirm path can both observe the same trade, and a check that runs in application code can race.",
+        tradeoff:
+          "The safety is a database uniqueness constraint rather than a code path, so it is invisible until someone reads the schema.",
+      },
+      {
+        choice:
+          "Ship a per-install random encryption key with a one-time backward-compatible migration, instead of rotating the shared one.",
+        because:
+          "A hardcoded key shared across every install means one extracted key compromises every device — but existing users already had data under it.",
+        tradeoff:
+          "A migration step every existing install runs once, rather than a clean break that would have lost their local state.",
+      },
+    ],
+
+    outcome: [
+      "Custodial fund risk on the trading engine is closed by construction — the platform never holds user SOL to trade.",
+      "The stale-supply slippage failure the migration was built to fix is closed by design, not by retry logic.",
+      "Both security findings were remediated with a path that did not require existing users to reinstall or lose local data.",
+      "Notifications cannot be lost between being recorded and being delivered, because they are written in the same transaction as the event that causes them.",
+    ],
+
+    facts: [
+      { value: "4", label: "Anchor/Rust smart contracts" },
+      { value: "~30", label: "NestJS backend modules" },
+      { value: "~1,150", label: "lines of Prisma schema" },
+      { value: "15", label: "on-chain test scenarios" },
+    ],
+
     tech: [
-      "Next.js 14",
-      "React",
+      "NestJS",
       "TypeScript",
+      "PostgreSQL",
+      "Prisma",
+      "Redis",
+      "BullMQ",
+      "Socket.IO",
+      "Solana",
+      "Anchor",
+      "Rust",
+      "React Native",
+      "Swift",
+      "React 19",
+      "TanStack Query",
+      "Recharts",
+    ],
+    featured: true,
+  },
+
+  /* ─────────────────────────────────────────────────────────────── */
+  {
+    slug: "fintrust",
+    title: "FinTrust",
+    category: "Staking & rewards protocol",
+    tagline: "Exactly-once payouts over an at-least-once blockchain",
+    summary:
+      "A non-custodial Solana staking, vesting and ICO platform with weekly on-chain reward snapshots, referral and cashback pools, and a write-ahead-log disbursement engine.",
+
+    problem:
+      "Paying real tokens to real wallets is the one operation you cannot get wrong twice. A blockchain transfer is an at-least-once primitive: a submission can succeed on-chain while the response never reaches you. Retrying blindly double-spends; not retrying loses the payout. Meanwhile the staking economy itself — tiers, vesting NFTs, referrals, cashback, KYC-gated ICO phases, card spend limits — all has to stay consistent between an Anchor program and a PostgreSQL database that update at different times.",
+    product:
+      "A staking and rewards platform where users buy platform tokens, stake across configurable reward tiers, earn referral and cashback incentives, claim vesting NFT rewards, and participate in KYC-gated ICO phases — with an admin console for tokenomics and reward controls.",
+    role:
+      "Full-stack engineer across the NestJS backend, the Anchor smart contract, and both Next.js frontends.",
+    owned: [
+      "Designed the write-ahead-log disbursement engine that makes admin-signed payouts exactly-once over an at-least-once chain primitive.",
+      "Split every on-chain user action into prepare (server builds an unsigned transaction, no database write) and confirm (submits the wallet-signed transaction, writes only after chain confirmation).",
+      "Built the wallet-authentication state machine and the derived gate that every data-fetching hook in the app depends on.",
+      "Implemented the reconciler and blockchain indexer that self-heal dropped on-chain events within one polling interval.",
+      "Used conditional updateMany as a lock-free concurrency primitive for every at-most-once invariant, encoding the precondition in the WHERE clause.",
+      "Audited the deployed system against its own published tokenomics and named where enforcement had drifted from it.",
+    ],
+
+    architecture: {
+      summary:
+        "No database write ever precedes chain confirmation on the user path; on the admin payout path a write-ahead-log row precedes submission, so a crash mid-transfer is recoverable without resubmitting.",
+      pipeline: [
+        { name: "Frontend", note: "wallet connected + JWT verified" },
+        { name: "prepare*", note: "server builds unsigned tx · no DB write" },
+        { name: "Wallet signature", note: "user signs" },
+        { name: "confirm*", note: "submit signed tx" },
+        { name: "Chain confirmation", note: "Anchor program" },
+        { name: "PostgreSQL write", note: "only now" },
+        { name: "Indexer + reconciler", note: "heals dropped events" },
+      ],
+      layers: [
+        {
+          label: "Clients",
+          nodes: [
+            { name: "Next.js app", note: "staking, vesting, referrals" },
+            { name: "Admin console", note: "tokenomics + reward controls" },
+          ],
+        },
+        {
+          label: "Services",
+          nodes: [
+            { name: "25 NestJS modules", note: "157 HTTP routes" },
+            { name: "Disbursement engine", note: "write-ahead log" },
+            { name: "BullMQ workers", note: "snapshots, reconciliation" },
+          ],
+        },
+        {
+          label: "State",
+          nodes: [
+            { name: "PostgreSQL / Prisma", note: "37 models" },
+            { name: "Redis" },
+            { name: "Anchor program", note: "27 instructions · 36 error codes" },
+          ],
+        },
+      ],
+    },
+
+    challenges: [
+      "A token transfer can land on-chain while the confirmation response is lost, leaving the system unable to prove whether the transfer happened.",
+      "Weekly reward snapshots must apply exactly once even when several triggers fire concurrently.",
+      "Any account address an attacker can supply must be re-derived and re-verified on-chain rather than trusted to exist and deserialize.",
+      "The browser focus event and the wallet adapter's connection promise are not ordered relative to each other, so naive cancel detection fires on a successful connect.",
+      "Off-chain PostgreSQL state and on-chain program state advance at different times and must converge without a distributed transaction.",
+    ],
+
+    decisions: [
+      {
+        choice:
+          "Write-ahead log before submission, with asynchronous reconciliation — not a two-phase commit.",
+        because:
+          "There is no protocol that lets a database and a blockchain commit atomically, and the code says so plainly: we cannot prove the original transaction did not land, so retrying could double-spend.",
+        tradeoff:
+          "A real, bounded window where the chain has moved and the database has not caught up yet.",
+      },
+      {
+        choice: "Conditional updateMany instead of a distributed lock for exactly-once flips.",
+        because:
+          "Encoding the precondition in the WHERE clause makes the invariant unraceable by construction, without introducing Redis or Zookeeper as a correctness dependency.",
+        tradeoff: "The losing caller in a race gets no feedback about why nothing happened.",
+      },
+      {
+        choice:
+          "Gate every data-fetching hook on a single derived value that resolves only when wallet, JWT and wallet identity all agree.",
+        because:
+          "A wallet being connected does not mean it is the wallet the session was issued for, and a user can switch accounts in the extension at any moment.",
+        tradeoff:
+          "One derived value becomes load-bearing for the whole app — it has to be right, and it needs an 800ms grace period to survive event-ordering races.",
+      },
+    ],
+
+    outcome: [
+      "The double-pay and lost-pay failure class on admin-signed disbursements is closed by construction.",
+      "Dropped blockchain events self-heal within one polling interval rather than surfacing as a user-reported incident.",
+      "No database record of a user's on-chain action can exist without a confirmed transaction behind it.",
+      "Where enforcement had drifted from the published tokenomics, that was documented directly rather than left for someone else to find.",
+    ],
+
+    facts: [
+      { value: "27", label: "on-chain instructions" },
+      { value: "157", label: "HTTP routes over 37 Prisma models" },
+      { value: "239", label: "automated tests" },
+      { value: "2,430", label: "lines in the Anchor program" },
+    ],
+
+    tech: [
+      "NestJS",
+      "TypeScript",
+      "PostgreSQL",
+      "Prisma",
+      "Redis",
+      "BullMQ",
+      "Solana",
+      "Anchor",
+      "Rust",
+      "SPL Token",
+      "Metaplex",
+      "Next.js",
+      "React",
+      "TanStack Query",
       "Tailwind CSS",
-      "ShadCN UI",
+      "Docker",
+    ],
+    image: "/projects/fintrust/one.png",
+    gallery: [
+      "/projects/fintrust/one.png",
+      "/projects/fintrust/two.png",
+      "/projects/fintrust/three.png",
+      "/projects/fintrust/four.png",
+      "/projects/fintrust/five.png",
+      "/projects/fintrust/six.png",
+      "/projects/fintrust/seven.png",
+      "/projects/fintrust/eight.png",
+      "/projects/fintrust/nine.png",
+      "/projects/fintrust/ten.png",
+      "/projects/fintrust/eleven.png",
+    ],
+    featured: true,
+  },
+
+  /* ─────────────────────────────────────────────────────────────── */
+  {
+    slug: "flyverr",
+    title: "Flyverr",
+    category: "Marketplace frontend architecture",
+    tagline: "A frontend convention that outlived its author",
+    summary:
+      "A staged resale marketplace for digital products, built from an empty scaffold — auth, the API integration layer, purchase and licensing flows, and an admin back-office on two shared primitives.",
+
+    problem:
+      "There was no prior frontend convention to extend: an empty create-next-app scaffold and an unusual business model. Products are sold in limited rounds and resold under platform licensing rules, so the same product can be in different states for different users at the same time. Without a shared integration pattern, twenty screens each invent their own approach to fetching, caching, error handling and access control — and then drift.",
+    product:
+      "A marketplace where creators sell limited digital products and buyers can purchase for personal use or for controlled resale, with dashboards, reviews, analytics, payments, and an admin approval workflow that suggests staged resale pricing.",
+    role:
+      "Frontend engineer — established the architecture from a blank slate, then built the highest-complexity surfaces on it.",
+    owned: [
+      "Established the features/<domain>/{services, hooks, types} convention, the shared Axios and TanStack Query integration pattern, AuthContext, ProtectedRoute and the authenticated dashboard shell.",
+      "Split route access into a fast client-cached check and a slow authoritative one, and made only the authoritative one the actual gate.",
+      "Replaced four hand-rolled Stripe readiness checks with a single HOC centralising an ordered requireReady() chain.",
+      "Built the admin back-office on two shared primitives — one AdminTable reused across 11 pages, one PaginationControls across 10 — rather than per-screen tables.",
+      "Made every mutation invalidate specific TanStack Query keys rather than hand-patching cached objects.",
+      "Mapped backend error codes to distinct UX outcomes at the service boundary, so components never see a raw backend payload.",
+    ],
+
+    architecture: {
+      summary:
+        "One integration convention, applied identically across six top-level and seventeen sub-level feature domains.",
+      layers: [
+        {
+          label: "UI",
+          nodes: [
+            { name: "Marketplace, dashboard, admin" },
+            { name: "AdminTable ×11 · PaginationControls ×10" },
+            { name: "withStripeOnboarding HOC" },
+          ],
+        },
+        {
+          label: "Integration layer",
+          nodes: [
+            { name: "features/<domain>/hooks", note: "TanStack Query" },
+            { name: "features/<domain>/services", note: "domain-type conversion" },
+            { name: "features/<domain>/types" },
+          ],
+        },
+        {
+          label: "Transport & gate",
+          nodes: [
+            { name: "Single Axios client", note: "refresh + retry once on 401" },
+            { name: "ProtectedRoute", note: "waits on live useGetCurrentUser()" },
+            { name: "Backend REST · Stripe Connect" },
+          ],
+        },
+      ],
+    },
+
+    challenges: [
+      "A multi-round resale model means the same product is in different states for different users simultaneously, and the buyer must never be confused about which.",
+      "Client-cached role flags are convenient and spoofable, so they cannot be the real access gate.",
+      "Four separate action components each needed the same Stripe onboarding precondition, and four copies of a precondition drift.",
+      "Roughly two dozen backend endpoints each need coherent loading, error and success states without twenty different approaches to them.",
+    ],
+
+    decisions: [
+      {
+        choice: "Gate protected routes on a live server query, not the cached auth flag.",
+        because: "The cached flag exists for instant UI feedback; it is not evidence of authorisation.",
+        tradeoff: "An extra query per protected-route mount, in exchange for a gate that cannot be spoofed.",
+      },
+      {
+        choice: "One readiness HOC instead of four inline checks.",
+        because: "A precondition that changes should change in one place, not four call sites.",
+        tradeoff: "A layer of indirection every new contributor has to learn once.",
+      },
+      {
+        choice: "Invalidate specific query keys on mutation rather than patching the cache by hand.",
+        because:
+          "Hand-patched cache objects encode assumptions about the server's response shape that quietly stop being true.",
+        tradeoff: "A refetch where a local patch would have been instant.",
+      },
+    ],
+
+    outcome: [
+      "An unusual multi-round resale economy shipped as a deterministic, unambiguous buyer experience.",
+      "The convention established here was still what a teammate built unrelated features on six weeks after my own commits stopped — visible in the commit history.",
+      "Admin screens gained pagination, sorting and empty states uniformly, because they share two components rather than eleven implementations.",
+    ],
+
+    facts: [
+      { value: "6 + 17", label: "feature domains under one convention" },
+      { value: "11", label: "admin pages on one shared table" },
+      { value: "1", label: "HOC replacing 4 inline checks" },
+    ],
+
+    tech: [
+      "Next.js 15",
+      "React 19",
+      "TypeScript",
+      "TanStack Query",
       "Axios",
-      "App Router",
+      "Tailwind CSS",
+      "shadcn/ui",
       "Node.js",
-      "Express.js",
+      "Express",
       "Supabase",
       "PostgreSQL",
-      "JWT",
-      "Supabase Auth",
-      "Stripe",
-      "Paystack",
+      "Stripe Connect",
       "Sentry",
       "PostHog",
-      "SendGrid",
-      "Supabase Storage",
-      "REST APIs",
     ],
     image: "/projects/flyver/one.png",
     gallery: [
@@ -323,27 +764,222 @@ export const projects: Project[] = [
       "/projects/flyver/Screenshot 2026-08-01 213922.png",
     ],
   },
+
+  /* ─────────────────────────────────────────────────────────────── */
   {
-    slug: "mindfull-oasis",
-    title: "Mind Oasis",
-    tagline: "Mindfulness and token-gated wellness app",
+    slug: "social-locket",
+    title: "Social Locket",
+    category: "Real-estate social marketplace",
+    tagline: "What a buyer wants is a different object from what a seller offers",
     summary:
-      "A calm wellness product with wallet connection, guided access, mindful activities, and token-gated experience screens.",
-    description:
-      "Mind Oasis is a wellness app interface centered on mindful habits, wallet access, and token-based progression. The detail page presents the uploaded screenshots as a project gallery.",
-    role: "Built the landing and app interface screens for the mindfulness experience.",
-    tech: ["Next.js", "Web3", "Wallet UI", "Wellness", "Tailwind"],
-    image: "/projects/mindfull-oasis/one.png",
-    gallery: [
-      "/projects/mindfull-oasis/one.png",
-      "/projects/mindfull-oasis/two.png",
-      "/projects/mindfull-oasis/three.png",
-      "/projects/mindfull-oasis/four.png",
-      "/projects/mindfull-oasis/five.png",
-      "/projects/mindfull-oasis/six.png",
-      "/projects/mindfull-oasis/seven.png",
-      "/projects/mindfull-oasis/eight.png",
-      "/projects/mindfull-oasis/nine.png",
+      "A social property marketplace with listings, a distinct 'property wanted' listing type, matching, offers, group-owned listings, messaging and payments.",
+
+    problem:
+      "A property marketplace usually models one thing: a listing. But a buyer describing what they are looking for and a seller describing what they have are different objects with different lifecycles — a wanted listing produces matches, a normal listing produces enquiries. Modelling the buyer side as a boolean flag on a listing forces every downstream branch to re-derive which kind of thing it is holding.",
+    product:
+      "A marketplace where users publish property listings or 'property wanted' listings, get matched against the other side, exchange offers and messages, collaborate on a listing as a group with member and admin roles, and pay through Stripe or PayPal.",
+    role: "Frontend engineer (React) — listing and marketplace workflows, payments and auth surfaces.",
+    owned: [
+      "Modelled 'property wanted' as its own listing type with its own matching and offer endpoints, rather than a flag on a normal listing.",
+      "Built one shared listing form used for both creation and editing, driven by a single react-hook-form/Yup schema encoding real domain rules.",
+      "Built an image pipeline that compresses and crops in the browser before upload, so a large source photo never reaches the network unprocessed.",
+      "Added a group-collaboration layer over individual listings — member and admin roles plus a separate user-to-user connection request flow.",
+      "Routed every network call through one API client that all service modules import from, one file per domain.",
+      "Pulled reference data — currency, inventory type, bedroom counts — through shared hooks reused across creation, search and dashboard screens.",
+    ],
+
+    architecture: {
+      summary:
+        "One API client, one service module per domain, and one listing form specialised by type — so the two sides of the marketplace converge on the same offer and messaging flow.",
+      layers: [
+        {
+          label: "Routes",
+          nodes: [
+            { name: "22 top-level routes" },
+            { name: "Listing · wanted · matched · detail" },
+            { name: "Auth, OTP, payment confirmation" },
+          ],
+        },
+        {
+          label: "Domain layer",
+          nodes: [
+            { name: "PostApi · postGroupApi · postOfferApi" },
+            { name: "UserService · messaging" },
+            { name: "Shared reference-data hooks" },
+          ],
+        },
+        {
+          label: "Transport & vendors",
+          nodes: [
+            { name: "Single ApiClient", note: "every service imports it" },
+            { name: "Stripe · PayPal" },
+            { name: "Cloudinary", note: "compress + crop before upload" },
+          ],
+        },
+      ],
+    },
+
+    challenges: [
+      "Two listing types share most of a large form but diverge in validation rules and downstream behaviour.",
+      "Property photos come from phone cameras at sizes that make uploads slow and unreliable on mobile connections.",
+      "Listing ownership needed to extend to a group without bolting a separate co-listing data model onto an existing single-owner schema.",
+      "Two payment providers and an OTP verification flow all resolve through redirects, so each needs an explicit resumable state.",
+    ],
+
+    decisions: [
+      {
+        choice: "A distinct 'property wanted' listing type instead of a flag on a normal listing.",
+        because:
+          "A match triggers differently from a new listing, and the two have genuinely different lifecycles.",
+        tradeoff: "Two listing code paths to maintain, in exchange for correct type-specific matching.",
+      },
+      {
+        choice: "One form and one validation schema for both creation and editing.",
+        because: "Two parallel forms for the same object drift, and the drift shows up as data that fails only on edit.",
+        tradeoff: "A single schema that has to express conditional rules rather than two simpler ones.",
+      },
+      {
+        choice: "Compress and crop in the browser before upload, not after.",
+        because: "Processing after upload still pays the full upload cost on the user's connection.",
+        tradeoff: "More work on the client device, and a cropping step in the user's path.",
+      },
+    ],
+
+    outcome: [
+      "A wanted listing and a standard listing share one consistent matching, offer and messaging flow instead of diverging code paths.",
+      "Reference data is defined once and consumed identically on every screen that needs it, rather than drifting per screen.",
+      "Listings can be owned and managed collaboratively without a parallel data model.",
+    ],
+
+    facts: [
+      { value: "22", label: "top-level routes" },
+      { value: "9+", label: "required or conditional listing fields" },
+      { value: "2", label: "payment providers behind one flow" },
+    ],
+
+    tech: [
+      "React 18",
+      "Create React App",
+      "TanStack Query",
+      "react-hook-form",
+      "Yup",
+      "Axios",
+      "Stripe",
+      "PayPal",
+      "Cloudinary",
+      "AWS S3",
+      "Web3Modal",
+      "wagmi",
+      "viem",
+      "Google Maps Places",
+      "Bootstrap",
+      "PrimeReact",
+    ],
+  },
+
+  /* ─────────────────────────────────────────────────────────────── */
+  {
+    slug: "lindo-mart",
+    title: "Lindo Mart",
+    category: "Internal operations platform",
+    tagline: "Six real authorization defects in inherited code",
+    summary:
+      "An internal operations platform — a nine-domain reference-data subsystem built end to end, a rebuilt multi-step form workflow, and six authorization and data-integrity defects found and fixed in someone else's code.",
+
+    problem:
+      "Regular staff needed real inventory, equipment and alert options inside forms, but those options lived behind admin-only CRUD routes — and granting staff admin access to populate a dropdown is not an option. The intended public endpoints existed but rejected every caller, and nobody knew why. The cause was a JavaScript truthiness bug in the shared roles guard: an empty required-roles array is truthy, so 'no roles required' was being read as 'reject everyone'.",
+    product:
+      "An internal platform for inventory, equipment, multi-step operational forms and safety reporting, with role-scoped dashboards across four user roles and real-time updates.",
+    role:
+      "Full-stack engineer — new subsystem end to end, plus defect work in a pre-existing codebase.",
+    owned: [
+      "Built a nine-domain reference-data subsystem across eight REST controllers and five NestJS modules, matched end to end by React Query hooks and admin CRUD pages.",
+      "Gave every reference-data module a second, field-limited /public endpoint alongside its admin routes, so staff read options without being granted admin access.",
+      "Found and fixed the RolesGuard truthiness bug that was silently rejecting every request to every intended-public route.",
+      "Redesigned Form recipient references from raw strings to typed MongoDB ObjectIds and rewrote the visibility query to branch on an explicit recipientType enum — closing a case where a Supervisor could read a form addressed to a different Supervisor.",
+      "Traced a 'hard refresh logs valid users out' bug to a race between a synchronous auth check and an async localStorage read, and replaced the derived state with an explicit loading flag.",
+      "Collapsed five structurally identical alert features into one generic schema and component set parameterised at the route level.",
+    ],
+
+    architecture: {
+      summary:
+        "Every reference-data domain exposes two doors: full admin CRUD, and a field-limited public read that returns only what a form dropdown needs.",
+      layers: [
+        {
+          label: "Client",
+          nodes: [
+            { name: "React 18 · React Query hooks" },
+            { name: "Role-scoped dashboards", note: "4 roles" },
+            { name: "One generic alert UI ×5 types" },
+          ],
+        },
+        {
+          label: "API",
+          nodes: [
+            { name: "RolesGuard", note: "empty @Roles() means public" },
+            { name: "8 REST controllers · 5 modules" },
+            { name: "Form validation dispatcher", note: "7+ form types" },
+          ],
+        },
+        {
+          label: "Data",
+          nodes: [
+            { name: "MongoDB / Mongoose", note: "typed ObjectId references" },
+            { name: "Socket.IO", note: "real-time updates" },
+          ],
+        },
+      ],
+    },
+
+    challenges: [
+      "The bug was in a guard's boolean logic, so every endpoint looked correctly configured and still rejected every caller.",
+      "Form visibility was decided by comparing role and user strings, which cannot distinguish 'addressed to any Supervisor' from 'addressed to this Supervisor'.",
+      "Five alert features were structurally identical but had been implemented as five near-duplicate CRUD stacks.",
+      "Auth state derived synchronously from an asynchronously-read storage value logs valid users out on refresh, intermittently.",
+    ],
+
+    decisions: [
+      {
+        choice: "Expose a second field-limited /public endpoint rather than relaxing the admin routes.",
+        because:
+          "Staff need three fields for a dropdown, not the full record — and widening an admin route to serve them widens it for everything.",
+        tradeoff: "Two endpoints per domain to keep in sync instead of one.",
+      },
+      {
+        choice: "Typed ObjectId references and an explicit recipientType enum over raw string comparison.",
+        because: "An unambiguous enum makes the visibility query express the actual rule instead of approximating it.",
+        tradeoff: "A schema migration, in exchange for closing a real cross-user visibility bug.",
+      },
+      {
+        choice: "One generic schema and component set for five alert types, parameterised by route.",
+        because: "Five near-duplicates means every fix has to be applied five times, and eventually is not.",
+        tradeoff: "Slightly more indirection than five literal implementations.",
+      },
+    ],
+
+    outcome: [
+      "Every public reference-data endpoint now returns data instead of rejecting all callers.",
+      "Non-Super-Admin roles see only the dashboard statistics and forms actually addressed to them.",
+      "A hard page refresh no longer ejects an authenticated user to the login screen.",
+      "Around 150 lines of duplicated markup were removed by extracting one reusable component.",
+    ],
+
+    facts: [
+      { value: "9", label: "reference-data domains built" },
+      { value: "6", label: "real defects fixed in inherited code" },
+      { value: "7+", label: "form types behind 1 dispatcher" },
+    ],
+
+    tech: [
+      "NestJS",
+      "TypeScript",
+      "MongoDB",
+      "Mongoose",
+      "class-validator",
+      "Socket.IO",
+      "React 18",
+      "TanStack Query",
+      "JWT",
     ],
   },
 ];
@@ -351,3 +987,5 @@ export const projects: Project[] = [
 export function getProject(slug: string) {
   return projects.find((project) => project.slug === slug);
 }
+
+export const featuredProjects = projects.filter((project) => project.featured);

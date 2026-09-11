@@ -1,80 +1,93 @@
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import type { Project } from "@/data/projects";
+import { cn } from "@/lib/utils";
 
-export function ProjectCard({ project, index }: { project: Project; index: number }) {
-  const num = String(index + 1).padStart(2, "0");
-  const label = project.featured ? "Featured Project" : "Creative Work";
-  const reversed = index % 2 === 1;
-  const imageFit = project.imageFit ?? "cover";
-
+/**
+ * A project card is engineering evidence, not a screenshot with a tech list.
+ * It leads with the problem, then what was engineered, then the verifiable facts.
+ */
+export function ProjectCard({
+  project,
+  index,
+  className,
+}: {
+  project: Project;
+  index?: number;
+  className?: string;
+}) {
   return (
-    <Link
-      href={`/projects/${project.slug}`}
-      className="group block focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
-      aria-label={`View ${project.title} project details`}
+    <article
+      className={cn(
+        "group relative flex flex-col rounded-lg border border-border bg-background p-5 transition-colors hover:border-border-strong sm:p-7",
+        className,
+      )}
     >
-      <article className="relative flex flex-col overflow-hidden rounded-2xl bg-background transition-all duration-300 md:block md:min-h-[380px]">
-        <div
-          className={`relative h-56 w-full overflow-hidden bg-muted/10 sm:h-72 md:absolute md:inset-y-0 md:h-full md:w-[62%] ${
-            reversed ? "md:right-0" : "md:left-0"
-          }`}
-        >
-          {project.image ? (
-            <Image
-              src={project.image}
-              alt={`${project.title} screenshot`}
-              fill
-              sizes="(max-width: 768px) 100vw, 62vw"
-              className={`transition-transform duration-500 group-hover:scale-[1.03] ${
-                imageFit === "contain" ? "object-contain p-3" : "object-cover"
-              }`}
-              priority={index === 0}
-            />
-          ) : (
-            <div className="flex h-full w-full items-center justify-center">
-              <span className="font-display select-none text-[8rem] font-black text-accent/20">
-                {project.title.charAt(0)}
-              </span>
-            </div>
+      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+        <p className="label">
+          {typeof index === "number" && (
+            <span className="mr-2 text-faint">{String(index + 1).padStart(2, "0")}</span>
           )}
-        </div>
+          {project.category}
+        </p>
+      </div>
 
-        <div
-          className={`relative z-10 flex flex-col justify-center rounded-lg bg-card p-6 shadow-2xl shadow-black/50 sm:p-8 md:my-8 md:w-[45%] ${
-            reversed
-              ? "md:mr-auto md:translate-x-[1%]"
-              : "md:ml-auto md:-translate-x-[1%]"
-          }`}
+      <h3 className="mt-3 text-xl font-semibold sm:text-2xl">
+        <Link
+          href={`/work/${project.slug}`}
+          className="after:absolute after:inset-0 focus-visible:outline-none"
         >
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-widest text-accent">
-              {label}
-            </span>
-            <span className="font-mono text-xs text-muted-foreground">{num}</span>
-          </div>
+          {project.title}
+        </Link>
+      </h3>
 
-          <h3 className="mt-3 font-display text-2xl font-black uppercase tracking-tight sm:text-3xl">
-            {project.title}
-          </h3>
+      <p className="mt-1 text-sm text-accent">{project.tagline}</p>
 
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground line-clamp-4">
-            {project.summary}
-          </p>
+      <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+        {project.summary}
+      </p>
 
-          <p className="mt-5 text-xs tracking-wide text-muted-foreground/60">
-            {project.tech.join("   ")}
-          </p>
+      {project.facts && project.facts.length > 0 && (
+        <dl className="mt-6 grid grid-cols-2 gap-x-4 gap-y-4 border-t border-border pt-5 sm:grid-cols-4">
+          {project.facts.map((fact) => (
+            <div key={fact.label}>
+              <dt className="sr-only">{fact.label}</dt>
+              <dd>
+                <span className="block font-mono text-base font-medium text-foreground">
+                  {fact.value}
+                </span>
+                <span className="mt-1 block text-[11px] leading-snug text-faint">
+                  {fact.label}
+                </span>
+              </dd>
+            </div>
+          ))}
+        </dl>
+      )}
 
-          <div className="mt-6">
-            <span className="inline-flex items-center gap-2 border border-accent px-5 py-2.5 text-xs font-bold uppercase tracking-widest text-accent transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
-              View Details
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </span>
-          </div>
-        </div>
-      </article>
-    </Link>
+      <div className="mt-6 flex flex-wrap items-center gap-1.5">
+        {project.tech.slice(0, 6).map((t) => (
+          <span
+            key={t}
+            className="rounded border border-border px-2 py-0.5 font-mono text-[11px] text-muted-foreground"
+          >
+            {t}
+          </span>
+        ))}
+        {project.tech.length > 6 && (
+          <span className="font-mono text-[11px] text-faint">
+            +{project.tech.length - 6}
+          </span>
+        )}
+      </div>
+
+      <p className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-foreground">
+        Read the case study
+        <ArrowUpRight
+          aria-hidden="true"
+          className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+        />
+      </p>
+    </article>
   );
 }

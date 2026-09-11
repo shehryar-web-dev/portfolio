@@ -1,52 +1,75 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { Reveal } from "@/components/reveal";
-import { ProjectCard } from "@/components/project-card";
+import { ArrowUpRight } from "lucide-react";
 import { projects } from "@/data/projects";
+import { Section } from "@/components/section";
+import { Reveal } from "@/components/reveal";
 
+/**
+ * All eight systems, one compact row each — title, category, tagline, the
+ * single most telling stat, and a link into the full case study. The depth
+ * (problem, architecture, decisions, trade-offs) lives on the detail page,
+ * not here.
+ */
 export function Projects() {
-  const featuredProjects = projects.slice(0, 3);
-
   return (
-    <section id="projects" className="scroll-mt-20 py-24 container-px mx-auto max-w-6xl">
-      <div className="relative mb-16 overflow-hidden py-6 text-center">
-        <span
-          aria-hidden
-          className="pointer-events-none absolute inset-0 flex select-none items-center justify-center font-display text-[clamp(6rem,20vw,14rem)] font-black leading-none text-foreground/5"
-        >
-          WORK
-        </span>
-        <div className="relative z-10">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-accent">
-            Projects
-          </p>
-          <h2 className="font-display text-5xl font-black leading-none tracking-tight sm:text-7xl">
-            MY <span className="text-accent">PORTFOLIO</span>
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground sm:text-base">
-            A focused look at recent products, starting with TWQ, Fintrust, and
-            the NFC app.
-          </p>
-        </div>
-      </div>
+    <Section
+      id="work"
+      eyebrow="Selected engineering work"
+      title="Eight systems I built, and the constraint that shaped each one"
+      description="Each one is summarised by the problem it had to solve — the full case study covers the architecture, the challenges, the decisions and their trade-offs."
+      watermark="WORK"
+    >
+      <ol className="divide-y divide-border border-t border-border">
+        {projects.map((project, i) => {
+          const stat = project.facts?.[0];
+          return (
+            <Reveal key={project.slug} delay={Math.min(i, 6) * 0.03}>
+              <li>
+                <Link
+                  href={`/work/${project.slug}`}
+                  className="group flex flex-col gap-3 py-5 transition-colors hover:bg-surface sm:flex-row sm:items-center sm:gap-6 sm:py-6"
+                >
+                  <div className="flex items-start gap-3 sm:w-[15rem] sm:shrink-0 sm:items-center">
+                    <span className="label text-faint">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div className="min-w-0">
+                      <h3 className="truncate text-base font-semibold text-foreground sm:text-lg">
+                        {project.title}
+                      </h3>
+                      <p className="label mt-0.5 truncate">{project.category}</p>
+                    </div>
+                  </div>
 
-      <div className="flex flex-col gap-6">
-        {featuredProjects.map((project, i) => (
-          <Reveal key={project.slug} delay={i * 0.08}>
-            <ProjectCard project={project} index={i} />
-          </Reveal>
-        ))}
-      </div>
+                  <p className="min-w-0 text-sm leading-relaxed text-muted-foreground sm:flex-1">
+                    {project.tagline}
+                  </p>
 
-      <div className="mt-10 flex justify-center">
-        <Link
-          href="/projects"
-          className="inline-flex items-center gap-2 border border-accent px-5 py-3 text-xs font-bold uppercase tracking-widest text-accent transition-colors hover:bg-accent hover:text-accent-foreground"
-        >
-          View All Projects
-          <ArrowRight className="h-4 w-4" />
-        </Link>
-      </div>
-    </section>
+                  <div className="flex items-center justify-between gap-4 sm:shrink-0 sm:justify-end">
+                    {stat && (
+                      <div className="text-right">
+                        <span className="block font-mono text-base font-semibold leading-none text-foreground">
+                          {stat.value}
+                        </span>
+                        <span className="mt-1 block text-[11px] leading-snug text-faint">
+                          {stat.label}
+                        </span>
+                      </div>
+                    )}
+                    <span className="inline-flex shrink-0 items-center gap-1 text-sm font-medium text-accent">
+                      Case study
+                      <ArrowUpRight
+                        aria-hidden="true"
+                        className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      />
+                    </span>
+                  </div>
+                </Link>
+              </li>
+            </Reveal>
+          );
+        })}
+      </ol>
+    </Section>
   );
 }

@@ -1,40 +1,44 @@
 import type { Metadata } from "next";
 import { BlogCard } from "@/components/blog-card";
 import { getPostMetas } from "@/lib/blog";
+import { SectionHeading } from "@/components/section";
 
 export const metadata: Metadata = {
-  title: "Blog",
+  title: "Writing",
   description:
-    "Posts on building web apps, Solana dApps, and AI products by Shehryar.",
+    "Occasional notes on backend architecture, event-driven systems, Solana integration and AI features.",
+  alternates: { canonical: "/blog" },
 };
 
 export default function BlogIndexPage() {
   const posts = getPostMetas();
 
   return (
-    <div className="mx-auto w-full max-w-5xl px-5 pb-24 pt-28">
-      <header className="mb-12 max-w-2xl">
-        <p className="mb-2 text-sm font-semibold uppercase tracking-wide gradient-text">
-          Blog
-        </p>
-        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-          Writing & notes
-        </h1>
-        <p className="mt-4 text-muted-foreground">
-          Thoughts on what I&apos;m building and learning across web, blockchain, and
-          AI.
-        </p>
-      </header>
-
-      {posts.length === 0 ? (
-        <p className="text-muted-foreground">No posts yet — check back soon.</p>
-      ) : (
-        <div className="grid gap-6 sm:grid-cols-2">
-          {posts.map((post) => (
-            <BlogCard key={post.slug} post={post} />
-          ))}
+    <>
+      <div className="border-b border-border">
+        <div className="shell container-px py-14 sm:py-20">
+          <SectionHeading
+            as="h1"
+            eyebrow="Writing"
+            title="Notes"
+            description="Occasional write-ups on things I have had to work out — backend architecture, asynchronous processing, blockchain integration and AI features."
+          />
         </div>
-      )}
-    </div>
+      </div>
+
+      <div className="shell container-px py-12 sm:py-16">
+        {posts.length === 0 ? (
+          <p className="text-muted-foreground">Nothing published yet.</p>
+        ) : (
+          <ul className="grid gap-4 sm:grid-cols-2">
+            {posts.map((post) => (
+              <li key={post.slug} className="flex">
+                <BlogCard post={post} />
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </>
   );
 }

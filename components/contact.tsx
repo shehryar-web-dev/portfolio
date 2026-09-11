@@ -1,110 +1,101 @@
-"use client";
-
-import { useState } from "react";
 import Image from "next/image";
-import { Check, Copy } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { profile } from "@/data/profile";
+import { CopyField } from "@/components/copy-field";
+import { GithubIcon, LinkedinIcon } from "@/components/icons";
 
+const socials = [
+  { label: "GitHub", href: profile.socials.github, icon: GithubIcon },
+  { label: "LinkedIn", href: profile.socials.linkedin, icon: LinkedinIcon },
+];
+
+/**
+ * Closing CTA — the dark navy/teal slab, matching the rest of the section
+ * banners but full-height: portrait, heading, the open-to roles, two
+ * contact cards (email/phone), and a closing row of location + socials.
+ */
 export function Contact() {
-  const [copied, setCopied] = useState<"email" | "phone" | null>(null);
-
-  function copy(value: string, key: "email" | "phone") {
-    navigator.clipboard.writeText(value).then(() => {
-      setCopied(key);
-      setTimeout(() => setCopied(null), 2000);
-    });
-  }
-
   return (
-    <section
-      id="contact"
-      className="scroll-mt-20 flex min-h-screen flex-col border-t border-border bg-background"
-    >
-      {/* Main content */}
-      <div className="relative flex flex-1 flex-col items-center justify-center overflow-hidden px-6 py-20 text-center">
-        {/* Watermark */}
-        <span
-          aria-hidden
-          className="pointer-events-none absolute inset-0 flex select-none items-center justify-center font-display text-[clamp(5rem,18vw,13rem)] font-black leading-none text-foreground/4"
-        >
-          CONTACT
-        </span>
+    <section id="contact" className="slab scroll-mt-16">
+      <span aria-hidden="true" className="slab-watermark">
+        CONTACT
+      </span>
 
-        {/* Big heading with floating avatar */}
-        <div className="relative z-10 inline-flex flex-col items-center">
-          <h2 className="font-display text-[clamp(3rem,10vw,7rem)] font-black leading-none tracking-tight text-foreground">
-            Let&apos;s work
+      <div className="shell container-px relative z-10 py-20 sm:py-28">
+        <div className="mx-auto max-w-xl text-center">
+          <span
+            className="relative mx-auto block h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 sm:h-20 sm:w-20"
+            style={{ borderColor: "var(--slab-border)" }}
+          >
+            <Image
+              src={profile.imagePath}
+              alt=""
+              fill
+              sizes="80px"
+              className="object-cover object-top"
+            />
+          </span>
+
+          <p className="slab-label mt-6">Contact</p>
+
+          <h2 className="mt-3 text-2xl font-bold leading-tight text-white sm:text-3xl">
+            Let&apos;s work{" "}
+            <span style={{ color: "var(--slab-accent)" }}>together.</span>
           </h2>
 
-          {/* Circular avatar overlapping both lines */}
-          <div className="relative z-10 -my-3 flex h-20 w-20 items-center justify-center sm:-my-4 sm:h-28 sm:w-28">
-            <div className="h-full w-full overflow-hidden rounded-full border-4 border-background bg-muted shadow-lg">
-              <Image
-                src={profile.imagePath}
-                alt={profile.name}
-                width={112}
-                height={112}
-                className="h-full w-full object-cover"
-              />
-            </div>
-          </div>
-
-          <h2 className="font-display text-[clamp(3rem,10vw,7rem)] font-black leading-none tracking-tight text-accent">
-            together
-          </h2>
+          <p
+            className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed"
+            style={{ color: "var(--slab-muted)" }}
+          >
+            Open to {profile.openTo.slice(0, -1).join(", ")} and{" "}
+            {profile.openTo[profile.openTo.length - 1]} roles — particularly where the hard
+            part is reliability, asynchronous workflows, or an integration surface that has
+            to hold together.
+          </p>
         </div>
 
-        {/* Email */}
-        <p className="mt-10 text-sm text-muted-foreground">Drop me an email:</p>
-        <div className="mt-2 flex items-center gap-2">
-          <a
+        <div className="mx-auto mt-10 grid max-w-2xl gap-4 sm:grid-cols-2">
+          <CopyField
+            icon={<Mail className="h-4.5 w-4.5" />}
+            label="Email"
+            value={profile.email}
             href={`mailto:${profile.email}`}
-            className="text-lg font-semibold text-foreground transition-colors hover:text-accent sm:text-xl"
-          >
-            {profile.email}
-          </a>
-          <button
-            type="button"
-            onClick={() => copy(profile.email, "email")}
-            aria-label="Copy email address"
-            className="flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-card text-muted-foreground transition-colors hover:text-foreground"
-          >
-            {copied === "email" ? (
-              <Check className="h-4 w-4 text-accent" />
-            ) : (
-              <Copy className="h-4 w-4" />
-            )}
-          </button>
-        </div>
-
-        {/* Phone */}
-        <p className="mt-6 text-sm text-muted-foreground">Or call me:</p>
-        <div className="mt-2 flex items-center gap-2">
-          <a
+          />
+          <CopyField
+            icon={<Phone className="h-4.5 w-4.5" />}
+            label="Phone"
+            value={profile.phone}
             href={`tel:${profile.phone.replace(/\s+/g, "")}`}
-            className="text-lg font-semibold text-foreground transition-colors hover:text-accent sm:text-xl"
-          >
-            {profile.phone}
-          </a>
-          <button
-            type="button"
-            onClick={() => copy(profile.phone, "phone")}
-            aria-label="Copy phone number"
-            className="flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-card text-muted-foreground transition-colors hover:text-foreground"
-          >
-            {copied === "phone" ? (
-              <Check className="h-4 w-4 text-accent" />
-            ) : (
-              <Copy className="h-4 w-4" />
-            )}
-          </button>
+          />
         </div>
-      </div>
 
-      {/* Bottom bar — hidden on mobile since copyright is the only content */}
-      <div className="hidden border-t border-border px-6 py-5 sm:block">
-        <div className="text-center text-xs text-muted-foreground">
-          ©{new Date().getFullYear()} {profile.name}
+        <div
+          className="mx-auto mt-10 flex max-w-2xl flex-col items-center gap-5 border-t pt-8 sm:flex-row sm:justify-between"
+          style={{ borderColor: "var(--slab-border)" }}
+        >
+          <p
+            className="flex items-center gap-1.5 text-sm"
+            style={{ color: "var(--slab-muted)" }}
+          >
+            <MapPin aria-hidden="true" className="h-4 w-4" />
+            {profile.location}
+          </p>
+
+          <div className="flex items-center gap-2">
+            {socials.map(({ label, href, icon: Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="inline-flex h-9 w-9 items-center justify-center rounded-md border transition-colors hover:text-white"
+                style={{ borderColor: "var(--slab-border)", color: "var(--slab-muted)" }}
+              >
+                <Icon className="h-4.5 w-4.5" />
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </section>
