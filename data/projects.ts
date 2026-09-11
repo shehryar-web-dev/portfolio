@@ -12,18 +12,33 @@
  * repositories carry that instrumentation.
  */
 
-export type ArchitectureLayer = {
-  label: string;
-  nodes: { name: string; note?: string }[];
-};
+/**
+ * What role a pipeline step plays, so the diagram can draw a distinct icon
+ * per step instead of a plain numbered box:
+ *   trigger  — the external event or user action that starts this run
+ *   inbound  — the surface that receives it (webhook, endpoint, client)
+ *   gate     — a check, guard, or signature this step cannot proceed without
+ *   queue    — buffered, streamed, or handed to a worker pool
+ *   compute  — business logic runs here
+ *   store    — state is read or written (database or chain)
+ *   notify   — the result reaches a person or another system
+ */
+export type PipelineIcon =
+  | "trigger"
+  | "inbound"
+  | "gate"
+  | "queue"
+  | "compute"
+  | "store"
+  | "notify";
 
 export type Architecture = {
   /** One-sentence description of the shape of the system. */
   summary: string;
-  /** A linear event/data pipeline, rendered as a chained flow diagram. */
-  pipeline?: { name: string; note?: string }[];
-  /** Stacked tiers, rendered as a layered diagram. */
-  layers?: ArchitectureLayer[];
+  /** How the system actually behaves at runtime: the steps a request or event
+   * moves through, in order, rendered as a connected flow diagram. Describes
+   * mechanism (what happens, and why at that step), not the tech stack. */
+  pipeline: { name: string; note?: string; icon: PipelineIcon }[];
 };
 
 export type Decision = {
@@ -96,41 +111,14 @@ export const projects: Project[] = [
       summary:
         "Ingestion is fully decoupled from processing: the handler's only job is to return 200 fast and durably record the event.",
       pipeline: [
-        { name: "Solana", note: "on-chain activity" },
-        { name: "Helius webhook", note: "disconnects slow subscribers" },
-        { name: "Handler", note: "ACK 200 before any work" },
-        { name: "Redis Stream", note: "capped at ~100k entries" },
-        { name: "Worker pool", note: "3 BullMQ queues" },
-        { name: "MongoDB", note: "tokens, rules, history" },
-        { name: "Alert matcher", note: "per-user preferences" },
-        { name: "Telegram", note: "3 delivery modes" },
-      ],
-      layers: [
-        {
-          label: "Client",
-          nodes: [
-            { name: "Next.js 14 dashboard", note: "single HTTP client · JWT" },
-            { name: "Wallet auth", note: "nonce → sign → verify" },
-          ],
-        },
-        {
-          label: "Services",
-          nodes: [
-            { name: "Ingestion", note: "ACK-then-process" },
-            { name: "Indicator engine", note: "8 indicators from raw formulas" },
-            { name: "AI advisory", note: "180-min cache + rule-based fallback" },
-            { name: "Alerting", note: "preference-filtered" },
-          ],
-        },
-        {
-          label: "Data & providers",
-          nodes: [
-            { name: "MongoDB · Redis" },
-            { name: "Helius · Birdeye · RugCheck" },
-            { name: "DexScreener · CoinGecko · CoinGlass" },
-            { name: "OpenAI · Telegram" },
-          ],
-        },
+        { name: "Solana", note: "on-chain activity", icon: "trigger" },
+        { name: "Helius webhook", note: "disconnects slow subscribers", icon: "inbound" },
+        { name: "Handler", note: "ACK 200 before any work", icon: "gate" },
+        { name: "Redis Stream", note: "capped at ~100k entries", icon: "queue" },
+        { name: "Worker pool", note: "3 BullMQ queues", icon: "compute" },
+        { name: "MongoDB", note: "tokens, rules, history", icon: "store" },
+        { name: "Alert matcher", note: "per-user preferences", icon: "compute" },
+        { name: "Telegram", note: "3 delivery modes", icon: "notify" },
       ],
     },
 
@@ -243,39 +231,13 @@ export const projects: Project[] = [
       summary:
         "The token points at a stable URL; the metadata behind that URL is generated on demand, so editing a reward is a database write rather than a blockchain transaction.",
       pipeline: [
-        { name: "NFC tap", note: "hardware session, 60s bound" },
-        { name: "Check-in API", note: "identify merchant + verify user" },
-        { name: "Tier resolution", note: "recomputed from thresholds" },
-        { name: "Mint / upgrade", note: "ethers.js" },
-        { name: "Token URI", note: "fixed → Dibzi API" },
-        { name: "Metadata endpoint", note: "computed from live DB state" },
-        { name: "Dashboards", note: "merchant + admin" },
-      ],
-      layers: [
-        {
-          label: "Clients",
-          nodes: [
-            { name: "React Native app", note: "Expo · NFC check-in" },
-            { name: "Merchant dashboard", note: "React 19 · Vite" },
-            { name: "Admin dashboard", note: "11 vendor chunk groups" },
-          ],
-        },
-        {
-          label: "API",
-          nodes: [
-            { name: "Node / Express" },
-            { name: "3 auth guards", note: "read from DB on every request" },
-            { name: "Dynamic metadata service" },
-          ],
-        },
-        {
-          label: "State",
-          nodes: [
-            { name: "MongoDB", note: "relationship-as-entity loyalty model" },
-            { name: "Blockchain", note: "ethers.js minting" },
-            { name: "Cloudinary · IPFS", note: "media" },
-          ],
-        },
+        { name: "NFC tap", note: "hardware session, 60s bound", icon: "trigger" },
+        { name: "Check-in API", note: "identify merchant + verify user", icon: "inbound" },
+        { name: "Tier resolution", note: "recomputed from thresholds", icon: "compute" },
+        { name: "Mint / upgrade", note: "ethers.js", icon: "store" },
+        { name: "Token URI", note: "fixed → Dibzi API", icon: "inbound" },
+        { name: "Metadata endpoint", note: "computed from live DB state", icon: "compute" },
+        { name: "Dashboards", note: "merchant + admin", icon: "notify" },
       ],
     },
 
@@ -387,41 +349,14 @@ export const projects: Project[] = [
       summary:
         "Trades are prepared server-side, signed in the user's wallet, and confirmed on-chain — then reconciled by an indexer that cannot double-write, because the idempotency key is derived from the transaction signature itself.",
       pipeline: [
-        { name: "Mobile app", note: "React Native" },
-        { name: "Prepare trade", note: "NestJS builds unsigned tx" },
-        { name: "Wallet deep link", note: "user signs in Phantom" },
-        { name: "Broadcast", note: "Solana bonding-curve program" },
-        { name: "Indexer", note: "reads on-chain trade events" },
-        { name: "Idempotent write", note: "sha256(txSignature) key" },
-        { name: "Outbox", note: "notification recorded in same tx" },
-        { name: "Poller → Socket.IO", note: "per-entry / per-user rooms" },
-      ],
-      layers: [
-        {
-          label: "Clients",
-          nodes: [
-            { name: "React Native app", note: "feed, trading, audio/video comments" },
-            { name: "iOS Share Extension", note: "Swift · App Groups" },
-            { name: "Admin console", note: "React 19 · Recharts" },
-          ],
-        },
-        {
-          label: "Services",
-          nodes: [
-            { name: "Trading", note: "quotes from live chain state" },
-            { name: "Blockchain / indexer" },
-            { name: "Notifications", note: "outbox + gateway" },
-            { name: "Moderation, staking, lending, DAO" },
-          ],
-        },
-        {
-          label: "State",
-          nodes: [
-            { name: "PostgreSQL / Prisma", note: "ledger accounts, earnings split" },
-            { name: "Redis + BullMQ", note: "queues and fan-out" },
-            { name: "Solana programs", note: "4 Anchor contracts" },
-          ],
-        },
+        { name: "Mobile app", note: "React Native", icon: "trigger" },
+        { name: "Prepare trade", note: "NestJS builds unsigned tx", icon: "compute" },
+        { name: "Wallet deep link", note: "user signs in Phantom", icon: "gate" },
+        { name: "Broadcast", note: "Solana bonding-curve program", icon: "store" },
+        { name: "Indexer", note: "reads on-chain trade events", icon: "inbound" },
+        { name: "Idempotent write", note: "sha256(txSignature) key", icon: "store" },
+        { name: "Outbox", note: "notification recorded in same tx", icon: "queue" },
+        { name: "Poller → Socket.IO", note: "per-entry / per-user rooms", icon: "notify" },
       ],
     },
 
@@ -528,38 +463,13 @@ export const projects: Project[] = [
       summary:
         "No database write ever precedes chain confirmation on the user path; on the admin payout path a write-ahead-log row precedes submission, so a crash mid-transfer is recoverable without resubmitting.",
       pipeline: [
-        { name: "Frontend", note: "wallet connected + JWT verified" },
-        { name: "prepare*", note: "server builds unsigned tx · no DB write" },
-        { name: "Wallet signature", note: "user signs" },
-        { name: "confirm*", note: "submit signed tx" },
-        { name: "Chain confirmation", note: "Anchor program" },
-        { name: "PostgreSQL write", note: "only now" },
-        { name: "Indexer + reconciler", note: "heals dropped events" },
-      ],
-      layers: [
-        {
-          label: "Clients",
-          nodes: [
-            { name: "Next.js app", note: "staking, vesting, referrals" },
-            { name: "Admin console", note: "tokenomics + reward controls" },
-          ],
-        },
-        {
-          label: "Services",
-          nodes: [
-            { name: "25 NestJS modules", note: "157 HTTP routes" },
-            { name: "Disbursement engine", note: "write-ahead log" },
-            { name: "BullMQ workers", note: "snapshots, reconciliation" },
-          ],
-        },
-        {
-          label: "State",
-          nodes: [
-            { name: "PostgreSQL / Prisma", note: "37 models" },
-            { name: "Redis" },
-            { name: "Anchor program", note: "27 instructions · 36 error codes" },
-          ],
-        },
+        { name: "Frontend", note: "wallet connected + JWT verified", icon: "trigger" },
+        { name: "prepare*", note: "server builds unsigned tx · no DB write", icon: "compute" },
+        { name: "Wallet signature", note: "user signs", icon: "gate" },
+        { name: "confirm*", note: "submit signed tx", icon: "inbound" },
+        { name: "Chain confirmation", note: "Anchor program", icon: "gate" },
+        { name: "PostgreSQL write", note: "only now", icon: "store" },
+        { name: "Indexer + reconciler", note: "heals dropped events", icon: "compute" },
       ],
     },
 
@@ -671,32 +581,16 @@ export const projects: Project[] = [
 
     architecture: {
       summary:
-        "One integration convention, applied identically across six top-level and seventeen sub-level feature domains.",
-      layers: [
-        {
-          label: "UI",
-          nodes: [
-            { name: "Marketplace, dashboard, admin" },
-            { name: "AdminTable ×11 · PaginationControls ×10" },
-            { name: "withStripeOnboarding HOC" },
-          ],
-        },
-        {
-          label: "Integration layer",
-          nodes: [
-            { name: "features/<domain>/hooks", note: "TanStack Query" },
-            { name: "features/<domain>/services", note: "domain-type conversion" },
-            { name: "features/<domain>/types" },
-          ],
-        },
-        {
-          label: "Transport & gate",
-          nodes: [
-            { name: "Single Axios client", note: "refresh + retry once on 401" },
-            { name: "ProtectedRoute", note: "waits on live useGetCurrentUser()" },
-            { name: "Backend REST · Stripe Connect" },
-          ],
-        },
+        "A protected screen renders on a cached flag for instant feedback, but nothing is fetched until a live server check confirms it — one convention, applied identically across twenty-three feature domains.",
+      pipeline: [
+        { name: "Route mount", note: "ProtectedRoute renders", icon: "trigger" },
+        { name: "Cached flag", note: "instant UI, not trusted", icon: "gate" },
+        { name: "Live user query", note: "useGetCurrentUser() — the real gate", icon: "gate" },
+        { name: "Domain hook", note: "features/<domain>/hooks · TanStack Query", icon: "compute" },
+        { name: "Domain service", note: "converts to domain types", icon: "compute" },
+        { name: "Axios client", note: "refresh + retry once on 401", icon: "inbound" },
+        { name: "Backend / Stripe Connect", note: "REST", icon: "store" },
+        { name: "Cache invalidation", note: "specific query keys, never patched", icon: "notify" },
       ],
     },
 
@@ -790,32 +684,16 @@ export const projects: Project[] = [
 
     architecture: {
       summary:
-        "One API client, one service module per domain, and one listing form specialised by type — so the two sides of the marketplace converge on the same offer and messaging flow.",
-      layers: [
-        {
-          label: "Routes",
-          nodes: [
-            { name: "22 top-level routes" },
-            { name: "Listing · wanted · matched · detail" },
-            { name: "Auth, OTP, payment confirmation" },
-          ],
-        },
-        {
-          label: "Domain layer",
-          nodes: [
-            { name: "PostApi · postGroupApi · postOfferApi" },
-            { name: "UserService · messaging" },
-            { name: "Shared reference-data hooks" },
-          ],
-        },
-        {
-          label: "Transport & vendors",
-          nodes: [
-            { name: "Single ApiClient", note: "every service imports it" },
-            { name: "Stripe · PayPal" },
-            { name: "Cloudinary", note: "compress + crop before upload" },
-          ],
-        },
+        "One shared form branches by listing type at the schema level, so a 'wanted' listing and a normal listing diverge into their own matching logic instead of being told apart by a flag.",
+      pipeline: [
+        { name: "Listing form", note: "one shared form, both types", icon: "trigger" },
+        { name: "Yup schema", note: "validation branches by type", icon: "gate" },
+        { name: "Photo capture", note: "compressed + cropped in-browser first", icon: "compute" },
+        { name: "ApiClient", note: "single client, every service imports it", icon: "inbound" },
+        { name: "Type router", note: "normal listing vs wanted listing", icon: "compute" },
+        { name: "Matching engine", note: "wanted listings only", icon: "compute" },
+        { name: "Offers & messaging", note: "both sides converge here", icon: "store" },
+        { name: "Payment", note: "Stripe or PayPal", icon: "notify" },
       ],
     },
 
@@ -903,31 +781,16 @@ export const projects: Project[] = [
 
     architecture: {
       summary:
-        "Every reference-data domain exposes two doors: full admin CRUD, and a field-limited public read that returns only what a form dropdown needs.",
-      layers: [
-        {
-          label: "Client",
-          nodes: [
-            { name: "React 18 · React Query hooks" },
-            { name: "Role-scoped dashboards", note: "4 roles" },
-            { name: "One generic alert UI ×5 types" },
-          ],
-        },
-        {
-          label: "API",
-          nodes: [
-            { name: "RolesGuard", note: "empty @Roles() means public" },
-            { name: "8 REST controllers · 5 modules" },
-            { name: "Form validation dispatcher", note: "7+ form types" },
-          ],
-        },
-        {
-          label: "Data",
-          nodes: [
-            { name: "MongoDB / Mongoose", note: "typed ObjectId references" },
-            { name: "Socket.IO", note: "real-time updates" },
-          ],
-        },
+        "Every reference-data domain exposes two doors: full admin CRUD, and a field-limited public read that returns only what a form dropdown needs — gated by a guard that had been silently rejecting every caller.",
+      pipeline: [
+        { name: "Staff request", note: "needs dropdown options, not admin access", icon: "trigger" },
+        { name: "/public endpoint", note: "field-limited read", icon: "inbound" },
+        { name: "RolesGuard", note: "empty @Roles() now reads as public", icon: "gate" },
+        { name: "Controller", note: "8 REST controllers · 5 modules", icon: "compute" },
+        { name: "Form dispatcher", note: "validates by form type", icon: "compute" },
+        { name: "recipientType check", note: "typed ObjectId, not string match", icon: "gate" },
+        { name: "MongoDB / Mongoose", note: "typed references", icon: "store" },
+        { name: "Socket.IO", note: "pushes update to dashboard", icon: "notify" },
       ],
     },
 

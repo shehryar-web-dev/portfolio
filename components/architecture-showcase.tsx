@@ -9,15 +9,15 @@ import { ArchitectureDiagram } from "@/components/architecture-diagram";
  */
 export function ArchitectureShowcase() {
   const twq = getProject("twq");
-  const fintrust = getProject("fintrust");
-  if (!twq || !fintrust) return null;
+  const dibzi = getProject("dibzi");
+  if (!twq || !dibzi) return null;
 
   return (
     <Section
       id="architecture"
       eyebrow="Architecture"
-      title="Ingestion decoupled from processing, and no write before confirmation"
-      description="Two diagrams that account for most of what I do. The first is the event-driven pattern: acknowledge fast, record durably, process elsewhere. The second is the rule that keeps a database honest about a blockchain it cannot control."
+      title="Ingestion decoupled from processing, and an immutable token made editable"
+      description="Two diagrams of how the system actually behaves, not what it's built with. The first is the event-driven pattern: acknowledge fast, record durably, process elsewhere. The second is what happens when a blockchain's permanence works against the product: point the token at a stable address, and compute what lives behind it on every request."
       watermark="ARCHITECTURE"
     >
       <div className="grid gap-10 lg:grid-cols-2 lg:gap-8">
@@ -37,13 +37,14 @@ export function ArchitectureShowcase() {
         <Reveal delay={0.05}>
           <div>
             <h3 className="mb-1 text-base font-semibold">
-              {fintrust.title} — prepare, sign, confirm, then write
+              {dibzi.title} — check-in to computed reward
             </h3>
             <p className="mb-4 text-sm text-muted-foreground">
-              No database record of a user&apos;s on-chain action can exist without a
-              confirmed transaction behind it. An indexer heals whatever the chain drops.
+              A reward minted as a token is permanently frozen once issued, so the token
+              URI points at a fixed address on Dibzi&apos;s own API instead of IPFS —
+              editing a reward becomes a database write, never a blockchain transaction.
             </p>
-            <ArchitectureDiagram architecture={fintrust.architecture} />
+            <ArchitectureDiagram architecture={dibzi.architecture} />
           </div>
         </Reveal>
       </div>
