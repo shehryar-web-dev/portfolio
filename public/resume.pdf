@@ -6,16 +6,16 @@ endobj
 << /Type /Pages /Kids [9 0 R 11 0 R] /Count 2 >>
 endobj
 3 0 obj
-<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
 endobj
 4 0 obj
-<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
 endobj
 5 0 obj
-<< /Length 9603 >>
+<< /Length 8588 >>
 stream
 BT /F2 23 Tf 0.12 0.20 0.32 rg 217 812 Td (Shehryar Naeem) Tj ET
-BT /F2 11.8 Tf 0.18 0.36 0.60 rg 238.5 786.5 Td (Full Stack Developer) Tj ET
+BT /F2 11.8 Tf 0.18 0.36 0.60 rg 241.45 786.5 Td (Full Stack Engineer) Tj ET
 BT /F1 9.1 Tf 0.38 0.42 0.47 rg 149.625 773 Td (Lahore, Pakistan  |  +92 311 1404107  |  shehryarwebdev@gmail.com) Tj ET
 BT /F1 9.1 Tf 0.18 0.36 0.60 rg 222.425 762.4 Td (Portfolio) Tj ET
 BT /F1 9.1 Tf 0.38 0.42 0.47 rg 263.375 762.4 Td (  |  ) Tj ET
@@ -24,74 +24,70 @@ BT /F1 9.1 Tf 0.38 0.42 0.47 rg 313.425 762.4 Td (  |  ) Tj ET
 BT /F1 9.1 Tf 0.18 0.36 0.60 rg 336.175 762.4 Td (LinkedIn) Tj ET
 BT /F2 11.6 Tf 0.12 0.20 0.32 rg 38 746.8 Td (PROFESSIONAL SUMMARY) Tj ET
 0.18 0.36 0.60 RG 0.7 w 38 739.0999999999999 m 557 739.0999999999999 l S
-BT /F1 10 Tf 0.15 0.15 0.15 rg 38 727.5999999999999 Td (Full Stack Developer with 3+ years of experience solving concrete production problems: acknowledging) Tj ET
-BT /F1 10 Tf 0.15 0.15 0.15 rg 38 715.8999999999999 Td (third-party webhook events within milliseconds so a slow downstream call never drops data, preventing) Tj ET
-BT /F1 10 Tf 0.15 0.15 0.15 rg 38 704.1999999999998 Td (duplicate or lost payments with a write-ahead-log disbursement engine on an at-least-once blockchain) Tj ET
-BT /F1 10 Tf 0.15 0.15 0.15 rg 38 692.4999999999998 Td (primitive, and fixing real authorization and data-integrity bugs left in existing codebases, such as an) Tj ET
-BT /F1 10 Tf 0.15 0.15 0.15 rg 38 680.7999999999997 Td (access-control guard silently rejecting every request to a public route. Comfortable owning a feature) Tj ET
-BT /F1 10 Tf 0.15 0.15 0.15 rg 38 669.0999999999997 Td (end-to-end, from redesigning how a system stores and serves data to building the frontend integration) Tj ET
-BT /F1 10 Tf 0.15 0.15 0.15 rg 38 657.3999999999996 Td (layer that consumes it, and has independently delivered multiple production systems from architecture) Tj ET
-BT /F1 10 Tf 0.15 0.15 0.15 rg 38 645.6999999999996 Td (through launch.) Tj ET
-BT /F2 11.6 Tf 0.12 0.20 0.32 rg 38 629.9999999999995 Td (TECHNICAL SKILLS) Tj ET
-0.18 0.36 0.60 RG 0.7 w 38 622.2999999999995 m 557 622.2999999999995 l S
-BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 610.7999999999995 Td (Languages: JavaScript, TypeScript) Tj ET
-BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 599.6999999999995 Td (Frontend: React, Next.js, React Native, TanStack Query, Tailwind CSS) Tj ET
-BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 588.5999999999995 Td (Backend: Node.js, Express, NestJS, RESTful APIs, Socket.IO) Tj ET
-BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 577.4999999999994 Td (Databases: PostgreSQL \(Prisma\), MongoDB, Redis) Tj ET
-BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 566.3999999999994 Td (Blockchain: Solana \(Web3.js, Anchor\), XRPL, Wallet Auth, SPL Tokens, NFTs) Tj ET
-BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 555.2999999999994 Td (AI: OpenAI API, Prompt Engineering, AI-Powered Applications, RAG) Tj ET
-BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 544.1999999999994 Td (Architecture: Event-Driven Systems, Distributed Systems, Message Queues \(BullMQ, Redis Streams\)) Tj ET
-BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 533.0999999999993 Td (Cloud & DevOps: AWS \(S3\), Docker, Git/GitHub, Nginx, Jest \(Automated Testing\)) Tj ET
-BT /F2 11.6 Tf 0.12 0.20 0.32 rg 38 518.9999999999993 Td (PROFESSIONAL EXPERIENCE) Tj ET
-0.18 0.36 0.60 RG 0.7 w 38 511.29999999999933 m 557 511.29999999999933 l S
-BT /F2 11.2 Tf 0.12 0.20 0.32 rg 38 499.79999999999933 Td (Full Stack Software Engineer) Tj ET
-BT /F1 9.1 Tf 0.38 0.42 0.47 rg 475.1 499.79999999999933 Td (Jan 2023 - Present) Tj ET
-BT /F2 9.9 Tf 0.18 0.36 0.60 rg 38 485.79999999999933 Td (Weiblocks) Tj ET
-BT /F1 9 Tf 0.38 0.42 0.47 rg 444.5 485.79999999999933 Td (Lahore, Pakistan \(Remote\)) Tj ET
-BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 473.29999999999933 Td (" Engineered and shipped 8 production full-stack systems across fintech, blockchain, AI, and) Tj ET
-BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 462.39999999999935 Td (   social/marketplace domains using React, Next.js, TypeScript, Node.js, NestJS, and Solana/XRPL blockchain) Tj ET
-BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 451.4999999999994 Td (   integrations.) Tj ET
-BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 440.3999999999994 Td (" Architected event-driven, distributed backend pipelines \(Redis Streams, BullMQ\) that decouple) Tj ET
-BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 429.49999999999943 Td (   latency-critical webhook ingestion from asynchronous processing, eliminating data loss from third-party) Tj ET
-BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 418.59999999999945 Td (   API timeouts.) Tj ET
-BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 407.4999999999995 Td (" Designed exactly-once transaction guarantees for financial and blockchain operations using write-ahead) Tj ET
-BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 396.5999999999995 Td (   logs, conditional atomic database updates, and signature-derived idempotency keys.) Tj ET
-BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 385.49999999999955 Td (" Implemented wallet-based cryptographic authentication \(Ed25519 signature verification\) and JWT/role-based) Tj ET
-BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 374.59999999999957 Td (   authorization across multiple trust levels, removing stored passwords and enforcing server-verified) Tj ET
-BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 363.6999999999996 Td (   access.) Tj ET
-BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 352.5999999999996 Td (" Built and maintained REST APIs \(150+ endpoints across 25+ NestJS/Express modules\) backed by PostgreSQL,) Tj ET
-BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 341.69999999999965 Td (   MongoDB, and Redis, with automated test coverage \(239+ tests\) and technical documentation.) Tj ET
-BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 330.5999999999997 Td (" Authored 4 Solana Anchor/Rust smart contracts and integrated XRPL token rewards, and established a) Tj ET
-BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 319.6999999999997 Td (   reusable frontend architecture \(single HTTP client, typed service layer\) adopted across multiple) Tj ET
-BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 308.7999999999997 Td (   projects.) Tj ET
-BT /F2 11.2 Tf 0.12 0.20 0.32 rg 38 295.69999999999976 Td (Frontend Developer Intern) Tj ET
-BT /F1 9.1 Tf 0.38 0.42 0.47 rg 488.75 295.69999999999976 Td (2023 - 2 Months) Tj ET
-BT /F2 9.9 Tf 0.18 0.36 0.60 rg 38 281.69999999999976 Td (Excellence Code Solution) Tj ET
-BT /F1 9 Tf 0.38 0.42 0.47 rg 485 281.69999999999976 Td (Lahore, Pakistan) Tj ET
-BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 269.19999999999976 Td (" Built responsive user interfaces and reusable React components for production web applications.) Tj ET
-BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 258.0999999999998 Td (" Collaborated with senior developers to refine layouts, resolve UI issues, and follow production) Tj ET
-BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 247.1999999999998 Td (   development practices.) Tj ET
-BT /F2 11.6 Tf 0.12 0.20 0.32 rg 38 231.0999999999998 Td (KEY PROJECTS) Tj ET
-0.18 0.36 0.60 RG 0.7 w 38 223.3999999999998 m 557 223.3999999999998 l S
-BT /F2 10.9 Tf 0.12 0.20 0.32 rg 38 211.8999999999998 Td (TWQ) Tj ET
-BT /F1 8.8 Tf 0.38 0.42 0.47 rg 341.4 211.8999999999998 Td (Node.js, Express, MongoDB, Redis, BullMQ, Next.js) Tj ET
-BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 199.0999999999998 Td (Solo-built real-time Solana token intelligence platform with webhook ingestion, alerting, and AI-grounded) Tj ET
-BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 188.1999999999998 Td (trading insights across 8 external integrations.) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 176.99999999999977 Td (" Architected a two-process, event-driven pipeline \(Redis Streams + BullMQ\) that acknowledges webhook events in) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 166.59999999999977 Td (   milliseconds, then processes them asynchronously with retry, backoff, and priority queues.) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 156.19999999999976 Td (" Implemented passwordless Ed25519 wallet authentication and a technical-analysis engine \(8 indicators computed) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 145.79999999999976 Td (   from raw price data\) with a rule-based AI fallback for continuous feature uptime.) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 135.39999999999975 Td (" Established a single Next.js data-fetching boundary \(one HTTP client, service-layer type conversion,) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 124.99999999999974 Td (   volatility-tuned cache lifetimes\) and designed alert filters that treat missing market data as "skip this) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 114.59999999999974 Td (   check" rather than a rejection, so early-stage tokens are not silently filtered out.) Tj ET
-BT /F2 10.9 Tf 0.12 0.20 0.32 rg 38 102.59999999999974 Td (Dibzi) Tj ET
-BT /F1 8.8 Tf 0.38 0.42 0.47 rg 354.6 102.59999999999974 Td (Node.js, Express, MongoDB, React Native, React) Tj ET
-BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 89.79999999999974 Td (NFC-triggered on-chain loyalty platform enabling merchants to update already-issued rewards at zero) Tj ET
-BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 78.89999999999974 Td (blockchain cost.) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 67.69999999999973 Td (" Owned 90% of commits \(237/264\) across 4 codebases \(API, mobile app, 2 dashboards\) over a 6-month build;) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 57.299999999999734 Td (   redesigned NFT metadata to be editable with no re-mint cost.) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 46.899999999999736 Td (" Built a 3-tier, database-verified authorization system and authored a ranked defect audit \(6 critical, 5) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 36.49999999999974 Td (   high, 12 medium\) that drove real security and data-integrity fixes.) Tj ET
+BT /F1 10 Tf 0.15 0.15 0.15 rg 38 727.5999999999999 Td (Full-stack engineer with 3 years building distributed, event-driven systems: webhook pipelines that) Tj ET
+BT /F1 10 Tf 0.15 0.15 0.15 rg 38 715.8999999999999 Td (survive provider timeouts, idempotent write-ahead-log processing that prevents double payments over an) Tj ET
+BT /F1 10 Tf 0.15 0.15 0.15 rg 38 704.1999999999998 Td (at-least-once blockchain primitive, and authorization layers hardened against real production defects.) Tj ET
+BT /F1 10 Tf 0.15 0.15 0.15 rg 38 692.4999999999998 Td (Writes maintainable, SOLID-aligned code — single-responsibility service layers, reusable typed) Tj ET
+BT /F1 10 Tf 0.15 0.15 0.15 rg 38 680.7999999999997 Td (abstractions — and owns the frontend integration layer end-to-end, translating designs into) Tj ET
+BT /F1 10 Tf 0.15 0.15 0.15 rg 38 669.0999999999997 Td (pixel-accurate production UI.) Tj ET
+BT /F2 11.6 Tf 0.12 0.20 0.32 rg 38 653.3999999999996 Td (TECHNICAL SKILLS) Tj ET
+0.18 0.36 0.60 RG 0.7 w 38 645.6999999999996 m 557 645.6999999999996 l S
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 634.1999999999996 Td (Languages: JavaScript, TypeScript) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 623.0999999999996 Td (Backend: Node.js, Express, NestJS, REST APIs, Socket.IO) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 611.9999999999995 Td (Databases: PostgreSQL \(Prisma\), MongoDB, Redis) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 600.8999999999995 Td (Architecture: Event-Driven Systems, Distributed Systems, Message Queues) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 589.7999999999995 Td (Frontend: React, Next.js, React Native, TanStack Query, Tailwind CSS, Figma-to-Code) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 578.6999999999995 Td (AI: LLM Integration, Retrieval-Augmented Generation \(RAG\) Systems, Prompt Engineering, AI Workflow) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 567.7999999999995 Td (Automation, Production AI Systems) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 556.6999999999995 Td (Infrastructure: Docker \(Compose\), AWS S3, Git/GitHub, Nginx, PM2, Jest) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 545.5999999999995 Td (Blockchain: Blockchain Integration, Wallet-Based Authentication) Tj ET
+BT /F2 11.6 Tf 0.12 0.20 0.32 rg 38 531.4999999999994 Td (PROFESSIONAL EXPERIENCE) Tj ET
+0.18 0.36 0.60 RG 0.7 w 38 523.7999999999994 m 557 523.7999999999994 l S
+BT /F2 11.2 Tf 0.12 0.20 0.32 rg 38 512.2999999999994 Td (Full Stack Developer) Tj ET
+BT /F1 9.1 Tf 0.38 0.42 0.47 rg 493.3 512.2999999999994 Td (2023 - Present) Tj ET
+BT /F2 9.9 Tf 0.18 0.36 0.60 rg 38 498.2999999999994 Td (Weiblocks) Tj ET
+BT /F1 9 Tf 0.38 0.42 0.47 rg 485 498.2999999999994 Td (Lahore, Pakistan) Tj ET
+BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 485.7999999999994 Td (• Shipped 8 production systems end-to-end across fintech, AI, and marketplace platforms, owning backend) Tj ET
+BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 474.8999999999994 Td (   architecture, API design, and the frontend integration layer on each.) Tj ET
+BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 463.79999999999944 Td (• Built event-driven ingestion pipelines that decouple slow downstream work from webhook acknowledgment,) Tj ET
+BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 452.89999999999947 Td (   eliminating data loss from provider timeouts.) Tj ET
+BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 441.7999999999995 Td (• Designed idempotent, write-ahead-logged transaction processing — conditional atomic updates,) Tj ET
+BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 430.8999999999995 Td (   signature-derived idempotency keys — that prevents double-payment or lost-payment over an at-least-once) Tj ET
+BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 419.99999999999955 Td (   blockchain primitive.) Tj ET
+BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 408.8999999999996 Td (• Replaced password-based auth with wallet-signature verification \(Ed25519\) and role-based access control) Tj ET
+BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 397.9999999999996 Td (   across multiple trust levels, closing a stored-credential attack surface entirely.) Tj ET
+BT /F2 11.2 Tf 0.12 0.20 0.32 rg 38 384.89999999999964 Td (Frontend Developer Intern) Tj ET
+BT /F1 9.1 Tf 0.38 0.42 0.47 rg 488.75 384.89999999999964 Td (2023 - 2 Months) Tj ET
+BT /F2 9.9 Tf 0.18 0.36 0.60 rg 38 370.89999999999964 Td (Excellence Code Solution) Tj ET
+BT /F1 9 Tf 0.38 0.42 0.47 rg 485 370.89999999999964 Td (Lahore, Pakistan) Tj ET
+BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 358.39999999999964 Td (• Built responsive user interfaces and reusable React components for production web applications.) Tj ET
+BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 347.29999999999967 Td (• Collaborated with senior developers to refine layouts, resolve UI issues, and follow production) Tj ET
+BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 336.3999999999997 Td (   development practices.) Tj ET
+BT /F2 11.6 Tf 0.12 0.20 0.32 rg 38 320.2999999999997 Td (KEY PROJECTS) Tj ET
+0.18 0.36 0.60 RG 0.7 w 38 312.59999999999974 m 557 312.59999999999974 l S
+BT /F2 10.9 Tf 0.12 0.20 0.32 rg 38 301.09999999999974 Td (TWQ) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 288.2999999999997 Td (Solo-built real-time on-chain token monitoring and alerting platform consolidating 8 external data sources) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 277.39999999999975 Td (into one automated workflow.) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 266.19999999999976 Td (• Cut webhook ingestion volume ~99.8% \(~100K -> ~200 events/hr\) by narrowing event subscriptions to the 4) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 255.79999999999976 Td (   programs and 3 event types the product needs.) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 245.39999999999975 Td (• Built a shared, self-throttling rate limiter across every outbound API call so concurrent webhook bursts) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 234.99999999999974 Td (   never exceed a provider's request cap.) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 224.59999999999974 Td (• Removed passwords and private keys from the attack surface entirely with single-use, wallet-signature) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 214.19999999999973 Td (   \(Ed25519\) authentication.) Tj ET
+BT /F2 10.9 Tf 0.12 0.20 0.32 rg 38 202.19999999999973 Td (Dibzi) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 189.39999999999972 Td (NFC-triggered loyalty platform letting merchants edit live reward tiers customers already hold, at zero) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 178.49999999999972 Td (blockchain cost per update.) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 167.2999999999997 Td (• Made merchant-editable rewards possible on an architecture where metadata is normally permanent, by inverting) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 156.8999999999997 Td (   which half of the token data is fixed.) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 146.4999999999997 Td (• Made tier downgrades structurally impossible, not just blocked, so a customer can never lose an) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 136.09999999999968 Td (   already-earned reward.) Tj ET
+BT /F2 10.9 Tf 0.12 0.20 0.32 rg 38 124.09999999999968 Td (FinTrust) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 111.29999999999968 Td (Non-custodial staking and rewards platform tying token staking to real card benefits, engineered for) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 100.39999999999968 Td (crash-safe financial operations.) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 89.19999999999968 Td (• Closed an entire class of double-pay/lost-payment bugs by construction with a write-ahead-log disbursement) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 78.79999999999967 Td (   engine that self-heals within 5 minutes.) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 68.39999999999966 Td (• Ran 3–10 concurrent replicas correctly with zero coordination layer by making every write idempotent by) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 57.999999999999666 Td (   construction.) Tj ET
 endstream
 endobj
 6 0 obj
@@ -107,50 +103,24 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Annots [6 0 R 7 0 R 8 0 R] /Contents 5 0 R >>
 endobj
 10 0 obj
-<< /Length 5629 >>
+<< /Length 1955 >>
 stream
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 812 Td (" Resolved a Node/browser dependency incompatibility that was blocking the admin dashboard build with a custom) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 801.6 Td (   polyfill configuration, and migrated live check-in history across three schema formats with zero downtime and) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 791.2 Td (   no data loss.) Tj ET
-BT /F2 10.9 Tf 0.12 0.20 0.32 rg 38 779.2 Td (FinTrust) Tj ET
-BT /F1 8.8 Tf 0.38 0.42 0.47 rg 350.2 779.2 Td (NestJS, PostgreSQL/Prisma, Redis, Anchor \(Rust\)) Tj ET
-BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 766.4000000000001 Td (Non-custodial Solana staking, rewards, and ICO platform backed by a custom Anchor smart contract and a) Tj ET
-BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 755.5000000000001 Td (25-module NestJS backend.) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 744.3000000000002 Td (" Designed a write-ahead-log disbursement engine guaranteeing exactly-once on-chain token transfers, closing) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 733.9000000000002 Td (   the double-pay/lost-pay failure class by construction.) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 723.5000000000002 Td (" Built 157 REST endpoints over 37 Prisma models and a 2,430-line Anchor program \(27 instructions\), backed by) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 713.1000000000003 Td (   239 automated tests and a 34-flow manual QA runbook.) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 702.7000000000003 Td (" Split every wallet-signed action into a prepare/confirm request pair so the database is only written after) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 692.3000000000003 Td (   on-chain confirmation, and hardened reward-claim instructions by re-verifying every attacker-suppliable) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 681.9000000000003 Td (   account on-chain.) Tj ET
-BT /F2 10.9 Tf 0.12 0.20 0.32 rg 38 669.9000000000003 Td (SocialFi Trading) Tj ET
-BT /F1 8.8 Tf 0.38 0.42 0.47 rg 350.2 669.9000000000003 Td (NestJS, PostgreSQL, Anchor \(Rust\), React Native) Tj ET
-BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 657.1000000000004 Td (Content-as-assets social trading platform pricing posts and comments on a Solana bonding curve, with a mobile) Tj ET
-BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 646.2000000000004 Td (app and admin console.) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 635.0000000000005 Td (" Migrated the trading engine from a custodial database ledger to a non-custodial, wallet-signed model, closing) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 624.6000000000005 Td (   custodial fund risk and a stale-price slippage bug class.) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 614.2000000000005 Td (" Authored 4 Rust/Anchor smart contracts and remediated 2 security weaknesses \(plaintext secrets, a shared) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 603.8000000000005 Td (   encryption key\) with a migration path that did not disrupt existing users.) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 593.4000000000005 Td (" Built a resilient mobile wallet-signing flow with ephemeral session keys that survive OS-level app) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 583.0000000000006 Td (   suspension, and implemented a transactional-outbox notification pipeline so a trade event can never be) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 572.6000000000006 Td (   recorded without also being delivered.) Tj ET
-BT /F2 10.9 Tf 0.12 0.20 0.32 rg 38 560.6000000000006 Td (Flyverr) Tj ET
-BT /F1 8.8 Tf 0.38 0.42 0.47 rg 332.6 560.6000000000006 Td (Next.js, TypeScript, TanStack Query, Stripe Connect) Tj ET
-BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 547.8000000000006 Td (Staged resale marketplace for digital products with multi-round pricing and Stripe Connect payouts.) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 536.6000000000007 Td (" Established the frontend's core architecture \(auth context, route guards, typed API layer\) from an empty) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 526.2000000000007 Td (   scaffold, later extended by another engineer for unrelated features.) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 515.8000000000008 Td (" Built a reusable Stripe-readiness HOC and shared admin table/pagination primitives, replacing per-screen) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 505.4000000000008 Td (   readiness checks and one-off table implementations.) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 495.0000000000008 Td (" Enforced route-level access control with a live, server-verified user query instead of a cached role flag,) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 484.6000000000008 Td (   and built the admin moderation console \(product approval with auto-suggested staged pricing\) on shared table) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 474.20000000000084 Td (   and pagination primitives.) Tj ET
-BT /F1 9.2 Tf 0.15 0.15 0.15 rg 38 462.20000000000084 Td (Additional Projects: Lindo Mart \(internal operations platform - NestJS, MongoDB, React, Socket.IO; fixed 6) Tj ET
-BT /F1 9.2 Tf 0.15 0.15 0.15 rg 38 451.6000000000008 Td (authorization and data-integrity defects\), Mindful Oasis \(XRPL wellness rewards platform - React, Node.js\), and) Tj ET
-BT /F1 9.2 Tf 0.15 0.15 0.15 rg 38 441.0000000000008 Td (Social Locket \(real-estate social marketplace - React, Stripe, PayPal, Web3Modal\).) Tj ET
-BT /F2 11.6 Tf 0.12 0.20 0.32 rg 38 425.4000000000008 Td (EDUCATION) Tj ET
-0.18 0.36 0.60 RG 0.7 w 38 417.7000000000008 m 557 417.7000000000008 l S
-BT /F2 10.6 Tf 0.12 0.20 0.32 rg 38 406.2000000000008 Td (University of Education, Lahore) Tj ET
-BT /F1 9.4 Tf 0.38 0.42 0.47 rg 38 394.4000000000008 Td (Bachelor's Degree - Information Technology) Tj ET
+BT /F2 10.9 Tf 0.12 0.20 0.32 rg 38 812 Td (Flyverr) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 799.2 Td (Staged digital-product resale marketplace with multi-round pricing and Stripe Connect payouts, built from a) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 788.3000000000001 Td (blank Next.js scaffold.) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 777.1000000000001 Td (• Built the auth, access-control, and API-integration foundation that later feature domains — including a) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 766.7000000000002 Td (   teammate's — were built on top of.) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 756.3000000000002 Td (• Replaced four independently-drifting Stripe-readiness checks with one reusable gate enforced identically) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 745.9000000000002 Td (   everywhere a purchase or listing happens.) Tj ET
+BT /F1 9.2 Tf 0.15 0.15 0.15 rg 38 733.9000000000002 Td (Additional Projects: Lindo Mart \(internal operations platform — NestJS, MongoDB, React, Socket.IO; 6) Tj ET
+BT /F1 9.2 Tf 0.15 0.15 0.15 rg 38 723.3000000000002 Td (authorization/data-integrity defects found and fixed in inherited code\), SocialFi Trading \(Solana bonding-curve) Tj ET
+BT /F1 9.2 Tf 0.15 0.15 0.15 rg 38 712.7000000000002 Td (social platform — NestJS, Anchor/Rust, React Native; 4 Anchor smart contracts\), Mindful Oasis \(XRPL wellness) Tj ET
+BT /F1 9.2 Tf 0.15 0.15 0.15 rg 38 702.1000000000001 Td (rewards platform — React, Node.js\), and Social Locket \(real-estate social marketplace — React, Stripe, PayPal,) Tj ET
+BT /F1 9.2 Tf 0.15 0.15 0.15 rg 38 691.5000000000001 Td (Web3Modal\).) Tj ET
+BT /F2 11.6 Tf 0.12 0.20 0.32 rg 38 675.9000000000001 Td (EDUCATION) Tj ET
+0.18 0.36 0.60 RG 0.7 w 38 668.2 m 557 668.2 l S
+BT /F2 10.6 Tf 0.12 0.20 0.32 rg 38 656.7 Td (University of Education, Lahore) Tj ET
+BT /F1 9.4 Tf 0.38 0.42 0.47 rg 38 644.9000000000001 Td (Bachelor's Degree - Information Technology) Tj ET
 endstream
 endobj
 11 0 obj
@@ -162,16 +132,16 @@ xref
 0000000009 00000 n 
 0000000058 00000 n 
 0000000122 00000 n 
-0000000192 00000 n 
-0000000267 00000 n 
-0000009922 00000 n 
-0000010084 00000 n 
-0000010246 00000 n 
-0000010425 00000 n 
-0000010589 00000 n 
-0000016271 00000 n 
+0000000219 00000 n 
+0000000321 00000 n 
+0000008961 00000 n 
+0000009123 00000 n 
+0000009285 00000 n 
+0000009464 00000 n 
+0000009628 00000 n 
+0000011636 00000 n 
 trailer
 << /Size 12 /Root 1 0 R >>
 startxref
-16409
+11774
 %%EOF

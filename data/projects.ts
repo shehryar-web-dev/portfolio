@@ -155,8 +155,9 @@ export const projects: Project[] = [
     ],
 
     outcome: [
-      "Webhook response time is fully decoupled from downstream processing, so a slow third-party API or stalled worker can no longer cause a dropped event.",
-      "Token research moved from a manual routine across several disconnected tools into one workflow that runs unattended.",
+      "Narrowing the on-chain event subscription to the 4 programs and 3 event types the product actually needs cut webhook ingestion volume by an estimated ~99.8% (roughly 100,000 to 200 events/hour, per the project's own volume model) — turning a feed that was ~98% noise into one worth processing at all.",
+      "Token research moved from a manual routine across several disconnected tools into one workflow that runs unattended — the user sets a rule once and gets told when it's met.",
+      "Webhook response time is fully decoupled from downstream processing, so a slow third-party API or a stalled worker can no longer cause a dropped event.",
       "The AI layer degrades to a real, deterministic prediction instead of an error page when the model provider is unavailable.",
       "No passwords and no private keys are stored anywhere in the system — authentication is a signature challenge.",
     ],
@@ -209,12 +210,12 @@ export const projects: Project[] = [
     category: "NFC loyalty + on-chain rewards",
     tagline: "Making an immutable reward editable",
     summary:
-      "An NFC check-in loyalty platform where rewards are blockchain tokens — spanning a mobile app, two role-scoped dashboards and a backend, with 90% of commits across four codebases.",
+      "An NFC loyalty platform that replaces punch cards and merchant-held point balances with rewards customers actually own — tapping a tag mints or advances a blockchain token in a wallet provisioned by email, no seed phrase or crypto knowledge required.",
 
     problem:
-      "The product's core mechanic is tier progression: check in, climb a tier, get better reward artwork. But a reward minted as a blockchain token with metadata pinned to IPFS is permanently frozen — a merchant can never update the artwork or copy on a reward already issued. The full IPFS pipeline was built and working before that immutability was understood to be structurally wrong for the product. Separately, an incorrect tier downgrade would be written permanently and publicly to a chain.",
+      "Retail loyalty normally runs on punch cards or a points balance sitting in a merchant's own database — the customer never really owns the reward, and it means nothing outside that one shop. The product's core mechanic is tier progression: check in, climb a tier, get better reward artwork the customer actually holds on-chain. But a reward minted as a blockchain token with metadata pinned to IPFS is permanently frozen — a merchant can never update the artwork or copy on a reward already issued. The full IPFS pipeline was built and working before that immutability was understood to be structurally wrong for the product. Separately, an incorrect tier downgrade would be written permanently and publicly to a chain.",
     product:
-      "Customers tap an NFC tag at a participating business, earn token-based loyalty rewards, and progress through membership tiers in a mobile app. Merchants manage customers and activity in one dashboard; platform admins manage merchants, rewards and settings in another.",
+      "Customers tap an NFC tag at a participating business and earn token-based loyalty rewards, progressing through membership tiers in a mobile app. The audience is ordinary retail customers, not crypto users, so onboarding is just an email and a one-time code — a wallet is silently provisioned behind it, with no seed phrase, wallet install, or gas fee ever surfaced. Merchants manage customers and activity in one dashboard; platform admins manage merchants, rewards and settings in another.",
     role:
       "Lead engineer across four codebases — backend API, React Native app, admin dashboard, merchant dashboard.",
     owned: [
@@ -224,6 +225,7 @@ export const projects: Project[] = [
       "Solved the Node/browser build bridge that let a Node-only Web3/IPFS dependency tree bundle for a browser at all — an explicit builtin alias map, a dev/prod polyfill plugin pair, and a 15-line interop shim for a transitive dependency with no documented fix.",
       "Shipped a per-visit history schema migration across three simultaneously-live data formats with no downtime and no data loss.",
       "Modelled loyalty state as belonging to the merchant–customer relationship rather than to either party.",
+      "Kept the original IPFS pipeline in the codebase as a fallback rather than deleting it, in case a future requirement needs content-addressed storage again.",
       "Produced a ranked defect audit of the platform, including findings against my own work.",
     ],
 
@@ -269,6 +271,13 @@ export const projects: Project[] = [
         because:
           "Security that depends on a developer remembering to check something after the fetch will eventually be forgotten.",
         tradeoff: "The rule lives in the query rather than somewhere obvious in the service layer.",
+      },
+      {
+        choice: "Mint a new token on a tier upgrade rather than repointing the existing one.",
+        because:
+          "The simpler mint path shipped first under delivery pressure; the architecture already supports a cheaper repoint.",
+        tradeoff:
+          "The stored token ID goes stale after an upgrade — the repoint path is designed for but not yet wired up. Named directly rather than left implicit.",
       },
     ],
 
@@ -514,10 +523,9 @@ export const projects: Project[] = [
     ],
 
     facts: [
-      { value: "27", label: "on-chain instructions" },
-      { value: "157", label: "HTTP routes over 37 Prisma models" },
-      { value: "239", label: "automated tests" },
-      { value: "2,430", label: "lines in the Anchor program" },
+      { value: "5 min", label: "reconciler recovery interval" },
+      { value: "1 hr", label: "before an unresolved payment is flagged for manual review" },
+      { value: "10x", label: "capped reconnect attempts on the event indexer" },
     ],
 
     tech: [

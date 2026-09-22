@@ -4,10 +4,10 @@
 // RESUME DATA
 // ============================================================
 
-const resume = {
+let resume = {
   name: "Shehryar Naeem",
 
-  title: "Full Stack Developer",
+  title: "Full Stack Engineer",
 
   location: "Lahore, Pakistan",
 
@@ -21,25 +21,23 @@ const resume = {
   },
 
   summary:
-    "Full Stack Developer with 3+ years of experience solving concrete production problems: acknowledging third-party webhook events within milliseconds so a slow downstream call never drops data, preventing duplicate or lost payments with a write-ahead-log disbursement engine on an at-least-once blockchain primitive, and fixing real authorization and data-integrity bugs left in existing codebases, such as an access-control guard silently rejecting every request to a public route. Comfortable owning a feature end-to-end, from redesigning how a system stores and serves data to building the frontend integration layer that consumes it, and has independently delivered multiple production systems from architecture through launch.",
+    "Full-stack engineer with 3 years building distributed, event-driven systems: webhook pipelines that survive provider timeouts, idempotent write-ahead-log processing that prevents double payments over an at-least-once blockchain primitive, and authorization layers hardened against real production defects. Writes maintainable, SOLID-aligned code — single-responsibility service layers, reusable typed abstractions — and owns the frontend integration layer end-to-end, translating designs into pixel-accurate production UI.",
 
   experience: [
     {
-      role: "Full Stack Software Engineer",
+      role: "Full Stack Developer",
 
       company: "Weiblocks",
 
-      location: "Lahore, Pakistan (Remote)",
+      location: "Lahore, Pakistan",
 
-      period: "Jun 2023 - Present",
+      period: "2023 - Present",
 
       bullets: [
-        "Engineered and shipped 8 production full-stack systems across fintech, blockchain, AI, and social/marketplace domains using React, Next.js, TypeScript, Node.js, NestJS, and Solana/XRPL blockchain integrations.",
-        "Architected event-driven, distributed backend pipelines (Redis Streams, BullMQ) that decouple latency-critical webhook ingestion from asynchronous processing, eliminating data loss from third-party API timeouts.",
-        "Designed exactly-once transaction guarantees for financial and blockchain operations using write-ahead logs, conditional atomic database updates, and signature-derived idempotency keys.",
-        "Implemented wallet-based cryptographic authentication (Ed25519 signature verification) and JWT/role-based authorization across multiple trust levels, removing stored passwords and enforcing server-verified access.",
-        "Built and maintained REST APIs (150+ endpoints across 25+ NestJS/Express modules) backed by PostgreSQL, MongoDB, and Redis, with automated test coverage (239+ tests) and technical documentation.",
-        "Authored 4 Solana Anchor/Rust smart contracts and integrated XRPL token rewards, and established a reusable frontend architecture (single HTTP client, typed service layer) adopted across multiple projects.",
+        "Shipped 8 production systems end-to-end across fintech, AI, and marketplace platforms, owning backend architecture, API design, and the frontend integration layer on each.",
+        "Built event-driven ingestion pipelines that decouple slow downstream work from webhook acknowledgment, eliminating data loss from provider timeouts.",
+        "Designed idempotent, write-ahead-logged transaction processing — conditional atomic updates, signature-derived idempotency keys — that prevents double-payment or lost-payment over an at-least-once blockchain primitive.",
+        "Replaced password-based auth with wallet-signature verification (Ed25519) and role-based access control across multiple trust levels, closing a stored-credential attack surface entirely.",
       ],
     },
 
@@ -66,12 +64,12 @@ const resume = {
       tech: "Node.js, Express, MongoDB, Redis, BullMQ, Next.js",
 
       summary:
-        "Solo-built real-time Solana token intelligence platform with webhook ingestion, alerting, and AI-grounded trading insights across 8 external integrations.",
+        "Solo-built real-time on-chain token monitoring and alerting platform consolidating 8 external data sources into one automated workflow.",
 
       bullets: [
-        "Architected a two-process, event-driven pipeline (Redis Streams + BullMQ) that acknowledges webhook events in milliseconds, then processes them asynchronously with retry, backoff, and priority queues.",
-        "Implemented passwordless Ed25519 wallet authentication and a technical-analysis engine (8 indicators computed from raw price data) with a rule-based AI fallback for continuous feature uptime.",
-        "Established a single Next.js data-fetching boundary (one HTTP client, service-layer type conversion, volatility-tuned cache lifetimes) and designed alert filters that treat missing market data as \"skip this check\" rather than a rejection, so early-stage tokens are not silently filtered out.",
+        "Cut webhook ingestion volume ~99.8% (~100K -> ~200 events/hr) by narrowing event subscriptions to the 4 programs and 3 event types the product needs.",
+        "Built a shared, self-throttling rate limiter across every outbound API call so concurrent webhook bursts never exceed a provider's request cap.",
+        "Removed passwords and private keys from the attack surface entirely with single-use, wallet-signature (Ed25519) authentication.",
       ],
     },
 
@@ -81,12 +79,11 @@ const resume = {
       tech: "Node.js, Express, MongoDB, React Native, React",
 
       summary:
-        "NFC-triggered on-chain loyalty platform enabling merchants to update already-issued rewards at zero blockchain cost.",
+        "NFC-triggered loyalty platform letting merchants edit live reward tiers customers already hold, at zero blockchain cost per update.",
 
       bullets: [
-        "Owned 90% of commits (237/264) across 4 codebases (API, mobile app, 2 dashboards) over a 6-month build; redesigned NFT metadata to be editable with no re-mint cost.",
-        "Built a 3-tier, database-verified authorization system and authored a ranked defect audit (6 critical, 5 high, 12 medium) that drove real security and data-integrity fixes.",
-        "Resolved a Node/browser dependency incompatibility that was blocking the admin dashboard build with a custom polyfill configuration, and migrated live check-in history across three schema formats with zero downtime and no data loss.",
+        "Made merchant-editable rewards possible on an architecture where metadata is normally permanent, by inverting which half of the token data is fixed.",
+        "Made tier downgrades structurally impossible, not just blocked, so a customer can never lose an already-earned reward.",
       ],
     },
 
@@ -96,27 +93,11 @@ const resume = {
       tech: "NestJS, PostgreSQL/Prisma, Redis, Anchor (Rust)",
 
       summary:
-        "Non-custodial Solana staking, rewards, and ICO platform backed by a custom Anchor smart contract and a 25-module NestJS backend.",
+        "Non-custodial staking and rewards platform tying token staking to real card benefits, engineered for crash-safe financial operations.",
 
       bullets: [
-        "Designed a write-ahead-log disbursement engine guaranteeing exactly-once on-chain token transfers, closing the double-pay/lost-pay failure class by construction.",
-        "Built 157 REST endpoints over 37 Prisma models and a 2,430-line Anchor program (27 instructions), backed by 239 automated tests and a 34-flow manual QA runbook.",
-        "Split every wallet-signed action into a prepare/confirm request pair so the database is only written after on-chain confirmation, and hardened reward-claim instructions by re-verifying every attacker-suppliable account on-chain.",
-      ],
-    },
-
-    {
-      name: "SocialFi Trading",
-
-      tech: "NestJS, PostgreSQL, Anchor (Rust), React Native",
-
-      summary:
-        "Content-as-assets social trading platform pricing posts and comments on a Solana bonding curve, with a mobile app and admin console.",
-
-      bullets: [
-        "Migrated the trading engine from a custodial database ledger to a non-custodial, wallet-signed model, closing custodial fund risk and a stale-price slippage bug class.",
-        "Authored 4 Rust/Anchor smart contracts and remediated 2 security weaknesses (plaintext secrets, a shared encryption key) with a migration path that did not disrupt existing users.",
-        "Built a resilient mobile wallet-signing flow with ephemeral session keys that survive OS-level app suspension, and implemented a transactional-outbox notification pipeline so a trade event can never be recorded without also being delivered.",
+        "Closed an entire class of double-pay/lost-payment bugs by construction with a write-ahead-log disbursement engine that self-heals within 5 minutes.",
+        "Ran 3–10 concurrent replicas correctly with zero coordination layer by making every write idempotent by construction.",
       ],
     },
 
@@ -126,28 +107,27 @@ const resume = {
       tech: "Next.js, TypeScript, TanStack Query, Stripe Connect",
 
       summary:
-        "Staged resale marketplace for digital products with multi-round pricing and Stripe Connect payouts.",
+        "Staged digital-product resale marketplace with multi-round pricing and Stripe Connect payouts, built from a blank Next.js scaffold.",
 
       bullets: [
-        "Established the frontend's core architecture (auth context, route guards, typed API layer) from an empty scaffold, later extended by another engineer for unrelated features.",
-        "Built a reusable Stripe-readiness HOC and shared admin table/pagination primitives, replacing per-screen readiness checks and one-off table implementations.",
-        "Enforced route-level access control with a live, server-verified user query instead of a cached role flag, and built the admin moderation console (product approval with auto-suggested staged pricing) on shared table and pagination primitives.",
+        "Built the auth, access-control, and API-integration foundation that later feature domains — including a teammate's — were built on top of.",
+        "Replaced four independently-drifting Stripe-readiness checks with one reusable gate enforced identically everywhere a purchase or listing happens.",
       ],
     },
   ],
 
   additionalProjects:
-    "Additional Projects: Lindo Mart (internal operations platform - NestJS, MongoDB, React, Socket.IO; fixed 6 authorization and data-integrity defects), Mindful Oasis (XRPL wellness rewards platform - React, Node.js), and Social Locket (real-estate social marketplace - React, Stripe, PayPal, Web3Modal).",
+    "Additional Projects: Lindo Mart (internal operations platform — NestJS, MongoDB, React, Socket.IO; 6 authorization/data-integrity defects found and fixed in inherited code), SocialFi Trading (Solana bonding-curve social platform — NestJS, Anchor/Rust, React Native; 4 Anchor smart contracts), Mindful Oasis (XRPL wellness rewards platform — React, Node.js), and Social Locket (real-estate social marketplace — React, Stripe, PayPal, Web3Modal).",
 
   skills: [
     "Languages: JavaScript, TypeScript",
-    "Frontend: React, Next.js, React Native, TanStack Query, Tailwind CSS",
-    "Backend: Node.js, Express, NestJS, RESTful APIs, Socket.IO",
+    "Backend: Node.js, Express, NestJS, REST APIs, Socket.IO",
     "Databases: PostgreSQL (Prisma), MongoDB, Redis",
-    "Blockchain: Solana (Web3.js, Anchor), XRPL, Wallet Auth, SPL Tokens, NFTs",
-    "AI: OpenAI API, Prompt Engineering, AI-Powered Applications, RAG",
-    "Architecture: Event-Driven Systems, Distributed Systems, Message Queues (BullMQ, Redis Streams)",
-    "Cloud & DevOps: AWS (S3), Docker, Git/GitHub, Nginx, Jest (Automated Testing)",
+    "Architecture: Event-Driven Systems, Distributed Systems, Message Queues",
+    "Frontend: React, Next.js, React Native, TanStack Query, Tailwind CSS, Figma-to-Code",
+    "AI: LLM Integration, Retrieval-Augmented Generation (RAG) Systems, Prompt Engineering, AI Workflow Automation, Production AI Systems",
+    "Infrastructure: Docker (Compose), AWS S3, Git/GitHub, Nginx, PM2, Jest",
+    "Blockchain: Blockchain Integration, Wallet-Based Authentication",
   ],
 
   education: {
@@ -156,7 +136,6 @@ const resume = {
     degree: "Bachelor's Degree - Information Technology",
   },
 };
-
 
 // ============================================================
 // A4 PDF CONFIGURATION
@@ -197,6 +176,17 @@ const MUTED_COLOR =
 
 const escapePdf = (value) =>
   String(value)
+    // Map punctuation outside Latin-1 to its WinAnsiEncoding (cp1252) byte
+    // BEFORE the final binary truncation below, or these silently corrupt
+    // into stray control characters / wrong glyphs (this was happening to
+    // every em dash, en dash, and bullet in the generated PDF).
+    .replaceAll("—", "\x97") // em dash
+    .replaceAll("–", "\x96") // en dash
+    .replaceAll("•", "\x95") // bullet
+    .replaceAll("‘", "\x91") // left single quote
+    .replaceAll("’", "\x92") // right single quote
+    .replaceAll("“", "\x93") // left double quote
+    .replaceAll("”", "\x94") // right double quote
     .replaceAll("\\", "\\\\")
     .replaceAll("(", "\\(")
     .replaceAll(")", "\\)")
@@ -780,7 +770,6 @@ class ResumePdf {
 
   projectHeader(
     name,
-    tech,
   ) {
 
     this.ensure(25);
@@ -796,18 +785,6 @@ class ResumePdf {
         font: "bold",
         leading: 12,
         color: PRIMARY_COLOR,
-      },
-    );
-
-
-    this.y =
-      startY;
-
-    this.rightText(
-      tech,
-      {
-        size: 8.8,
-        color: MUTED_COLOR,
       },
     );
 
@@ -983,7 +960,6 @@ function buildContent() {
 
     pdf.projectHeader(
       project.name,
-      project.tech,
     );
 
 
@@ -1096,13 +1072,13 @@ function makePdf(pages) {
 
   const fontRegularId =
     add(
-      "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>",
+      "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>",
     );
 
 
   const fontBoldId =
     add(
-      "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>",
+      "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>",
     );
 
 
@@ -1320,30 +1296,19 @@ function makePdf(pages) {
 // GENERATE PDF
 // ============================================================
 
-const pages =
-  buildContent();
+const pdf = buildContent();
 
-
-if (pages.length <= 2) {
-
+if (pdf.length <= 2) {
   console.log(
-    `Resume generated successfully on ${pages.length} page(s).`,
+    `Resume generated successfully on ${pdf.length} page(s) -> resume.pdf`,
   );
-
 } else {
-
   console.warn(
-    `Warning: Resume generated ${pages.length} pages (target is 2 pages).`,
+    `Warning: Resume generated ${pdf.length} pages (target is 2 pages) -> resume.pdf`,
   );
 }
 
-
 writeFileSync(
   "../public/resume.pdf",
-  makePdf(pages),
-);
-
-
-console.log(
-  "Resume PDF generated successfully with clickable links!",
+  makePdf(pdf),
 );

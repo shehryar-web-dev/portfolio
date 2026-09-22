@@ -64,23 +64,25 @@ export function ArchitectureDiagram({
   return (
     <figure className={cn("m-0", className)}>
       <div className="rounded-lg border border-border bg-surface p-4 sm:p-6">
-        <ol className="relative mx-auto max-w-sm">
+        <div className="relative mx-auto max-w-sm">
           <div
             aria-hidden="true"
             className="absolute bottom-4 left-[17.5px] top-4 w-px bg-border-strong"
           />
-          {pipeline.map((step, i) => (
-            <li
-              key={step.name}
-              className={cn(
-                "relative flex gap-3",
-                i < pipeline.length - 1 ? "pb-6" : "pb-0",
-              )}
-            >
-              <Node name={step.name} note={step.note} icon={step.icon} />
-            </li>
-          ))}
-        </ol>
+          <ol>
+            {pipeline.map((step, i) => (
+              <li
+                key={step.name}
+                className={cn(
+                  "relative flex gap-3",
+                  i < pipeline.length - 1 ? "pb-6" : "pb-0",
+                )}
+              >
+                <Node name={step.name} note={step.note} icon={step.icon} />
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
 
       <figcaption className="mt-3 text-sm leading-relaxed text-muted-foreground">
