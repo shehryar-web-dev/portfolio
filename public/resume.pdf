@@ -12,11 +12,11 @@ endobj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
 endobj
 5 0 obj
-<< /Length 8588 >>
+<< /Length 8601 >>
 stream
 BT /F2 23 Tf 0.12 0.20 0.32 rg 217 812 Td (Shehryar Naeem) Tj ET
 BT /F2 11.8 Tf 0.18 0.36 0.60 rg 241.45 786.5 Td (Full Stack Engineer) Tj ET
-BT /F1 9.1 Tf 0.38 0.42 0.47 rg 149.625 773 Td (Lahore, Pakistan  |  +92 311 1404107  |  shehryarwebdev@gmail.com) Tj ET
+BT /F1 9.1 Tf 0.38 0.42 0.47 rg 195.125 773 Td (Lahore, Pakistan  |  shehryarwebdev@gmail.com) Tj ET
 BT /F1 9.1 Tf 0.18 0.36 0.60 rg 222.425 762.4 Td (Portfolio) Tj ET
 BT /F1 9.1 Tf 0.38 0.42 0.47 rg 263.375 762.4 Td (  |  ) Tj ET
 BT /F1 9.1 Tf 0.18 0.36 0.60 rg 286.125 762.4 Td (GitHub) Tj ET
@@ -37,14 +37,14 @@ BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 623.0999999999996 Td (Backend: Node.js, Expre
 BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 611.9999999999995 Td (Databases: PostgreSQL \(Prisma\), MongoDB, Redis) Tj ET
 BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 600.8999999999995 Td (Architecture: Event-Driven Systems, Distributed Systems, Message Queues) Tj ET
 BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 589.7999999999995 Td (Frontend: React, Next.js, React Native, TanStack Query, Tailwind CSS, Figma-to-Code) Tj ET
-BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 578.6999999999995 Td (AI: LLM Integration, Retrieval-Augmented Generation \(RAG\) Systems, Prompt Engineering, AI Workflow) Tj ET
-BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 567.7999999999995 Td (Automation, Production AI Systems) Tj ET
-BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 556.6999999999995 Td (Infrastructure: Docker \(Compose\), AWS S3, Git/GitHub, Nginx, PM2, Jest) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 578.6999999999995 Td (AI: LLM Integration, Retrieval-Augmented Generation \(RAG\) Systems, AI Workflow Automation, Production AI) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 567.7999999999995 Td (Systems) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 556.6999999999995 Td (Infrastructure: Docker \(Compose\), AWS S3, Git/GitHub, Jest , Playwright, CI/CD Pipelines) Tj ET
 BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 545.5999999999995 Td (Blockchain: Blockchain Integration, Wallet-Based Authentication) Tj ET
 BT /F2 11.6 Tf 0.12 0.20 0.32 rg 38 531.4999999999994 Td (PROFESSIONAL EXPERIENCE) Tj ET
 0.18 0.36 0.60 RG 0.7 w 38 523.7999999999994 m 557 523.7999999999994 l S
 BT /F2 11.2 Tf 0.12 0.20 0.32 rg 38 512.2999999999994 Td (Full Stack Developer) Tj ET
-BT /F1 9.1 Tf 0.38 0.42 0.47 rg 493.3 512.2999999999994 Td (2023 - Present) Tj ET
+BT /F1 9.1 Tf 0.38 0.42 0.47 rg 484.2 512.2999999999994 Td (2023 - July 2026) Tj ET
 BT /F2 9.9 Tf 0.18 0.36 0.60 rg 38 498.2999999999994 Td (Weiblocks) Tj ET
 BT /F1 9 Tf 0.38 0.42 0.47 rg 485 498.2999999999994 Td (Lahore, Pakistan) Tj ET
 BT /F1 9.4 Tf 0.15 0.15 0.15 rg 51 485.7999999999994 Td (• Shipped 8 production systems end-to-end across fintech, AI, and marketplace platforms, owning backend) Tj ET
@@ -70,8 +70,8 @@ BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 288.2999999999997 Td (Solo-built real-time on
 BT /F1 9.5 Tf 0.15 0.15 0.15 rg 38 277.39999999999975 Td (into one automated workflow.) Tj ET
 BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 266.19999999999976 Td (• Cut webhook ingestion volume ~99.8% \(~100K -> ~200 events/hr\) by narrowing event subscriptions to the 4) Tj ET
 BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 255.79999999999976 Td (   programs and 3 event types the product needs.) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 245.39999999999975 Td (• Built a shared, self-throttling rate limiter across every outbound API call so concurrent webhook bursts) Tj ET
-BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 234.99999999999974 Td (   never exceed a provider's request cap.) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 245.39999999999975 Td (• Built a shared, self-throttling rate limiter wrapping every outbound call to a given third-party provider so) Tj ET
+BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 234.99999999999974 Td (   concurrent webhook bursts never exceed that provider's request cap.) Tj ET
 BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 224.59999999999974 Td (• Removed passwords and private keys from the attack surface entirely with single-use, wallet-signature) Tj ET
 BT /F1 9.1 Tf 0.15 0.15 0.15 rg 51 214.19999999999973 Td (   \(Ed25519\) authentication.) Tj ET
 BT /F2 10.9 Tf 0.12 0.20 0.32 rg 38 202.19999999999973 Td (Dibzi) Tj ET
@@ -134,14 +134,14 @@ xref
 0000000122 00000 n 
 0000000219 00000 n 
 0000000321 00000 n 
-0000008961 00000 n 
-0000009123 00000 n 
-0000009285 00000 n 
-0000009464 00000 n 
-0000009628 00000 n 
-0000011636 00000 n 
+0000008974 00000 n 
+0000009136 00000 n 
+0000009298 00000 n 
+0000009477 00000 n 
+0000009641 00000 n 
+0000011649 00000 n 
 trailer
 << /Size 12 /Root 1 0 R >>
 startxref
-11774
+11787
 %%EOF

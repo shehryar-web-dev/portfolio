@@ -15,7 +15,7 @@ Full-stack engineer with 3 years building distributed, event-driven systems: web
 - **Databases:** PostgreSQL (Prisma), MongoDB, Redis
 - **Architecture:** Event-Driven Systems, Distributed Systems, Message Queues
 - **Frontend:** React, Next.js, React Native, TanStack Query, Tailwind CSS, Figma-to-Code
-- **AI:** LLM Integration (OpenAI GPT-4), Retrieval-Augmented Generation (RAG), Prompt Engineering, Workflow Automation
+- **AI:** LLM Integration, Retrieval-Augmented Generation (RAG) Systems, Prompt Engineering, AI Workflow Automation, Production AI Systems
 - **Infrastructure:** Docker (Compose), AWS S3, Git/GitHub, Nginx, PM2, Jest
 - **Blockchain:** Blockchain Integration, Wallet-Based Authentication
 
@@ -43,7 +43,7 @@ Full-stack engineer with 3 years building distributed, event-driven systems: web
 Solo-built real-time on-chain token monitoring and alerting platform consolidating 8 external data sources into one automated workflow.
 
 - Cut webhook ingestion volume ~99.8% (~100K → ~200 events/hr) by narrowing event subscriptions to the 4 programs and 3 event types the product needs.
-- Built a shared, self-throttling rate limiter across every outbound API call so concurrent webhook bursts never exceed a provider's request cap.
+- Built a shared, self-throttling rate limiter wrapping every outbound call to a given third-party provider so concurrent webhook bursts never exceed that provider's request cap.
 - Removed passwords and private keys from the attack surface entirely with single-use, wallet-signature (Ed25519) authentication.
 
 ### Dibzi

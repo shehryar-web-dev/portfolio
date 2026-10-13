@@ -12,7 +12,7 @@ let resume = {
   location: "Lahore, Pakistan",
 
   contact:
-    "+92 311 1404107  |  shehryarwebdev@gmail.com",
+    "shehryarwebdev@gmail.com",
 
   links: {
     portfolio: "https://shehryar-web-dev.vercel.app/",
@@ -31,7 +31,7 @@ let resume = {
 
       location: "Lahore, Pakistan",
 
-      period: "2023 - Present",
+      period: "2023 - July 2026",
 
       bullets: [
         "Shipped 8 production systems end-to-end across fintech, AI, and marketplace platforms, owning backend architecture, API design, and the frontend integration layer on each.",
@@ -68,7 +68,7 @@ let resume = {
 
       bullets: [
         "Cut webhook ingestion volume ~99.8% (~100K -> ~200 events/hr) by narrowing event subscriptions to the 4 programs and 3 event types the product needs.",
-        "Built a shared, self-throttling rate limiter across every outbound API call so concurrent webhook bursts never exceed a provider's request cap.",
+        "Built a shared, self-throttling rate limiter wrapping every outbound call to a given third-party provider so concurrent webhook bursts never exceed that provider's request cap.",
         "Removed passwords and private keys from the attack surface entirely with single-use, wallet-signature (Ed25519) authentication.",
       ],
     },
@@ -125,8 +125,8 @@ let resume = {
     "Databases: PostgreSQL (Prisma), MongoDB, Redis",
     "Architecture: Event-Driven Systems, Distributed Systems, Message Queues",
     "Frontend: React, Next.js, React Native, TanStack Query, Tailwind CSS, Figma-to-Code",
-    "AI: LLM Integration, Retrieval-Augmented Generation (RAG) Systems, Prompt Engineering, AI Workflow Automation, Production AI Systems",
-    "Infrastructure: Docker (Compose), AWS S3, Git/GitHub, Nginx, PM2, Jest",
+    "AI: LLM Integration, Retrieval-Augmented Generation (RAG) Systems, AI Workflow Automation, Production AI Systems",
+    "Infrastructure: Docker (Compose), AWS S3, Git/GitHub, Jest , Playwright, CI/CD Pipelines",
     "Blockchain: Blockchain Integration, Wallet-Based Authentication",
   ],
 
